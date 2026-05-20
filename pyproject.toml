@@ -21,6 +21,7 @@ dependencies = [
 [project.optional-dependencies]
 chem = ["rdkit>=2023.9"]
 models = ["xgboost>=2.0", "lightgbm>=4.0"]
+gpu = ["torch>=2.2"]
 benchmarks = ["PyTDC"]
 dev = ["pytest>=8.0"]
 
@@ -30,6 +31,7 @@ moltrustbench-load-benchmarks = "moltrustbench.data.benchmark_loader:main"
 moltrustbench-audit-exposure = "moltrustbench.audit.exact_exposure:main"
 moltrustbench-density-matched-split = "moltrustbench.splits.density_matched:main"
 moltrustbench-train = "moltrustbench.training.train:main"
+moltrustbench-gpu-mlp = "moltrustbench.training.gpu_mlp:main"
 moltrustbench-sanity-check = "moltrustbench.evaluation.sanity_checks:main"
 moltrustbench-smoke = "moltrustbench.smoke:main"
 moltrustbench-real-audit = "moltrustbench.real_audit:main"
