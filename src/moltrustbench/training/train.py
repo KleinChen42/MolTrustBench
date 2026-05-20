@@ -11,6 +11,7 @@ import pandas as pd
 from moltrustbench.evaluation.metrics import compute_metrics
 from moltrustbench.io import read_dataframe, stable_hash_text, write_dataframe, write_json
 from moltrustbench.models.classical import fit_classical_model, predict_model
+from moltrustbench.splits.density_matched import density_matched_clean_split
 
 
 def split_train_test(df: pd.DataFrame, *, split_name: str) -> tuple[pd.DataFrame, pd.DataFrame]:
@@ -19,8 +20,11 @@ def split_train_test(df: pd.DataFrame, *, split_name: str) -> tuple[pd.DataFrame
         test = df[df["split"] == "test"].copy()
     elif split_name == "exact_removed":
         test = df[(df["split"] == "test") & (~df["exact_exposed"].fillna(False))].copy()
+    elif split_name == "density_matched_clean":
+        selected = set(density_matched_clean_split(df)["test"])
+        test = df[df["row_id"].astype(int).isin(selected)].copy()
     else:
-        raise ValueError(f"Unsupported split for Milestone 1: {split_name}")
+        raise ValueError(f"Unsupported split: {split_name}")
     if train.empty:
         raise ValueError("Train split is empty")
     if test.empty:
@@ -78,7 +82,7 @@ def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--annotations", required=True)
     parser.add_argument("--model-id", required=True, choices=["morgan_logreg", "morgan_ridge", "morgan_xgb"])
-    parser.add_argument("--split-name", required=True, choices=["standard", "exact_removed"])
+    parser.add_argument("--split-name", required=True, choices=["standard", "exact_removed", "density_matched_clean"])
     parser.add_argument("--allow-fallback-standardizer", action="store_true")
     parser.add_argument("--seed", type=int, default=0)
     args = parser.parse_args(argv)

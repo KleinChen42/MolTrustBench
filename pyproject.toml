@@ -28,6 +28,7 @@ dev = ["pytest>=8.0"]
 moltrustbench-build-release-index = "moltrustbench.data.build_release_index:main"
 moltrustbench-load-benchmarks = "moltrustbench.data.benchmark_loader:main"
 moltrustbench-audit-exposure = "moltrustbench.audit.exact_exposure:main"
+moltrustbench-density-matched-split = "moltrustbench.splits.density_matched:main"
 moltrustbench-train = "moltrustbench.training.train:main"
 moltrustbench-sanity-check = "moltrustbench.evaluation.sanity_checks:main"
 moltrustbench-smoke = "moltrustbench.smoke:main"
