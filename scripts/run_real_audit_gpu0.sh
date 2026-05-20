@@ -40,10 +40,10 @@ else
   status "gpu0_policy" "warning" "nvidia-smi not found; continuing with CUDA_VISIBLE_DEVICES=0"
 fi
 
-PYTHON_BIN="${MOLTRUST_PYTHON:-python}"
-status "real_audit" "started" "$PYTHON_BIN"
+read -r -a PYTHON_CMD <<< "${MOLTRUST_PYTHON:-python}"
+status "real_audit" "started" "${MOLTRUST_PYTHON:-python}"
 
-"$PYTHON_BIN" -m moltrustbench.real_audit \
+"${PYTHON_CMD[@]}" -m moltrustbench.real_audit \
   --release CHEMBL24 \
   --release CHEMBL27 \
   --release CHEMBL30 \
