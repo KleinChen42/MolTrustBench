@@ -1,0 +1,9 @@
+{
+  "benchmark_tasks": 2,
+  "compound_index_rows": 20,
+  "mode": "fixture_smoke",
+  "note": "Fallback identifiers are fixture-only and must not be used as chemical InChIKeys in paper claims.",
+  "standardization_backends": [
+    "fallback-fixture-only"
+  ]
+}

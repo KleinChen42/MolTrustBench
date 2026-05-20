@@ -1,0 +1,4 @@
+benchmarks:
+  - source: chembl_bioactivity
+    tasks: []
+    milestone_1: false

@@ -1,0 +1,15 @@
+{
+  "cutoff_release": "CHEMBL30",
+  "exact_clean_molecules": 4,
+  "exact_public_exposure_rate": 0.666667,
+  "interpretation": "Observable public-exposure lower bound; not evidence of confirmed model leakage.",
+  "n_molecules": 12,
+  "nn_exposure_rate_06": 0.666667,
+  "nn_exposure_rate_07": 0.666667,
+  "nn_exposure_rate_08": 0.666667,
+  "nn_exposure_rate_09": 0.666667,
+  "risk_level": "high",
+  "scaffold_public_exposure_rate": 0.916667,
+  "source_name": "moleculenet",
+  "task_name": "BBBP"
+}

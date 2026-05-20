@@ -1,0 +1,8 @@
+releases:
+  source: "https://chembl.gitbook.io/chembl-interface-documentation/downloads"
+  milestone_1_subset:
+    - CHEMBL24
+    - CHEMBL27
+    - CHEMBL30
+    - CHEMBL33
+    - CHEMBL36

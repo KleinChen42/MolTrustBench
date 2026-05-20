@@ -1,0 +1,14 @@
+benchmarks:
+  - source: moleculenet
+    tasks:
+      - BBBP
+      - ClinTox
+      - ESOL
+      - Lipophilicity
+      - BACE
+      - Tox21
+      - SIDER
+    milestone_1_primary:
+      - BBBP
+    milestone_1_fallback:
+      - ClinTox

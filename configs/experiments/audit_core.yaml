@@ -1,0 +1,5 @@
+experiment:
+  id: audit_core
+  claims: [C1, C2]
+  releases: [CHEMBL24, CHEMBL27, CHEMBL30, CHEMBL33, CHEMBL36]
+  cutoff_release: CHEMBL30

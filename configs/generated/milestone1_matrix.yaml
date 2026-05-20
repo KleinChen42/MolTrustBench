@@ -1,0 +1,12 @@
+tasks:
+- tdc_admet:hERG
+- moleculenet:BBBP
+models:
+- morgan_logreg
+- morgan_xgb
+splits:
+- standard
+- exact_removed
+seeds:
+- 0
+cutoff_release: CHEMBL30

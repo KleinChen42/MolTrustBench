@@ -1,0 +1,15 @@
+{
+  "cutoff_release": "CHEMBL30",
+  "exact_clean_molecules": 5,
+  "exact_public_exposure_rate": 0.583333,
+  "interpretation": "Observable public-exposure lower bound; not evidence of confirmed model leakage.",
+  "n_molecules": 12,
+  "nn_exposure_rate_06": 0.75,
+  "nn_exposure_rate_07": 0.75,
+  "nn_exposure_rate_08": 0.666667,
+  "nn_exposure_rate_09": 0.583333,
+  "risk_level": "high",
+  "scaffold_public_exposure_rate": 0.916667,
+  "source_name": "tdc_admet",
+  "task_name": "hERG"
+}

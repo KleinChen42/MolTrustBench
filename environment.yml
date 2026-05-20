@@ -1,0 +1,19 @@
+name: moltrustbench
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.10
+  - pandas
+  - pyarrow
+  - numpy
+  - scikit-learn
+  - matplotlib
+  - pyyaml
+  - requests
+  - pytest
+  - rdkit
+  - pip
+  - pip:
+      - xgboost
+      - lightgbm
+      - PyTDC

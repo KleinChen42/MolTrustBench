@@ -1,0 +1,5 @@
+experiment:
+  id: exposure_sliced_eval
+  claims: [C3, C5]
+  splits: [standard, exact_removed]
+  models: [morgan_logreg, morgan_xgb]

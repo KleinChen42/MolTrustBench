@@ -1,0 +1,6 @@
+{
+  "metrics_path": "results\\metrics\\run-f28ab4e6370fe598.json",
+  "prediction_path": "results\\predictions\\run-f28ab4e6370fe598.parquet",
+  "run_id": "run-f28ab4e6370fe598",
+  "status": "completed"
+}

@@ -1,0 +1,4 @@
+experiment:
+  id: assay_provenance
+  claims: [C4]
+  milestone_1: interface_only

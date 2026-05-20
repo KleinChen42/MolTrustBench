@@ -1,0 +1,19 @@
+{
+  "accuracy": 0.6666666666666666,
+  "auprc": 0.3333333333333333,
+  "auroc": 0.0,
+  "balanced_accuracy": 0.5,
+  "clean_test_n": 3,
+  "exact_exposed_test_n": 0,
+  "model_backend": "sklearn_logistic_regression",
+  "model_id": "morgan_logreg",
+  "n": 3,
+  "run_id": "run-46268f5b65a37da9",
+  "seed": 0,
+  "source_name": "tdc_admet",
+  "split_name": "exact_removed",
+  "task_name": "hERG",
+  "task_type": "classification",
+  "test_n": 3,
+  "train_n": 6
+}

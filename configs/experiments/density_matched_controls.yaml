@@ -1,0 +1,4 @@
+experiment:
+  id: density_matched_controls
+  claims: [C2, C3]
+  milestone_1: interface_only

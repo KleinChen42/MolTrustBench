@@ -1,0 +1,11 @@
+risk,required_control,status
+R1,Conservative public-exposure terminology,preliminary
+R2,Density-matched clean split,missing
+R3,Novelty boundary against ADMET/OOD benchmarks,preliminary
+R4,Cutoff release reported as observability date,preliminary
+R5,Model pretraining registry,missing
+R6,Exposure-adjusted scores and trust cards,preliminary
+R7,Foundation model wrappers scoped as case studies,missing
+R8,Clean subset size sanity checks,preliminary
+R9,Standardization report and rejected molecules,preliminary
+R10,Assay-provenance conflict scoring,missing

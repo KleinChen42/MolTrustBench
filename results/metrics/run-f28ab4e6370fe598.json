@@ -1,0 +1,19 @@
+{
+  "accuracy": 1.0,
+  "auprc": 1.0,
+  "auroc": 1.0,
+  "balanced_accuracy": 1.0,
+  "clean_test_n": 2,
+  "exact_exposed_test_n": 0,
+  "model_backend": "sklearn_gradient_boosting_xgb_fallback",
+  "model_id": "morgan_xgb",
+  "n": 2,
+  "run_id": "run-f28ab4e6370fe598",
+  "seed": 0,
+  "source_name": "moleculenet",
+  "split_name": "exact_removed",
+  "task_name": "BBBP",
+  "task_type": "classification",
+  "test_n": 2,
+  "train_n": 6
+}

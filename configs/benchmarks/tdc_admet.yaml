@@ -1,0 +1,5 @@
+benchmarks:
+  - source: tdc_admet
+    tasks:
+      - hERG
+    milestone_1: true

@@ -1,0 +1,19 @@
+{
+  "accuracy": 0.6666666666666666,
+  "auprc": 0.9166666666666665,
+  "auroc": 0.888888888888889,
+  "balanced_accuracy": 0.6666666666666666,
+  "clean_test_n": 2,
+  "exact_exposed_test_n": 4,
+  "model_backend": "sklearn_logistic_regression",
+  "model_id": "morgan_logreg",
+  "n": 6,
+  "run_id": "run-83c1e345222b561d",
+  "seed": 0,
+  "source_name": "moleculenet",
+  "split_name": "standard",
+  "task_name": "BBBP",
+  "task_type": "classification",
+  "test_n": 6,
+  "train_n": 6
+}

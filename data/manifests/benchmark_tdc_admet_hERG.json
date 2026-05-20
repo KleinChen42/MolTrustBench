@@ -1,0 +1,17 @@
+{
+  "allow_fallback": true,
+  "backends": [
+    "fallback-fixture-only"
+  ],
+  "input_manifest_id": "tdc_admet-hERG-fb9c44a2ade902c4",
+  "input_rows": 12,
+  "rejected_rows": 0,
+  "rows": 12,
+  "source_name": "tdc_admet",
+  "splits": [
+    "test",
+    "train"
+  ],
+  "standardized_rows": 12,
+  "task_name": "hERG"
+}

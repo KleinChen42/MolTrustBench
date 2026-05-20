@@ -1,0 +1,5 @@
+model:
+  id: morgan_logreg
+  representation: hashed_morgan_or_fallback
+  estimator: sklearn_logistic_regression
+  milestone_1: true

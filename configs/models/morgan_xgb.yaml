@@ -1,0 +1,4 @@
+model:
+  id: morgan_xgb
+  representation: hashed_morgan_or_fallback
+  estimator: xgboost_if_available_else_sklearn_gradient_boosting

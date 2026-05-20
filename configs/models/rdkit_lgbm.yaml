@@ -1,0 +1,5 @@
+model:
+  id: rdkit_lgbm
+  representation: rdkit_descriptors
+  estimator: lightgbm
+  milestone_1: false

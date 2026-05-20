@@ -1,0 +1,19 @@
+{
+  "accuracy": 0.3333333333333333,
+  "auprc": 0.3333333333333333,
+  "auroc": 0.25,
+  "balanced_accuracy": 0.25,
+  "clean_test_n": 3,
+  "exact_exposed_test_n": 0,
+  "model_backend": "sklearn_gradient_boosting_xgb_fallback",
+  "model_id": "morgan_xgb",
+  "n": 3,
+  "run_id": "run-d255cd3f879ba646",
+  "seed": 0,
+  "source_name": "tdc_admet",
+  "split_name": "exact_removed",
+  "task_name": "hERG",
+  "task_type": "classification",
+  "test_n": 3,
+  "train_n": 6
+}

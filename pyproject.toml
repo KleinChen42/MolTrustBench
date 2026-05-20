@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "moltrustbench"
+version = "0.1.0"
+description = "Public-exposure, temporal validity, and assay-provenance auditing for molecular AI benchmarks."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "pandas>=2.0",
+  "pyarrow>=14",
+  "numpy>=1.24",
+  "scikit-learn>=1.3",
+  "matplotlib>=3.7",
+  "pyyaml>=6.0",
+  "requests>=2.31"
+]
+
+[project.optional-dependencies]
+chem = ["rdkit>=2023.9"]
+models = ["xgboost>=2.0", "lightgbm>=4.0"]
+benchmarks = ["PyTDC"]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+moltrustbench-build-release-index = "moltrustbench.data.build_release_index:main"
+moltrustbench-load-benchmarks = "moltrustbench.data.benchmark_loader:main"
+moltrustbench-audit-exposure = "moltrustbench.audit.exact_exposure:main"
+moltrustbench-train = "moltrustbench.training.train:main"
+moltrustbench-sanity-check = "moltrustbench.evaluation.sanity_checks:main"
+moltrustbench-smoke = "moltrustbench.smoke:main"
+moltrustbench-real-audit = "moltrustbench.real_audit:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

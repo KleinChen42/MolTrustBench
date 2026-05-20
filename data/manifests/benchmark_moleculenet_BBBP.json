@@ -1,0 +1,17 @@
+{
+  "allow_fallback": true,
+  "backends": [
+    "fallback-fixture-only"
+  ],
+  "input_manifest_id": "moleculenet-BBBP-0bf9d99c9e1eb8a9",
+  "input_rows": 12,
+  "rejected_rows": 0,
+  "rows": 12,
+  "source_name": "moleculenet",
+  "splits": [
+    "test",
+    "train"
+  ],
+  "standardized_rows": 12,
+  "task_name": "BBBP"
+}

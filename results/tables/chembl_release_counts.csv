@@ -1,0 +1,6 @@
+chembl_release,release_date,release_doi,input_rows,standardized_rows,unique_standard_inchikey,unique_scaffold,rejected_rows
+CHEMBL24,2018-05,10.6019/CHEMBL.database.24,5,5,5,2,0
+CHEMBL27,2020-05,10.6019/CHEMBL.database.27,4,4,4,2,0
+CHEMBL30,2022-02,10.6019/CHEMBL.database.30,4,4,4,2,0
+CHEMBL33,2023-05,10.6019/CHEMBL.database.33,4,4,4,2,0
+CHEMBL36,2025-07,10.6019/CHEMBL.database.36,3,3,3,2,0

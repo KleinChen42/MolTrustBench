@@ -1,0 +1,5 @@
+model:
+  id: morgan_ridge
+  representation: hashed_morgan_or_fallback
+  estimator: sklearn_ridge
+  milestone_1: true_for_regression_tasks

@@ -1,0 +1,21 @@
+releases:
+  - id: CHEMBL24
+    version: 24
+    date: "2018-05"
+    doi: "10.6019/CHEMBL.database.24"
+  - id: CHEMBL27
+    version: 27
+    date: "2020-05"
+    doi: "10.6019/CHEMBL.database.27"
+  - id: CHEMBL30
+    version: 30
+    date: "2022-02"
+    doi: "10.6019/CHEMBL.database.30"
+  - id: CHEMBL33
+    version: 33
+    date: "2023-05"
+    doi: "10.6019/CHEMBL.database.33"
+  - id: CHEMBL36
+    version: 36
+    date: "2025-07"
+    doi: "10.6019/CHEMBL.database.36"
