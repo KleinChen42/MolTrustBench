@@ -7,6 +7,21 @@ This note records how two external skill collections inform the next MolTrustBen
 - Yuan1z0825/nature-skills: https://github.com/Yuan1z0825/nature-skills
 - Imbad0202/academic-research-skills: https://github.com/Imbad0202/academic-research-skills
 
+## Installed Local Skills
+
+Installed for future Codex sessions:
+
+- `nature-writing`
+- `nature-figure`
+- `nature-data`
+- `nature-response`
+- `deep-research`
+- `academic-paper`
+- `academic-pipeline`
+
+The current session uses these by direct `SKILL.md` inspection because newly
+installed skills may require a Codex restart before automatic triggering.
+
 ## Nature-Skills Adaptation
 
 Relevant skills:
@@ -52,3 +67,8 @@ The immediate next step is not more prose. It is a real-data experiment gate:
 1. Create a remote RDKit/PyTDC environment on H200.
 2. Run the GPU0-only real audit from the GitHub clone.
 3. Promote C1/C2 only if `results/logs/real_audit_gpu0/summary.json` reports zero critical sanity failures.
+
+## Operational Gate Added
+
+See `paper/design_notes/real_data_exposure_gate.md`. This is the active bridge
+between the external skill guidance and MolTrustBench Milestone 1 execution.
