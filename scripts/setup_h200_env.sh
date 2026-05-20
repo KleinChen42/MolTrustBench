@@ -3,6 +3,7 @@ set -euo pipefail
 
 CONDA_BIN="${CONDA_BIN:-/home/zetyun/miniconda3/bin/conda}"
 ENV_NAME="${MOLTRUST_ENV_NAME:-moltrustbench}"
+CONDA_CHANNEL_ARGS="${CONDA_CHANNEL_ARGS:---override-channels -c conda-forge}"
 
 if [ ! -x "$CONDA_BIN" ]; then
   echo "conda not found at $CONDA_BIN" >&2
@@ -11,7 +12,10 @@ fi
 
 echo "[setup] creating/updating conda env: $ENV_NAME"
 if "$CONDA_BIN" env list | awk '{print $1}' | grep -qx "$ENV_NAME"; then
-  "$CONDA_BIN" install -y -n "$ENV_NAME" -c conda-forge \
+  # Keep the solver on one explicit channel set; inherited HPC configs often
+  # add many mirrors and make RDKit environment resolution much slower.
+  # shellcheck disable=SC2086
+  "$CONDA_BIN" install -y -n "$ENV_NAME" $CONDA_CHANNEL_ARGS \
     python=3.10 \
     rdkit \
     pandas \
@@ -23,7 +27,8 @@ if "$CONDA_BIN" env list | awk '{print $1}' | grep -qx "$ENV_NAME"; then
     requests \
     pytest
 else
-  "$CONDA_BIN" create -y -n "$ENV_NAME" -c conda-forge \
+  # shellcheck disable=SC2086
+  "$CONDA_BIN" create -y -n "$ENV_NAME" $CONDA_CHANNEL_ARGS \
     python=3.10 \
     rdkit \
     pandas \
