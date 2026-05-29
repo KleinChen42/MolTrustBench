@@ -147,9 +147,24 @@ def _summarize_delta(pairs: pd.DataFrame, *, n_boot: int, seed: int) -> pd.DataF
         mean = float(np.mean(values))
         sd = float(np.std(values, ddof=1)) if n > 1 else 0.0
         sem = sd / math.sqrt(n) if n > 1 else 0.0
-        tcrit = _t_critical_975(n - 1) if n > 1 else 0.0
-        boot_low, boot_high = _bootstrap_ci(values, rng=rng, n_boot=n_boot)
-        ci_available = n > 1 and np.isfinite(boot_low) and np.isfinite(boot_high)
+        deterministic_repeat = n > 1 and sd <= 1e-12
+        if deterministic_repeat:
+            boot_low, boot_high = float("nan"), float("nan")
+            t_low, t_high = float("nan"), float("nan")
+            uncertainty_source = "deterministic_repeat"
+            uncertainty_status = "deterministic_repeat_no_interval"
+        elif n > 1:
+            tcrit = _t_critical_975(n - 1)
+            t_low, t_high = float(mean - tcrit * sem), float(mean + tcrit * sem)
+            boot_low, boot_high = _bootstrap_ci(values, rng=rng, n_boot=n_boot)
+            uncertainty_source = "seed_replicate"
+            uncertainty_status = "seed_replicate_ci_available"
+        else:
+            boot_low, boot_high = float("nan"), float("nan")
+            t_low, t_high = float("nan"), float("nan")
+            uncertainty_source = "single_run"
+            uncertainty_status = "single_run_no_interval"
+        ci_available = n > 1 and not deterministic_repeat and np.isfinite(boot_low) and np.isfinite(boot_high)
         pos = int(np.sum(values > 0))
         neg = int(np.sum(values < 0))
         row = dict(zip(group_cols, key))
@@ -164,8 +179,8 @@ def _summarize_delta(pairs: pd.DataFrame, *, n_boot: int, seed: int) -> pd.DataF
                 "median_delta": float(np.median(values)),
                 "sd_delta": sd,
                 "sem_delta": sem,
-                "seed_t_ci95_low": float(mean - tcrit * sem) if n > 1 else float("nan"),
-                "seed_t_ci95_high": float(mean + tcrit * sem) if n > 1 else float("nan"),
+                "seed_t_ci95_low": t_low,
+                "seed_t_ci95_high": t_high,
                 "bootstrap_ci95_low": boot_low,
                 "bootstrap_ci95_high": boot_high,
                 "positive_delta_n": pos,
@@ -175,7 +190,8 @@ def _summarize_delta(pairs: pd.DataFrame, *, n_boot: int, seed: int) -> pd.DataF
                 "sign_test_p": _sign_test_pvalue(values),
                 "ci_available": bool(ci_available),
                 "ci_excludes_zero": bool(ci_available and ((boot_low > 0 and boot_high > 0) or (boot_low < 0 and boot_high < 0))),
-                "uncertainty_status": "repeated_ci_available" if ci_available else "single_run_no_interval",
+                "uncertainty_source": uncertainty_source,
+                "uncertainty_status": uncertainty_status,
                 "direction": "standard_higher" if mean > 0 else "comparison_higher" if mean < 0 else "zero",
             }
         )

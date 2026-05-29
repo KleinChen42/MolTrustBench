@@ -57,13 +57,13 @@
 
 \title[MolTrustBench]{Benchmarking without Time Travel: Public-Exposure Auditing and Temporal Generalization in Molecular AI}
 
-\author[1,$\ast$]{Author One}
-\author[1]{Author Two}
+\author[1,$\ast$]{SUBMISSION\_METADATA\_REQUIRED\_AUTHOR\_1}
+\author[1]{SUBMISSION\_METADATA\_REQUIRED\_AUTHOR\_2}
 \author[1]{MolTrustBench Consortium}
 
-\address[1]{\orgdiv{Department}, \orgname{Institution}, \orgaddress{\street{Street}, \postcode{Postcode}, \state{State}, \country{Country}}}
+\address[1]{\orgdiv{SUBMISSION\_METADATA\_REQUIRED\_DEPARTMENT}, \orgname{SUBMISSION\_METADATA\_REQUIRED\_INSTITUTION}, \orgaddress{\street{SUBMISSION\_METADATA\_REQUIRED\_STREET}, \postcode{SUBMISSION\_METADATA\_REQUIRED\_POSTCODE}, \state{SUBMISSION\_METADATA\_REQUIRED\_STATE}, \country{SUBMISSION\_METADATA\_REQUIRED\_COUNTRY}}}
 
-\corresp[$\ast$]{Corresponding author. \url{mailto:author@example.com}}
+\corresp[$\ast$]{Corresponding author. \url{mailto:submission-metadata-required@example.invalid}}
 
 \received{Date}{0}{2026}
 \revised{Date}{0}{2026}
@@ -136,7 +136,7 @@ For the current performance evidence, MolTrustBench compares standard splits aga
 
 Train-label-shuffle controls permute training labels before fitting sequence baselines, then compare null-control exposure-adjusted deltas with observed-label deltas. This analysis is used as a negative control for score sensitivity, not as evidence that public exposure caused a specific model behavior.
 
-For endpoint-native temporal evaluation, MolTrustBench also constructs ChEMBL-derived hERG, CYP3A4, CYP2D6, CYP2C9, CYP1A2, CYP2C19, and DILI/hepatotoxicity tasks from release-indexed bioactivity or text-evidence records. These tasks use the same exposure-aware split logic but are interpreted as endpoint-specific temporal-validity and provenance checks. If a strict exposure-removed slice becomes too small or one-class, the run is retained as an expected limitation rather than being promoted to a performance result. Frozen foundation-model embeddings are treated as checkpoint-light wrapper case studies; they are not used as evidence that a specific checkpoint used ChEMBL during pretraining.
+For endpoint-native temporal evaluation, MolTrustBench also constructs ChEMBL-derived hERG, CYP, and DILI/hepatotoxicity tasks from release-indexed bioactivity or text-evidence records. These tasks use the same exposure-aware split logic but are interpreted as endpoint-specific temporal-validity and provenance checks. Strict exposure-removed slices that become too small or one-class are retained as expected limitations rather than promoted to performance results. Frozen foundation-model embeddings are treated as checkpoint-light wrapper case studies, not evidence that a specific checkpoint used ChEMBL during pretraining.
 
 \subsection{Assay provenance}
 
@@ -201,29 +201,29 @@ Exposure-adjusted evaluation shows that standard split scores and exposure-remov
 \begin{figure}[!t]
 \centering
 \maybefigure[width=0.94\columnwidth,keepaspectratio]{exposure_delta_ci.pdf}
-\caption{\textbf{Exposure-adjusted score deltas.} The main heatmap shows repeated-evidence rows with at least five matched runs. Deltas are computed as standard-score minus comparison-score for matched standard and exposure-aware slices; open markers indicate intervals excluding zero only when repeated-run uncertainty is available. Single-run Morgan rows are retained in the source tables as ``single run; no interval'' and are not marked as interval evidence. The figure is evidence of benchmark score sensitivity under public-exposure auditing; it does not prove model-specific training exposure or label recall.}
+\caption{\textbf{Exposure-adjusted score deltas.} The main heatmap shows rows with at least five matched runs and non-degenerate seed-replicate uncertainty. Deltas are computed as standard-score minus comparison-score for matched standard and exposure-aware slices; open markers indicate intervals excluding zero only when repeated-run uncertainty is available. Single-run or deterministic-repeat rows are retained in the source tables as descriptive estimates without interval markers. The figure is evidence of benchmark score sensitivity under public-exposure auditing; it does not prove model-specific training exposure or label recall.}
 \label{fig:performance-drop}
 \end{figure}
 
 \subsection{Density-matched and temporal-future controls define the current evidence boundary}
 
-The first controls address two interpretation caveats: public exposure may be a proxy for chemical-space density, and release dates are not model-specific training dates. Density-matched exposure-removed controls did not eliminate score differences in the evaluated tasks. For BACE, Morgan-XGB AUROC changed from 0.767 on the standard split to 0.720 on exact-removed and 0.550 on the density-matched split. For Tox21, Morgan-XGB changed from 0.707 on standard to 0.849 on exact-removed, 0.584 on scaffold-removed, and 0.849 on density-matched, while the exposure-removed subsets were much smaller than the standard test set. Temporal-future splits remain a narrower control: BBBP had 34 temporal-future test molecules, ClinTox had only 8, and BACE/Tox21 temporal-future subsets were too small or single-class for stable classification metrics. These controls support the framework logic, while temporal-generalization evidence remains a current boundary rather than a final deployment claim.
+The first controls address two interpretation caveats: public exposure may track chemical-space density, and release dates are not model-specific training dates. Density-matched exposure-removed controls did not eliminate score differences in the evaluated tasks, but exposure-removed subsets were often much smaller than standard test sets. Temporal-future splits remain a narrower control: BBBP had 34 temporal-future test molecules, ClinTox had only 8, and BACE/Tox21 temporal-future subsets were too small or single-class for stable classification metrics. Metric-computable rows with very low minority-class counts are treated as boundary evidence rather than stable performance estimates. These controls support the framework logic, while temporal-generalization evidence remains a current boundary rather than a final deployment claim.
 
 \subsection{Endpoint-native ChEMBL tasks add temporal-validity checks}
 
-Endpoint-native ChEMBL temporal tasks add a direct stress test because the labels and release history are derived from ChEMBL bioactivity records rather than mapped retrospectively from MoleculeNet labels. hERG, CYP3A4, CYP2D6, and CYP2C9 sequence baselines use the same standard, exposure-removed, density-matched, and temporal-future slice logic where valid. The summaries show endpoint-specific temporal drops for hERG, CYP3A4, and CYP2D6, while CYP2C9 retains only a subset of valid slices because exact/NN/density exposure-removed tests become class-degenerate. This is treated as a benchmark-usability finding: the protocol records both score sensitivity and the point at which strict exposure removal no longer yields statistically usable classification slices.
+Endpoint-native ChEMBL temporal tasks add a stress test because labels and release history are derived from ChEMBL bioactivity records rather than mapped retrospectively from MoleculeNet labels. hERG and CYP sequence baselines use the same standard, exposure-removed, density-matched, and temporal-future logic where valid. The summaries show endpoint-specific temporal drops and class-degenerate exposure-removed slices, which the protocol records as benchmark-usability findings rather than hidden failures.
 
 \subsection{Frozen FM embeddings provide supplement-first applicability checks}
 
-The checkpoint-light foundation-model case study tests whether the same exposure-aware contracts can be applied to staged molecular FM wrappers \cite{molformer2022,chemberta2020}. MolFormer and ChemBERTa-100M frozen-embedding runs are reported in supplement tables as applicability checks rather than as a foundation-model leaderboard. They document that the audit contract can be wrapped around safetensors-compatible checkpoints, but they do not show that either checkpoint used ChEMBL during pretraining and do not generalize to all molecular foundation models. Earlier blocked FM attempts are recorded separately as artifact-format/runtime limitations, not scientific negative results.
+MolFormer and ChemBERTa-100M frozen-embedding runs are reported in supplement tables as applicability checks, not as a foundation-model leaderboard \cite{molformer2022,chemberta2020}. They show that the audit contract can wrap staged checkpoints without implying that either checkpoint used ChEMBL during pretraining or generalizing to all molecular foundation models.
 
 \subsection{Train-label-shuffle controls provide a negative-control check}
 
-Train-label-shuffle controls test whether exposure-adjusted deltas remain larger than a null training-label baseline. The supplement reports null-control metrics, expected one-class limitations, task-specific exclusions, and a de-duplicated CYP label-shuffle integration. Across 22 observed-vs-shuffle comparisons, most observed deltas are larger than shuffled-label deltas, while four comparisons remain null-sensitive. This mixed result is used as a negative control that bounds interpretation; it is not presented as causal evidence that public exposure changed any model.
+Train-label-shuffle controls test whether exposure-adjusted deltas remain larger than a null training-label baseline. Across 22 observed-vs-shuffle comparisons, most observed deltas are larger than shuffled-label deltas, while four remain null-sensitive. The supplement reports the full null-control table and expected one-class limitations; the result bounds interpretation rather than serving as causal evidence that public exposure changed any model.
 
 \subsection{Model-family sensitivity shows that exposure effects are not confined to one baseline}
 
-The model-family sweep extends exposure-adjusted evaluation beyond classical fingerprint models while keeping the interpretation conservative. Across BBBP, ClinTox, BACE, and Tox21, the current artifacts include Morgan, MLP, SMILES-CNN, SMILES-GRU, and SMILES-Transformer results under standard, exposure-removed, density-matched, and temporal-future slices where valid. The BACE/Tox21 sequence-family integration uses repeated seeds so confidence intervals can separate stable deltas from uncertain deltas; several Tox21 SMILES-GRU deltas cross zero, while most BACE/Tox21 SMILES-CNN deltas do not. ESOL regression adds the same audit logic for RMSE deltas, and Lipophilicity is retained as an expected-limitation case. The goal is not to rank model families, but to show that benchmark trustworthiness should be reported by exposure slice and model family rather than by a single leaderboard number.
+The model-family sweep extends exposure-adjusted evaluation beyond classical fingerprints while keeping the interpretation conservative. Across BBBP, ClinTox, BACE, and Tox21, the artifacts include Morgan, MLP, SMILES-CNN, SMILES-GRU, and SMILES-Transformer results under valid standard, exposure-removed, density-matched, and temporal-future slices. Repeated BACE/Tox21 sequence runs separate stable deltas from uncertain deltas, and ESOL regression adds the same audit logic for RMSE. The goal is not to rank models, but to show that benchmark trustworthiness should be reported by exposure slice and model family rather than by a single leaderboard number.
 
 \begin{figure}[!t]
 \centering
@@ -234,7 +234,7 @@ The model-family sweep extends exposure-adjusted evaluation beyond classical fin
 
 \subsection{Assay provenance reveals label-source heterogeneity beyond molecule exposure}
 
-MolTrustBench also audits whether the molecules underlying benchmark labels have heterogeneous public assay records. ChEMBL36 SQLite extraction identified activity records for 1,289 BBBP molecules and 654 ClinTox molecules, with duplicate records, unit heterogeneity, threshold sensitivity, and discordant threshold-derived label calls among molecules with public activity records. The endpoint-native hERG pilot provides a focused ChEMBL provenance case study with 4,999 molecules with activity coverage; CYP1A2 and CYP2C19 add two further endpoint-native provenance summaries and temporal split manifests. A DILI/hepatotoxicity text-evidence pilot is retained as a provenance and expected-limitation case because several exposure-removed slices collapse to one-class two-molecule tests. Together, these results support the claim that benchmark trustworthiness is not only a molecule-exposure problem; it also depends on assay source, measurement units, censoring relations, thresholding choices, text-label evidence, and document provenance.
+MolTrustBench also audits whether benchmark-label molecules have heterogeneous public assay records. ChEMBL36 SQLite extraction identified activity records for 1,289 BBBP molecules and 654 ClinTox molecules, with duplicate records, unit heterogeneity, threshold sensitivity, and discordant threshold-derived label calls among molecules with public activity records. The endpoint-native hERG, CYP1A2, CYP2C19, and DILI/hepatotoxicity cases extend this provenance check. Together, these results show that benchmark trustworthiness depends not only on molecule exposure, but also on assay source, measurement units, censoring relations, thresholding choices, text-label evidence, and document provenance.
 
 \begin{figure}[!t]
 \centering
@@ -276,9 +276,9 @@ Limitations & Whether evidence is audit-only, performance-tested, or endpoint-na
 
 MolTrustBench reframes molecular benchmark evaluation as a trustworthiness audit. The central finding is not that any model used a specific molecule or label, but that commonly used benchmark tasks contain measurable public-observability and assay-provenance limitations that should be reported before leaderboard scores are interpreted as prospective generalization. This framing separates three questions that are often conflated: whether chemistry was publicly observable, whether model performance changes under exposure-aware evaluation, and whether assay-derived labels are stable enough to support benchmark claims.
 
-The evidence package is intentionally scoped. The four-task audit supports the molecule, scaffold, and nearest-neighbor public-observability claims. Exposure-adjusted evaluation is supported by the core tasks plus endpoint-native, sequence-family, regression, frozen-embedding, and train-label-shuffle extensions summarized in the supplement. Assay-provenance claims are supported by ChEMBL36 SQLite extraction plus endpoint-native hERG, CYP1A2, CYP2C19, and DILI toxicology evidence. The reusable reporting-standard contribution is supported by the workflow schematic, generated trust cards, sanity checks, data-freeze records, and machine-readable supplement tables S24--S29.
+The evidence package is intentionally scoped. The four-task audit supports the molecule, scaffold, and nearest-neighbor public-observability claims. Exposure-adjusted evaluation is supported by the core tasks plus endpoint-native, sequence-family, regression, frozen-embedding, and train-label-shuffle extensions summarized in the supplement. Assay-provenance claims are supported by ChEMBL36 SQLite extraction plus endpoint-native toxicology evidence. The reporting-standard contribution is supported by the workflow schematic, trust cards, sanity checks, data-freeze records, and machine-readable supplement tables S24--S29.
 
-The main limitations are also explicit: SIDER remains deferred from the first coverage expansion; Lipophilicity exposure-aware regression slices are too small or absent under the current cutoff; CYP2C9 exact/NN/density exposure-removed slices become one-class subsets in the endpoint-native wave; DILI exact/NN/temporal/density exposure-removed slices are one-class two-molecule tests; BACE label-shuffle controls are class-degenerate under the submitted annotation configuration; four observed-vs-null comparisons remain null-sensitive; CYP1A2 does not form paired temporal-delta rows in the CYP label-shuffle integration; temporal-future subsets are small for some tasks; frozen FM rows are wrapper applicability evidence rather than model-specific pretraining evidence; and model-specific pretraining cutoffs remain unknown for many public checkpoints.
+The main limitations are also explicit: SIDER remains deferred; Lipophilicity, CYP2C9, DILI, and some label-shuffle slices become too small or class-degenerate under strict exposure-aware filtering; four observed-vs-null comparisons remain null-sensitive; temporal-future subsets are small for some tasks; frozen FM rows are wrapper applicability evidence; and model-specific pretraining cutoffs remain unknown for many public checkpoints.
 
 These limitations are audit outputs rather than failures to be hidden. Exposure-removed subsets that become too small or class-degenerate under strict filtering are evidence about benchmark usability under exposure-adjusted evaluation. MolTrustBench provides a reproducible scaffold for replacing implicit benchmark assumptions with explicit public-exposure lower bounds, assay-provenance diagnostics, and exposure-adjusted reporting.
 
@@ -288,19 +288,19 @@ Processed evidence tables, exposure annotations, generated benchmark splits, fig
 
 \section{Code availability}
 
-MolTrustBench code is maintained in the project repository. The current version uses the release-index, exposure-audit, assay-provenance, model-family integration, label-shuffle negative-control, supplement-packaging, and final-figure scripts under \artifact{scripts/}, with reusable package modules under \artifact{src/moltrustbench/}. Before submission, the GitHub commit SHA or tagged release corresponding to the deposited evidence archive should be added here.
+MolTrustBench code is maintained in the project repository. The current version uses the release-index, exposure-audit, assay-provenance, model-family integration, label-shuffle negative-control, supplement-packaging, and final-figure scripts under \artifact{scripts/}, with reusable package modules under \artifact{src/moltrustbench/}. \textbf{SUBMISSION\_METADATA\_REQUIRED:} add the GitHub URL, commit SHA, and tagged release corresponding to the deposited evidence archive.
 
 \section{Acknowledgments}
 
-Acknowledgments will be completed after author and compute-resource details are finalized.
+\textbf{SUBMISSION\_METADATA\_REQUIRED:} add acknowledgments after author and compute-resource details are finalized.
 
 \section{Funding}
 
-Funding information will be completed before submission.
+\textbf{SUBMISSION\_METADATA\_REQUIRED:} add funding information or state that no specific funding was received.
 
 \section{Conflict of interest}
 
-The authors declare no competing interests. This statement should be verified before submission.
+\textbf{SUBMISSION\_METADATA\_REQUIRED:} verify the competing-interest statement before submission.
 
 \bibliographystyle{oup-plain}
 \bibliography{references}

@@ -16,7 +16,7 @@ WORKFLOW_STEPS = [
     {
         "step_id": "inputs",
         "title": "Benchmark inputs",
-        "subtitle": "MoleculeNet / TDC / ChEMBL-derived tasks",
+        "subtitle": "MoleculeNet, TDC, ChEMBL tasks",
         "module": "benchmark ingestion",
         "artifact": "data/processed/benchmarks",
         "x": 0.05,
@@ -25,8 +25,8 @@ WORKFLOW_STEPS = [
     {
         "step_id": "standardize",
         "title": "Standardization audit",
-        "subtitle": "SMILES, InChIKey, scaffold, manifests",
-        "module": "molecule standardization",
+        "subtitle": "SMILES, InChIKey, scaffolds",
+        "module": "standardization",
         "artifact": "data/processed/standardization_report.json",
         "x": 0.25,
         "y": 0.66,
@@ -34,8 +34,8 @@ WORKFLOW_STEPS = [
     {
         "step_id": "release_index",
         "title": "Release-time index",
-        "subtitle": "ChEMBL24/27/30/33/36 first seen",
-        "module": "public release index",
+        "subtitle": "ChEMBL releases, first-seen dates",
+        "module": "release index",
         "artifact": "results/release_index/compound_release_index.parquet",
         "x": 0.45,
         "y": 0.66,
@@ -52,7 +52,7 @@ WORKFLOW_STEPS = [
     {
         "step_id": "evaluation",
         "title": "Exposure-adjusted evaluation",
-        "subtitle": "Exposure-removed slices, CIs, limitations",
+        "subtitle": "Slices, intervals, limitations",
         "module": "score sensitivity",
         "artifact": "results/tables/exposure_delta_ci.csv",
         "x": 0.25,
@@ -61,7 +61,7 @@ WORKFLOW_STEPS = [
     {
         "step_id": "provenance",
         "title": "Assay provenance",
-        "subtitle": "Documents, units, discordance, thresholds",
+        "subtitle": "Assays, units, thresholds",
         "module": "label-source audit",
         "artifact": "results/tables/assay_provenance_task_summary.csv",
         "x": 0.45,
@@ -70,7 +70,7 @@ WORKFLOW_STEPS = [
     {
         "step_id": "trust_cards",
         "title": "Trust-card reporting",
-        "subtitle": "Exposure, scores, caveats, reporting standard",
+        "subtitle": "Cards, schema, caveats",
         "module": "reporting standard",
         "artifact": "results/figures/trust_card_examples.pdf",
         "x": 0.65,
@@ -120,6 +120,23 @@ def write_workflow_table(root: Path, output: Path) -> pd.DataFrame:
     return table
 
 
+def _assert_no_text_overlap(fig: plt.Figure, text_groups: dict[str, list[plt.Text]]) -> None:
+    """Fail fast if labels inside any workflow box overlap after rendering."""
+    fig.canvas.draw()
+    renderer = fig.canvas.get_renderer()
+    for step_id, artists in text_groups.items():
+        boxes = []
+        for artist in artists:
+            bbox = artist.get_window_extent(renderer=renderer).expanded(1.01, 1.08)
+            boxes.append((artist.get_text(), bbox))
+        for i, (left_text, left_box) in enumerate(boxes):
+            for right_text, right_box in boxes[i + 1 :]:
+                if left_box.overlaps(right_box):
+                    raise RuntimeError(
+                        f"Workflow text overlap in {step_id!r}: {left_text!r} overlaps {right_text!r}"
+                    )
+
+
 def plot_workflow(
     *,
     root: str | Path = ".",
@@ -131,23 +148,24 @@ def plot_workflow(
     table = write_workflow_table(root_path, Path(output_table))
     _setup_style()
 
-    fig, ax = plt.subplots(figsize=(7.4, 4.4))
+    fig, ax = plt.subplots(figsize=(7.4, 4.8))
     ax.set_axis_off()
     fig.patch.set_facecolor("white")
 
     layout = {
-        "inputs": (0.05, 0.69, 0.24, 0.14),
-        "standardize": (0.38, 0.69, 0.24, 0.14),
-        "release_index": (0.71, 0.69, 0.24, 0.14),
-        "exposure": (0.25, 0.47, 0.50, 0.14),
-        "evaluation": (0.07, 0.25, 0.38, 0.14),
-        "provenance": (0.55, 0.25, 0.38, 0.14),
-        "trust_cards": (0.25, 0.055, 0.50, 0.14),
+        "inputs": (0.04, 0.68, 0.28, 0.16),
+        "standardize": (0.36, 0.68, 0.28, 0.16),
+        "release_index": (0.68, 0.68, 0.28, 0.16),
+        "exposure": (0.25, 0.455, 0.50, 0.15),
+        "evaluation": (0.04, 0.22, 0.28, 0.16),
+        "provenance": (0.36, 0.22, 0.28, 0.16),
+        "trust_cards": (0.68, 0.22, 0.28, 0.16),
     }
     colors = {
         "available": ("#eef5f2", "#3c7c66"),
         "planned": ("#f4f4f4", "#8a8a8a"),
     }
+    text_groups: dict[str, list[plt.Text]] = {}
 
     for step in WORKFLOW_STEPS:
         status = _artifact_status(root_path, step["artifact"])
@@ -163,37 +181,39 @@ def plot_workflow(
             facecolor=face,
         )
         ax.add_patch(patch)
-        title_width = 21 if box_w < 0.4 else 38
-        subtitle_width = 28 if box_w < 0.4 else 58
-        ax.text(
+        title_width = 28 if box_w < 0.4 else 44
+        subtitle_width = 34 if box_w < 0.4 else 62
+        title = ax.text(
             x + 0.018,
-            y + box_h - 0.030,
+            y + box_h - 0.026,
             fill(step["title"], width=title_width),
             weight="bold",
-            fontsize=7.2,
+            fontsize=7.0,
             va="top",
             ha="left",
             linespacing=1.05,
         )
-        ax.text(
+        subtitle = ax.text(
             x + 0.018,
-            y + box_h - 0.069,
+            y + box_h - 0.073,
             fill(step["subtitle"], width=subtitle_width),
-            fontsize=5.9,
+            fontsize=5.55,
             va="top",
             ha="left",
             color="#333333",
             linespacing=1.08,
         )
-        ax.text(
+        module = ax.text(
             x + 0.018,
-            y + 0.016,
-            fill(step["module"], width=title_width),
-            fontsize=5.7,
+            y + 0.024,
+            step["module"],
+            fontsize=5.45,
             va="bottom",
+            ha="left",
             color=edge,
             weight="bold",
         )
+        text_groups[step["step_id"]] = [title, subtitle, module]
 
     def mid_right(step_id: str) -> tuple[float, float]:
         x, y, w, h = layout[step_id]
@@ -215,10 +235,9 @@ def plot_workflow(
         (mid_right("inputs"), mid_left("standardize"), 0.0),
         (mid_right("standardize"), mid_left("release_index"), 0.0),
         (bottom_center("release_index"), top_center("exposure"), 0.0),
-        (bottom_center("exposure"), top_center("evaluation"), 0.12),
-        (bottom_center("exposure"), top_center("provenance"), -0.12),
-        (bottom_center("evaluation"), top_center("trust_cards"), -0.08),
-        (bottom_center("provenance"), top_center("trust_cards"), 0.08),
+        (bottom_center("exposure"), top_center("evaluation"), 0.16),
+        (bottom_center("exposure"), top_center("provenance"), 0.0),
+        (bottom_center("exposure"), top_center("trust_cards"), -0.16),
     ]
     for start_xy, end_xy, rad in arrows:
         arrow = FancyArrowPatch(
@@ -259,6 +278,7 @@ def plot_workflow(
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 1)
     fig.tight_layout()
+    _assert_no_text_overlap(fig, text_groups)
 
     output_pdf = Path(output_pdf)
     output_pdf.parent.mkdir(parents=True, exist_ok=True)

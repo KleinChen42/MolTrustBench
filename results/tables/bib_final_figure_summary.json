@@ -1,23 +1,23 @@
 {
   "figure_contract": {
-    "Fig4": "Exposure-adjusted AUROC deltas identify score-sensitive slices and uncertain deltas.",
+    "Fig3": "Exposure-adjusted AUROC deltas identify score-sensitive slices and uncertain deltas.",
     "Fig5": "BACE/Tox21 sequence-family effects are task- and architecture-dependent and require exposure-removed slice-size caveats.",
     "FigS7": "Train-label-shuffle controls are negative controls, not causal exposure evidence."
   },
   "outputs": [
     {
-      "figure": "Fig4",
+      "figure": "Fig3",
       "outputs": [
-        "results\\figures\\fig4_exposure_delta_ci_bib.pdf",
-        "results\\figures\\fig4_exposure_delta_ci_bib.svg",
-        "results\\figures\\fig4_exposure_delta_ci_bib.png",
-        "results\\figures\\fig4_exposure_delta_ci_bib.tiff",
+        "results\\figures\\fig3_exposure_delta_ci_bib.pdf",
+        "results\\figures\\fig3_exposure_delta_ci_bib.svg",
+        "results\\figures\\fig3_exposure_delta_ci_bib.png",
+        "results\\figures\\fig3_exposure_delta_ci_bib.tiff",
         "results\\figures\\exposure_delta_ci.pdf",
         "results\\figures\\exposure_delta_ci.svg",
         "results\\figures\\exposure_delta_ci.png",
         "results\\figures\\exposure_delta_ci.tiff"
       ],
-      "rows": 48
+      "rows": 40
     },
     {
       "figure": "Fig5",

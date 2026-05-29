@@ -1,6 +1,6 @@
-chembl_release,release_date,release_doi,input_kind,input_rows,standardized_rows,unique_standard_inchikey,rejected_rows,unique_scaffold
-CHEMBL24,2018-05,10.6019/CHEMBL.database.24,chemreps,1820035,1820035,1820035,0,525438
-CHEMBL27,2020-05,10.6019/CHEMBL.database.27,chemreps,1941410,1941410,1941410,0,38987
-CHEMBL30,2022-02,10.6019/CHEMBL.database.30,chemreps,2136187,2136187,2136187,0,60599
-CHEMBL33,2023-05,10.6019/CHEMBL.database.33,chemreps,2372674,2372674,2372674,0,120287
-CHEMBL36,2025-07,10.6019/CHEMBL.database.36,chemreps,2854815,2854815,2854815,0,163644
+chembl_release,release_date,release_doi,input_kind,raw_chemreps_input_rows,standardized_compound_records,unique_standard_inchikeys_after_filtering,rejected_rows,new_standard_inchikeys_first_seen,new_scaffolds_first_seen,cumulative_first_seen_scaffolds,scaffold_generation_success_n,scaffold_generation_failure_n,scaffold_count_scope
+CHEMBL24,2018-05,10.6019/CHEMBL.database.24,chemreps,1820035,1820035,1820035,0,1820035,525438,525438,1799463,20572,new first-seen Bemis-Murcko scaffolds in the collapsed ChEMBL release index; cumulative column is expected to be monotonic
+CHEMBL27,2020-05,10.6019/CHEMBL.database.27,chemreps,1941410,1941410,1941410,0,135127,38987,564425,134212,915,new first-seen Bemis-Murcko scaffolds in the collapsed ChEMBL release index; cumulative column is expected to be monotonic
+CHEMBL30,2022-02,10.6019/CHEMBL.database.30,chemreps,2136187,2136187,2136187,0,194983,60599,625024,193431,1552,new first-seen Bemis-Murcko scaffolds in the collapsed ChEMBL release index; cumulative column is expected to be monotonic
+CHEMBL33,2023-05,10.6019/CHEMBL.database.33,chemreps,2372674,2372674,2372674,0,236538,120287,745311,235912,626,new first-seen Bemis-Murcko scaffolds in the collapsed ChEMBL release index; cumulative column is expected to be monotonic
+CHEMBL36,2025-07,10.6019/CHEMBL.database.36,chemreps,2854815,2854815,2854815,0,482969,163644,908955,481747,1222,new first-seen Bemis-Murcko scaffolds in the collapsed ChEMBL release index; cumulative column is expected to be monotonic

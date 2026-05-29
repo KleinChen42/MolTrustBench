@@ -276,7 +276,7 @@ REVIEWER_COLUMN_RENAMES = {
 
 
 def write_reviewer_table_copy(src: Path, dst: Path) -> None:
-    """Copy a compact reviewer-facing CSV while normalizing conservative terms."""
+    """Copy a compact audit-facing CSV while normalizing conservative terms."""
     if src.suffix.lower() != ".csv":
         shutil.copy2(src, dst)
         return
@@ -296,6 +296,75 @@ def read_parquet_rows(path: Path) -> tuple[int | None, str]:
         return len(pd.read_parquet(path)), "available"
     except Exception as exc:  # pragma: no cover - depends on optional parquet backend
         return None, f"unreadable: {type(exc).__name__}"
+
+
+def release_index_summary_table() -> pd.DataFrame:
+    """Return a clarified release-index summary for audit-facing Table S1."""
+    counts = read_csv_safe("results/tables/chembl_release_counts.csv")
+    if counts.empty:
+        return counts
+    compound_path = ROOT / "results" / "release_index" / "compound_release_index.parquet"
+    scaffold_path = ROOT / "results" / "release_index" / "scaffold_release_index.parquet"
+    compound = pd.read_parquet(compound_path) if compound_path.exists() else pd.DataFrame()
+    scaffold = pd.read_parquet(scaffold_path) if scaffold_path.exists() else pd.DataFrame()
+    release_order = counts["chembl_release"].astype(str).tolist()
+    compound_first_seen = (
+        compound["first_seen_release"].astype(str).value_counts().to_dict()
+        if not compound.empty and "first_seen_release" in compound
+        else {}
+    )
+    scaffold_first_seen = (
+        scaffold["first_seen_release"].astype(str).value_counts().to_dict()
+        if not scaffold.empty and "first_seen_release" in scaffold
+        else {}
+    )
+    scaffold_success = {}
+    scaffold_failure = {}
+    if not compound.empty and {"first_seen_release", "murcko_scaffold_smiles"}.issubset(compound.columns):
+        grouped = compound.groupby(compound["first_seen_release"].astype(str), dropna=False)
+        for release, group in grouped:
+            success = int(group["murcko_scaffold_smiles"].fillna("").astype(str).ne("").sum())
+            scaffold_success[str(release)] = success
+            scaffold_failure[str(release)] = int(len(group) - success)
+
+    running_scaffolds = 0
+    rows = []
+    for _, record in counts.iterrows():
+        release = str(record.get("chembl_release", ""))
+        new_scaffolds = int(
+            scaffold_first_seen.get(
+                release,
+                record.get("new_scaffolds_first_seen", record.get("unique_scaffold", record.get("unique_scaffolds_in_release", 0))) or 0,
+            )
+        )
+        running_scaffolds += new_scaffolds
+        rows.append(
+            {
+                "chembl_release": release,
+                "release_date": record.get("release_date", ""),
+                "release_doi": record.get("release_doi", ""),
+                "input_kind": record.get("input_kind", "chemreps"),
+                "raw_chemreps_input_rows": record.get("input_rows", ""),
+                "standardized_compound_records": record.get("standardized_rows", ""),
+                "unique_standard_inchikeys_after_filtering": record.get("unique_standard_inchikey", ""),
+                "rejected_rows": record.get("rejected_rows", ""),
+                "new_standard_inchikeys_first_seen": int(compound_first_seen.get(release, 0)),
+                "new_scaffolds_first_seen": new_scaffolds,
+                "cumulative_first_seen_scaffolds": running_scaffolds,
+                "scaffold_generation_success_n": scaffold_success.get(release, ""),
+                "scaffold_generation_failure_n": scaffold_failure.get(release, ""),
+                "scaffold_count_scope": "new first-seen Bemis-Murcko scaffolds in the collapsed ChEMBL release index; cumulative column is expected to be monotonic",
+            }
+        )
+    out = pd.DataFrame(rows)
+    cumulative = pd.to_numeric(out["cumulative_first_seen_scaffolds"], errors="coerce")
+    if cumulative.notna().all() and not cumulative.is_monotonic_increasing:
+        raise ValueError("Cumulative first-seen scaffold counts must be monotonic in Table S1")
+    return out
+
+
+def write_release_index_summary(dst: Path) -> None:
+    release_index_summary_table().to_csv(dst, index=False)
 
 
 def parse_label_counts(value: object) -> tuple[int | None, int | None, bool | None]:
@@ -550,6 +619,36 @@ def ci_source_for(row: dict[str, object], ci_keys: set[tuple[str, str, str, str]
     return True, "results/tables/exposure_delta_ci.csv"
 
 
+def class_balance_interpretation(
+    positive_n: object,
+    negative_n: object,
+    *,
+    metric_valid: bool,
+    is_regression: bool = False,
+    one_class: bool = False,
+    non_auditable: bool = False,
+) -> tuple[object, object, str]:
+    """Return min-class count, minimum-count pass flag, and reviewer interpretation."""
+    if is_regression:
+        return "not_applicable_regression", "not_applicable", "class_balance_not_applicable_regression"
+    if non_auditable:
+        return "", False, "not_auditable_in_compact_package"
+    pos = _to_int(positive_n)
+    neg = _to_int(negative_n)
+    if pos is None or neg is None:
+        return "", False, "missing_class_counts"
+    min_class = min(pos, neg)
+    if one_class or min_class == 0:
+        return min_class, False, "one_class_invalid"
+    if not metric_valid:
+        return min_class, False, "metric_invalid"
+    if min_class < 5:
+        return min_class, False, "low_minority_class_boundary"
+    if min_class < 10:
+        return min_class, True, "small_minority_class_caution"
+    return min_class, True, "class_balance_ok"
+
+
 def counts_for_metric(record: pd.Series, summary_counts: dict[tuple[str, str, str], dict[str, object]]) -> dict[str, object]:
     source = str(record.get("source_name", ""))
     task = str(record.get("task_name", ""))
@@ -639,13 +738,23 @@ def write_slice_validity_master() -> Path:
                 metric_valid = False
                 reason = "ONE_CLASS_AUROC_INVALID"
             elif has_metric and not has_counts:
-                # Reviewer-facing S24 is an auditable slice-validity table.
-                # Historical metric rows whose compact archive does not expose
-                # class counts remain in the data-freeze archive, not here.
-                continue
+                metric_valid = False
+                reason = "CLASS_COUNTS_NOT_AUDITABLE_IN_COMPACT_ARCHIVE"
             else:
                 metric_valid = bool(has_metric)
                 reason = "VALID_METRIC_WITH_CLASS_COUNTS" if has_metric else "NO_VALID_PRIMARY_METRIC"
+            min_class_n, minimum_class_count_ok, interpretation_status = class_balance_interpretation(
+                positive_n,
+                negative_n,
+                metric_valid=bool(metric_valid),
+                is_regression=is_regression,
+                one_class=known_one_class,
+                non_auditable=has_metric and not has_counts and not is_regression,
+            )
+            if metric_valid and interpretation_status == "low_minority_class_boundary":
+                reason = "VALID_METRIC_LOW_MINORITY_CLASS_BOUNDARY"
+            elif metric_valid and interpretation_status == "small_minority_class_caution":
+                reason = "VALID_METRIC_SMALL_MINORITY_CLASS_CAUTION"
             rows.append(
                 {
                     "source_table": rel_path,
@@ -658,8 +767,11 @@ def write_slice_validity_master() -> Path:
                     "test_n": counts.get("test_n", record.get("test_n", "")),
                     "positive_n": positive_n,
                     "negative_n": negative_n,
+                    "min_class_n": min_class_n,
                     "one_class_flag": one_class_flag,
                     "metric_validity_flag": metric_valid,
+                    "minimum_class_count_ok": minimum_class_count_ok,
+                    "interpretation_status": interpretation_status,
                     "ci_available": ci_available,
                     "ci_source_table": ci_source,
                     "class_count_source": counts.get("class_count_source", ""),
@@ -685,6 +797,9 @@ def write_slice_validity_master() -> Path:
                     "negative_n": "",
                     "one_class_flag": True,
                     "metric_validity_flag": False,
+                    "minimum_class_count_ok": False,
+                    "min_class_n": "",
+                    "interpretation_status": "expected_limitation_invalid",
                     "ci_available": False,
                     "ci_source_table": "",
                     "class_count_source": expected_rel,
@@ -703,7 +818,34 @@ def write_slice_validity_master() -> Path:
         note = note.replace("clean", "exposure-removed")
         row["reviewer_note"] = note
     out = TABLES / "Table_S24_slice_validity_master.csv"
-    pd.DataFrame(rows).to_csv(out, index=False)
+    df = pd.DataFrame(rows)
+    core = df[df["source_block"] == "core_slice_metrics"].copy()
+    s3 = read_csv_safe("results/tables/slice_metrics.csv")
+    if not s3.empty:
+        expected_keys = set(
+            tuple(str(record.get(col, "")) for col in ["source_name", "task_name", "model_id", "split_name"])
+            for _, record in s3.iterrows()
+        )
+        observed_keys = set(
+            tuple(str(record.get(col, "")) for col in ["source_name", "task_name", "model_id", "split_name"])
+            for _, record in core.iterrows()
+        )
+        missing = sorted(expected_keys.difference(observed_keys))
+        if missing:
+            raise ValueError(f"Table S24 is missing Table S3 core metric rows: {missing[:8]}")
+    valid_classification = df[
+        (df["metric_validity_flag"].astype(str).str.lower().isin({"true", "1"}))
+        & (df["positive_n"].astype(str) != "not_applicable_regression")
+    ].copy()
+    missing_counts = valid_classification[
+        valid_classification["positive_n"].astype(str).eq("")
+        | valid_classification["negative_n"].astype(str).eq("")
+    ]
+    if not missing_counts.empty:
+        raise ValueError("Table S24 has valid classification metric rows without class counts")
+    if df["reason_code"].astype(str).str.contains("VALID_METRIC_CLASS_COUNTS_NOT_RECOVERABLE_FROM_ARCHIVE").any():
+        raise ValueError("Table S24 contains stale class-count-not-recoverable reason codes")
+    df.to_csv(out, index=False)
     return out
 
 
@@ -715,10 +857,19 @@ def write_standardization_audit() -> Path:
     columns = [
         "dataset_id",
         "dataset_kind",
+        "release_id",
         "raw_rows",
         "standardized_rows",
         "rejected_rows",
         "unique_inchikeys",
+        "raw_chemreps_input_rows",
+        "standardized_compound_records",
+        "unique_standard_inchikeys_after_filtering",
+        "new_standard_inchikeys_first_seen",
+        "new_scaffolds_first_seen",
+        "cumulative_first_seen_scaffolds",
+        "scaffold_generation_success_n",
+        "scaffold_generation_failure_n",
         "duplicate_rows_retained",
         "duplicate_rows_removed",
         "duplicate_policy",
@@ -728,28 +879,40 @@ def write_standardization_audit() -> Path:
         "standardization_backend",
         "policy_notes",
     ]
-    rows: list[dict[str, object]] = [
-        {
-            "dataset_id": "ChEMBL release index",
-            "dataset_kind": "release_index",
-            "raw_rows": report.get("compound_index_rows", ""),
-            "standardized_rows": report.get("compound_index_rows", ""),
-            "rejected_rows": "",
-            "unique_inchikeys": report.get("compound_index_rows", ""),
-            "duplicate_rows_retained": "",
-            "duplicate_rows_removed": "",
-            "duplicate_policy": "collapsed to earliest public release by standard InChIKey and scaffold",
-            "scaffold_available_rows": "",
-            "exact_annotation_rows": "",
-            "exposure_annotation_rows": "",
-            "standardization_backend": ";".join(report.get("standardization_backends", [])),
-            "policy_notes": report.get("note", ""),
-        }
-    ]
+    rows: list[dict[str, object]] = []
+    release_summary = release_index_summary_table()
+    for _, r in release_summary.iterrows():
+        rows.append(
+            {
+                "dataset_id": f"ChEMBL release index {r.get('chembl_release', '')}",
+                "dataset_kind": "release_index_first_seen_release",
+                "release_id": r.get("chembl_release", ""),
+                "raw_rows": r.get("raw_chemreps_input_rows", ""),
+                "standardized_rows": r.get("standardized_compound_records", ""),
+                "rejected_rows": r.get("rejected_rows", ""),
+                "unique_inchikeys": r.get("unique_standard_inchikeys_after_filtering", ""),
+                "raw_chemreps_input_rows": r.get("raw_chemreps_input_rows", ""),
+                "standardized_compound_records": r.get("standardized_compound_records", ""),
+                "unique_standard_inchikeys_after_filtering": r.get("unique_standard_inchikeys_after_filtering", ""),
+                "new_standard_inchikeys_first_seen": r.get("new_standard_inchikeys_first_seen", ""),
+                "new_scaffolds_first_seen": r.get("new_scaffolds_first_seen", ""),
+                "cumulative_first_seen_scaffolds": r.get("cumulative_first_seen_scaffolds", ""),
+                "scaffold_generation_success_n": r.get("scaffold_generation_success_n", ""),
+                "scaffold_generation_failure_n": r.get("scaffold_generation_failure_n", ""),
+                "duplicate_rows_retained": "",
+                "duplicate_rows_removed": "",
+                "duplicate_policy": "raw release records are counted separately from collapsed first-seen InChIKey/scaffold index rows",
+                "scaffold_available_rows": r.get("new_scaffolds_first_seen", ""),
+                "exact_annotation_rows": "",
+                "exposure_annotation_rows": "",
+                "standardization_backend": ";".join(report.get("standardization_backends", [])),
+                "policy_notes": f"{report.get('note', '')} Scaffold counts are first-seen index counts; cumulative first-seen scaffolds are monotonic by construction.",
+            }
+        )
     for path in sorted((ROOT / "data" / "processed" / "benchmarks").glob("*.parquet")):
         row_count, status = read_parquet_rows(path)
         if path.name.startswith(("moleculenet", "tdc")) and isinstance(row_count, int) and row_count < 100:
-            # These tiny processed files are smoke fixtures. The reviewer-facing
+            # These tiny processed files are smoke fixtures. The audit-facing
             # standardization audit uses real exposure-annotation tables below.
             continue
         unique_inchikeys = ""
@@ -771,10 +934,19 @@ def write_standardization_audit() -> Path:
             {
                 "dataset_id": path.stem,
                 "dataset_kind": "endpoint_native_processed_benchmark",
+                "release_id": "",
                 "raw_rows": row_count if row_count is not None else "",
                 "standardized_rows": row_count if row_count is not None else "",
                 "rejected_rows": 0 if row_count is not None else "",
                 "unique_inchikeys": unique_inchikeys,
+                "raw_chemreps_input_rows": "",
+                "standardized_compound_records": "",
+                "unique_standard_inchikeys_after_filtering": "",
+                "new_standard_inchikeys_first_seen": "",
+                "new_scaffolds_first_seen": "",
+                "cumulative_first_seen_scaffolds": "",
+                "scaffold_generation_success_n": "",
+                "scaffold_generation_failure_n": "",
                 "duplicate_rows_retained": (row_count - unique_inchikeys) if isinstance(row_count, int) and isinstance(unique_inchikeys, int) else "",
                 "duplicate_rows_removed": 0 if row_count is not None else "",
                 "duplicate_policy": "dataset rows retained unless downstream split construction removes duplicates",
@@ -808,10 +980,19 @@ def write_standardization_audit() -> Path:
             {
                 "dataset_id": path.stem,
                 "dataset_kind": "real_benchmark_exposure_annotation",
+                "release_id": "",
                 "raw_rows": row_count if row_count is not None else "",
                 "standardized_rows": row_count if row_count is not None else "",
                 "rejected_rows": 0 if row_count is not None else "",
                 "unique_inchikeys": unique_inchikeys,
+                "raw_chemreps_input_rows": "",
+                "standardized_compound_records": "",
+                "unique_standard_inchikeys_after_filtering": "",
+                "new_standard_inchikeys_first_seen": "",
+                "new_scaffolds_first_seen": "",
+                "cumulative_first_seen_scaffolds": "",
+                "scaffold_generation_success_n": "",
+                "scaffold_generation_failure_n": "",
                 "duplicate_rows_retained": (row_count - unique_inchikeys) if isinstance(row_count, int) and isinstance(unique_inchikeys, int) else "",
                 "duplicate_rows_removed": 0 if row_count is not None else "",
                 "duplicate_policy": "annotation table preserves benchmark row identity and adds exposure fields",
@@ -1175,7 +1356,7 @@ def write_figure_source_data_map() -> Path:
     rows = [
         ("Fig. 1", "workflow_schematic.pdf", "results/tables/workflow_artifact_map.csv", "C5", "workflow stage-to-artifact source data"),
         ("Fig. 2", "exposure_heatmap_coverage.pdf", "results/tables/benchmark_coverage_exposure_summary.csv", "C1/C2", "four-task exposure rates at CHEMBL30"),
-        ("Fig. 3", "exposure_delta_ci.pdf", "results/tables/fig4_exposure_delta_ci_source.csv", "C3/R8", "standard-minus-comparison delta CI source"),
+        ("Fig. 3", "exposure_delta_ci.pdf", "results/tables/fig3_exposure_delta_ci_source.csv", "C3/R8", "standard-minus-comparison delta interval source"),
         ("Fig. 4A", "bace_tox21_sequence_model_family.pdf", "results/tables/fig5_sequence_family_delta_source.csv", "C3", "sequence-family AUROC deltas"),
         ("Fig. 4B", "bace_tox21_sequence_model_family.pdf", "results/tables/fig5_sequence_family_comparison_size_source.csv", "C3/R8", "comparison-slice test sizes"),
         ("Fig. 5", "assay_conflict_map.pdf", "results/tables/assay_provenance_task_summary_with_dili.csv", "C4/R10", "assay-provenance heterogeneity rates"),
@@ -1258,7 +1439,10 @@ def copy_tables() -> list[dict[str, str]]:
         out_name = f"{spec.table_id}_{Path(spec.source).name}"
         dst = TABLES / out_name
         if src.exists():
-            write_reviewer_table_copy(src, dst)
+            if spec.table_id == "Table_S1":
+                write_release_index_summary(dst)
+            else:
+                write_reviewer_table_copy(src, dst)
             copied_paths.append(dst)
         manifest_rows.append(
             {
@@ -1388,7 +1572,7 @@ All processed data, exposure annotations, generated benchmark splits, summary ta
 - `[GitHub URL and commit SHA to be inserted]`
 - `DOI added during production`
 - `Date added during production`
-- `author@example.com`
+- `submission-metadata-required@example.invalid`
 - author, affiliation, funding, acknowledgment, and conflict-of-interest placeholders
 
 ## Risk Flags
@@ -1446,6 +1630,31 @@ def validate_package_tables() -> None:
     ]
     if not one_class_valid.empty:
         raise ValueError("Table S24 marks one-class classification rows as metric-valid")
+    for required_col in ["min_class_n", "minimum_class_count_ok", "interpretation_status"]:
+        if required_col not in s24.columns:
+            raise ValueError(f"Table S24 missing required interpretability column: {required_col}")
+    valid_classification = s24[
+        s24["metric_validity_flag"].astype(str).str.lower().eq("true")
+        & s24["positive_n"].astype(str).ne("not_applicable_regression")
+    ]
+    missing_valid_counts = valid_classification[
+        valid_classification["positive_n"].astype(str).eq("")
+        | valid_classification["negative_n"].astype(str).eq("")
+    ]
+    if not missing_valid_counts.empty:
+        raise ValueError("Table S24 has valid classification metric rows without auditable class counts")
+    s3 = pd.read_csv(ROOT / "results" / "tables" / "slice_metrics.csv")
+    s24_core = s24[s24["source_block"].astype(str).eq("core_slice_metrics")]
+    s3_keys = set(
+        tuple(str(row.get(col, "")) for col in ["source_name", "task_name", "model_id", "split_name"])
+        for _, row in s3.iterrows()
+    )
+    s24_keys = set(
+        tuple(str(row.get(col, "")) for col in ["source_name", "task_name", "model_id", "split_name"])
+        for _, row in s24_core.iterrows()
+    )
+    if s3_keys.difference(s24_keys):
+        raise ValueError("Table S24 core slice block does not cover every Table S3 metric row")
 
     s25 = pd.read_csv(TABLES / "Table_S25_standardization_audit.csv")
     fixture_rows = s25[
@@ -1453,9 +1662,11 @@ def validate_package_tables() -> None:
         & (pd.to_numeric(s25["raw_rows"], errors="coerce") < 100)
     ]
     if not fixture_rows.empty:
-        raise ValueError("Table S25 still exposes smoke-fixture row accounting as reviewer-facing benchmark accounting")
+        raise ValueError("Table S25 still exposes smoke-fixture row accounting as audit-facing benchmark accounting")
     if s25["dataset_id"].astype(str).eq("tdc_admet_hERG_exposure").any():
         raise ValueError("Table S25 still includes the 12-row TDC hERG miniature card")
+    if s25["dataset_id"].astype(str).eq("ChEMBL release index").any():
+        raise ValueError("Table S25 contains an ambiguous aggregate ChEMBL release-index row")
 
     s27 = pd.read_csv(TABLES / "Table_S27_assay_provenance_examples.csv")
     required_tasks = {"BBBP", "ClinTox", "hERG_pchembl5_pilot", "CYP1A2_pchembl5_temporal", "CYP2C19_pchembl5_temporal"}
@@ -1466,7 +1677,9 @@ def validate_package_tables() -> None:
 
     s29 = pd.read_csv(TABLES / "Table_S29_figure_source_data_map.csv")
     if "Fig. 8" in set(s29["figure"].astype(str)):
-        raise ValueError("Table S29 still maps a main Fig. 8 even though label shuffle is supplement-first")
+        raise ValueError("Table S29 still maps a main label-shuffle figure even though that control is supplement-first")
+    if s29["source_data_path"].astype(str).str.contains("fig4_exposure_delta", case=False, na=False).any():
+        raise ValueError("Table S29 still references stale Fig. 4 exposure-delta source data")
     unavailable_sources = s29[s29["source_status"].astype(str) != "available"]
     if not unavailable_sources.empty:
         raise ValueError(f"Table S29 has missing source-data rows: {unavailable_sources['figure'].tolist()}")
@@ -1480,7 +1693,7 @@ def validate_package_tables() -> None:
     }
     for path in (SUPP / "trust_cards").glob("*_card.json"):
         if path.name == "tdc_admet_hERG_card.json":
-            raise ValueError("Reviewer-facing trust-card JSON still includes the 12-row TDC hERG miniature card")
+            raise ValueError("Audit-facing trust-card JSON still includes the 12-row TDC hERG miniature card")
         card = json.loads(path.read_text(encoding="utf-8"))
         missing_fields = sorted(required_fields.difference(card))
         if missing_fields:

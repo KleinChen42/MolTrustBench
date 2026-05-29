@@ -29,6 +29,20 @@ def read_chembl_sqlite(sqlite_path: str | Path) -> pd.DataFrame:
         return pd.read_sql_query(select, conn)
 
 
+def read_chembl_chemreps(chemreps_path: str | Path) -> pd.DataFrame:
+    frame = pd.read_csv(chemreps_path, sep="\t")
+    if "canonical_smiles" not in frame.columns:
+        raise ValueError(f"Missing canonical_smiles column in {chemreps_path}")
+    out = frame.rename(columns={"canonical_smiles": "smiles"}).copy()
+    keep = ["smiles"]
+    if "chembl_id" in out.columns:
+        keep.append("chembl_id")
+    if "standard_inchi_key" in out.columns:
+        out = out.rename(columns={"standard_inchi_key": "source_inchikey"})
+        keep.append("source_inchikey")
+    return out[keep].dropna(subset=["smiles"]).reset_index(drop=True)
+
+
 def build_release_indexes(
     release_frames: dict[str, pd.DataFrame],
     *,
@@ -67,7 +81,7 @@ def build_release_indexes(
                 "input_rows": int(len(frame)),
                 "standardized_rows": int(len(standardized)),
                 "unique_standard_inchikey": int(standardized["standard_inchikey"].nunique()),
-                "unique_scaffold": int(standardized["murcko_scaffold_smiles"].nunique()),
+                "unique_scaffolds_in_release": int(standardized["murcko_scaffold_smiles"].nunique()),
                 "rejected_rows": int(len(rejected)),
             }
         )
@@ -110,6 +124,33 @@ def build_release_indexes(
     )
     scaffold_index["chembl_release"] = scaffold_index["first_seen_release"]
     scaffold_index["moltrustbench_version"] = __version__
+    counts = counts.copy()
+    compound_first_seen = compound_index["first_seen_release"].value_counts().to_dict()
+    scaffold_first_seen = scaffold_index["first_seen_release"].value_counts().to_dict()
+    scaffold_success = (
+        compound_index.assign(
+            scaffold_available=compound_index["murcko_scaffold_smiles"].fillna("").astype(str).ne("")
+        )
+        .groupby("first_seen_release")["scaffold_available"]
+        .agg(["sum", "count"])
+    )
+    cumulative_scaffolds = []
+    running_scaffolds = 0
+    for _, row in counts.iterrows():
+        release = row["chembl_release"]
+        new_scaffolds = int(scaffold_first_seen.get(release, 0))
+        running_scaffolds += new_scaffolds
+        cumulative_scaffolds.append(running_scaffolds)
+    counts["new_standard_inchikeys_first_seen"] = counts["chembl_release"].map(compound_first_seen).fillna(0).astype(int)
+    counts["new_scaffolds_first_seen"] = counts["chembl_release"].map(scaffold_first_seen).fillna(0).astype(int)
+    counts["cumulative_first_seen_scaffolds"] = cumulative_scaffolds
+    counts["scaffold_generation_success_n"] = counts["chembl_release"].map(
+        {release: int(values["sum"]) for release, values in scaffold_success.iterrows()}
+    ).fillna(0).astype(int)
+    counts["scaffold_generation_failure_n"] = (
+        counts["chembl_release"].map({release: int(values["count"]) for release, values in scaffold_success.iterrows()}).fillna(0).astype(int)
+        - counts["scaffold_generation_success_n"]
+    )
     return compound_index, scaffold_index, counts, rejected_all
 
 
@@ -148,6 +189,7 @@ def build_fixture_release_index(*, allow_fallback: bool = True) -> tuple[pd.Data
 def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--release-sqlite", action="append", default=[], help="Mapping like CHEMBL24=path/to/chembl_24.db")
+    parser.add_argument("--release-chemreps", action="append", default=[], help="Mapping like CHEMBL24=path/to/chembl_24_chemreps.txt.gz")
     parser.add_argument("--fixture", action="store_true")
     parser.add_argument("--allow-fallback-standardizer", action="store_true")
     parser.add_argument("--output-dir", default="results/release_index")
@@ -168,6 +210,10 @@ def main(argv: list[str] | None = None) -> None:
             release_id, raw_path = item.split("=", 1)
             frames[release_id] = read_chembl_sqlite(raw_path)
             manifests[release_id] = {"sqlite_path": raw_path, "sha256": file_sha256(raw_path)}
+        for item in args.release_chemreps:
+            release_id, raw_path = item.split("=", 1)
+            frames[release_id] = read_chembl_chemreps(raw_path)
+            manifests[release_id] = {"chemreps_path": raw_path, "sha256": file_sha256(raw_path), "input_kind": "chemreps"}
         if not frames:
             raise SystemExit("Provide --release-sqlite CHEMBLxx=path or --fixture")
 

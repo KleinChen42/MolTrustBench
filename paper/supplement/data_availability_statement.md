@@ -19,7 +19,7 @@ All processed data, exposure annotations, generated benchmark splits, summary ta
 - `[GitHub URL and commit SHA to be inserted]`
 - `DOI added during production`
 - `Date added during production`
-- `author@example.com`
+- `submission-metadata-required@example.invalid`
 - author, affiliation, funding, acknowledgment, and conflict-of-interest placeholders
 
 ## Risk Flags

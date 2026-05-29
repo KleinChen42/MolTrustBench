@@ -1,4 +1,4 @@
-"""Make BIB-facing final versions of Fig. 4, Fig. 5, and Fig. S7.
+"""Make BIB-facing final versions of Fig. 3, Fig. 4, and Fig. S7.
 
 The figures are regenerated from integrated result tables. They intentionally
 show exposure-adjusted score sensitivity and negative-control diagnostics
@@ -197,7 +197,10 @@ def make_fig4() -> dict[str, object]:
     include = ci[
         ci["metric_family"].isin(["bbbp_clintox_model_family", "bace_tox21_feature_mlp"])
     ].copy()
-    include = include[include["n_pairs"].fillna(0).astype(float) >= 5].copy()
+    include = include[
+        (include["n_pairs"].fillna(0).astype(float) >= 5)
+        & (include["ci_available"].astype(str).str.lower().isin({"true", "1"}))
+    ].copy()
     include["model_order"] = include["model_id"].map(
         {
             "morgan_logreg": 0,
@@ -222,14 +225,14 @@ def make_fig4() -> dict[str, object]:
     summary = include[
         include.apply(lambda r: (r["task_name"], r["model_id"]) in row_order, axis=1)
     ].copy()
-    summary.to_csv(TABLE_DIR / "fig4_exposure_delta_ci_source.csv", index=False)
+    summary.to_csv(TABLE_DIR / "fig3_exposure_delta_ci_source.csv", index=False)
 
     fig, ax = plt.subplots(figsize=(7.2, 5.6))
     im = draw_delta_heatmap(
         ax,
         summary,
         row_order,
-        title="Fig. 4 | Exposure-adjusted AUROC deltas across benchmark tasks",
+        title="Fig. 3 | Exposure-adjusted AUROC deltas across benchmark tasks",
         vlim=0.42,
     )
     ax.set_xlabel("Exposure-aware comparison split")
@@ -237,8 +240,8 @@ def make_fig4() -> dict[str, object]:
     cbar.set_label("AUROC delta: standard - comparison")
     legend = [
         Patch(facecolor="#f1f3f5", edgecolor="#c5cbd3", label="Not evaluable"),
-        Patch(facecolor="white", edgecolor="white", label="o: repeated-run CI excludes 0"),
-        Patch(facecolor="white", edgecolor="white", label="x: repeated-run CI overlaps 0"),
+        Patch(facecolor="white", edgecolor="white", label="o: seed-replicate interval excludes 0"),
+        Patch(facecolor="white", edgecolor="white", label="x: seed-replicate interval overlaps 0"),
     ]
     ax.legend(handles=legend, loc="lower center", bbox_to_anchor=(0.5, -0.18), ncol=3)
     fig.text(
@@ -249,11 +252,11 @@ def make_fig4() -> dict[str, object]:
         color="#4b5563",
     )
     fig.tight_layout(rect=(0, 0.04, 1, 1))
-    stem = FIG_DIR / "fig4_exposure_delta_ci_bib"
+    stem = FIG_DIR / "fig3_exposure_delta_ci_bib"
     paths = export_figure(fig, stem)
     paths.extend(duplicate_exports(stem, FIG_DIR / "exposure_delta_ci"))
     plt.close(fig)
-    return {"figure": "Fig4", "rows": int(len(summary)), "outputs": paths}
+    return {"figure": "Fig3", "rows": int(len(summary)), "outputs": paths}
 
 
 def make_fig5() -> dict[str, object]:
@@ -424,7 +427,7 @@ def main() -> None:
     payload = {
         "status": "completed",
         "figure_contract": {
-            "Fig4": "Exposure-adjusted AUROC deltas identify score-sensitive slices and uncertain deltas.",
+            "Fig3": "Exposure-adjusted AUROC deltas identify score-sensitive slices and uncertain deltas.",
             "Fig5": "BACE/Tox21 sequence-family effects are task- and architecture-dependent and require exposure-removed slice-size caveats.",
             "FigS7": "Train-label-shuffle controls are negative controls, not causal exposure evidence.",
         },
