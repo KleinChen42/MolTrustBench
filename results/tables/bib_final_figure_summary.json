@@ -1,0 +1,52 @@
+{
+  "figure_contract": {
+    "Fig4": "Exposure-adjusted AUROC deltas identify score-sensitive slices and uncertain deltas.",
+    "Fig5": "BACE/Tox21 sequence-family effects are task- and architecture-dependent and require exposure-removed slice-size caveats.",
+    "FigS7": "Train-label-shuffle controls are negative controls, not causal exposure evidence."
+  },
+  "outputs": [
+    {
+      "figure": "Fig4",
+      "outputs": [
+        "results\\figures\\fig4_exposure_delta_ci_bib.pdf",
+        "results\\figures\\fig4_exposure_delta_ci_bib.svg",
+        "results\\figures\\fig4_exposure_delta_ci_bib.png",
+        "results\\figures\\fig4_exposure_delta_ci_bib.tiff",
+        "results\\figures\\exposure_delta_ci.pdf",
+        "results\\figures\\exposure_delta_ci.svg",
+        "results\\figures\\exposure_delta_ci.png",
+        "results\\figures\\exposure_delta_ci.tiff"
+      ],
+      "rows": 56
+    },
+    {
+      "figure": "Fig5",
+      "outputs": [
+        "results\\figures\\fig5_sequence_family_bib.pdf",
+        "results\\figures\\fig5_sequence_family_bib.svg",
+        "results\\figures\\fig5_sequence_family_bib.png",
+        "results\\figures\\fig5_sequence_family_bib.tiff",
+        "results\\figures\\bace_tox21_sequence_model_family.pdf",
+        "results\\figures\\bace_tox21_sequence_model_family.svg",
+        "results\\figures\\bace_tox21_sequence_model_family.png",
+        "results\\figures\\bace_tox21_sequence_model_family.tiff"
+      ],
+      "rows": 24
+    },
+    {
+      "figure": "FigS7",
+      "outputs": [
+        "results\\figures\\figS7_label_shuffle_null_control_bib.pdf",
+        "results\\figures\\figS7_label_shuffle_null_control_bib.svg",
+        "results\\figures\\figS7_label_shuffle_null_control_bib.png",
+        "results\\figures\\figS7_label_shuffle_null_control_bib.tiff",
+        "results\\figures\\label_shuffle_null_control.pdf",
+        "results\\figures\\label_shuffle_null_control.svg",
+        "results\\figures\\label_shuffle_null_control.png",
+        "results\\figures\\label_shuffle_null_control.tiff"
+      ],
+      "rows": 22
+    }
+  ],
+  "status": "completed"
+}

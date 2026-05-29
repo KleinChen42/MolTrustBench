@@ -1,0 +1,9 @@
+task_name,comparison_split,comparison_test_n_median,standard_test_n_median
+BACE,exact_removed,882.0,1265.0
+BACE,scaffold_removed,719.0,1265.0
+BACE,nn08_removed,755.0,1265.0
+BACE,density_matched_clean,123.0,1265.0
+Tox21,exact_removed,100.0,1452.0
+Tox21,scaffold_removed,379.0,1452.0
+Tox21,nn08_removed,56.0,1452.0
+Tox21,density_matched_clean,100.0,1452.0

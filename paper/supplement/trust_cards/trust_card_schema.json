@@ -1,0 +1,95 @@
+{
+  "schema_name": "MolTrustBench benchmark trust card",
+  "version": "2026-05-29",
+  "interpretation": "public observability lower bound; not model-specific training-inclusion or memorization evidence",
+  "fields": [
+    {
+      "field_name": "dataset_id",
+      "type": "string",
+      "required": true,
+      "example": "moleculenet:BBBP",
+      "description": "stable benchmark/task identifier",
+      "claim_role": "C5"
+    },
+    {
+      "field_name": "cutoff_release",
+      "type": "string",
+      "required": true,
+      "example": "CHEMBL30",
+      "description": "public-observability cutoff used for exposure labels",
+      "claim_role": "C1/C2"
+    },
+    {
+      "field_name": "n_molecules",
+      "type": "integer",
+      "required": true,
+      "example": 2039,
+      "description": "number of audited benchmark molecules",
+      "claim_role": "C1"
+    },
+    {
+      "field_name": "exact_public_exposure_rate",
+      "type": "number",
+      "required": true,
+      "example": 0.8377,
+      "description": "fraction exactly observed by cutoff in indexed releases",
+      "claim_role": "C1"
+    },
+    {
+      "field_name": "scaffold_public_exposure_rate",
+      "type": "number",
+      "required": true,
+      "example": 0.8779,
+      "description": "fraction with scaffold observed by cutoff",
+      "claim_role": "C2"
+    },
+    {
+      "field_name": "nn_exposure_rate_08",
+      "type": "number",
+      "required": true,
+      "example": 0.8892,
+      "description": "fraction with nearest-neighbor similarity >=0.8 before cutoff",
+      "claim_role": "C2"
+    },
+    {
+      "field_name": "exposure_removed_test_n",
+      "type": "integer",
+      "required": true,
+      "example": 331,
+      "description": "test size after exposure removal, with class-balance validity reported separately",
+      "claim_role": "C3/R8"
+    },
+    {
+      "field_name": "assay_provenance_available",
+      "type": "boolean",
+      "required": true,
+      "example": true,
+      "description": "whether matched public assay provenance was extracted",
+      "claim_role": "C4"
+    },
+    {
+      "field_name": "label_conflict_summary",
+      "type": "object",
+      "required": false,
+      "example": "{\"conflicting_label_count\": 677}",
+      "description": "provenance heterogeneity summary",
+      "claim_role": "C4/R10"
+    },
+    {
+      "field_name": "primary_limitations",
+      "type": "array",
+      "required": true,
+      "example": "[\"ChEMBL-only lower bound\"]",
+      "description": "required caveats for interpretation",
+      "claim_role": "R1/R4/R8"
+    },
+    {
+      "field_name": "source_artifacts",
+      "type": "array",
+      "required": true,
+      "example": "[\"results/tables/...\"]",
+      "description": "machine-readable artifacts behind the card",
+      "claim_role": "C5"
+    }
+  ]
+}

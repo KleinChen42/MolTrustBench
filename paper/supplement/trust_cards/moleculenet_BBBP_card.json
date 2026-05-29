@@ -1,0 +1,32 @@
+{
+  "assay_provenance_available": true,
+  "cutoff_release": "CHEMBL30",
+  "dataset_id": "moleculenet:BBBP",
+  "exact_public_exposure_rate": 0.837666,
+  "exposure_removed_test_n": 0,
+  "interpretation": "Observable public-exposure lower bound; not evidence of model-specific training exposure.",
+  "label_conflict_summary": {
+    "activity_coverage_rate": 0.6539827498731609,
+    "conflicting_label_count": 677,
+    "duplicate_compound_count": 1215,
+    "median_derived_label_discordance_score": 0.8,
+    "molecules_with_activity": 1289,
+    "threshold_sensitive_count": 728,
+    "unit_inconsistency_count": 932
+  },
+  "n_molecules": 2039,
+  "nn_exposure_rate_08": 0.889161,
+  "primary_limitations": [
+    "ChEMBL-indexed observable lower bound, not model-specific training evidence",
+    "Exposure-removed subset size and class balance must be checked before interpreting deltas"
+  ],
+  "scaffold_public_exposure_rate": 0.877881,
+  "source_artifacts": [
+    "results/tables/benchmark_coverage_exposure_summary.csv",
+    "results/tables/trust_card_examples.csv",
+    "paper/supplement/tables/Table_S24_slice_validity_master.csv",
+    "paper/supplement/tables/Table_S28_trust_card_schema.csv"
+  ],
+  "source_name": "moleculenet",
+  "task_name": "BBBP"
+}

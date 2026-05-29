@@ -1,0 +1,3 @@
+source_name,task_name,molecules_with_activity,duplicate_compound_count,conflicting_label_count,unit_inconsistency_count,threshold_sensitive_count,median_derived_label_discordance_score,benchmark_molecule_count,activity_coverage_rate,endpoint_native_provenance
+chembl_bioactivity,CYP1A2_pchembl5_temporal,11107,279,27,0,5741,0.1,6000,1.0,True
+chembl_bioactivity,CYP2C19_pchembl5_temporal,11144,2901,62,0,5605,0.1,6000,1.0,True

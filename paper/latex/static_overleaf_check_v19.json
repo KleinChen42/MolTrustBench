@@ -1,0 +1,25 @@
+{
+  "labels": [
+    "fig:assay-conflict",
+    "fig:coverage-heatmap",
+    "fig:label-shuffle-null",
+    "fig:model-family",
+    "fig:performance-drop",
+    "fig:release-histogram",
+    "fig:trust-cards",
+    "fig:workflow",
+    "tab:checklist",
+    "tab:chembl-releases",
+    "tab:coverage"
+  ],
+  "missing_refs": [],
+  "missing_cites": [],
+  "missing_figures": [],
+  "class_line": "\\documentclass[unnumsec,webpdf,contemporary,large,numbered]{oup-authoring-template}",
+  "uses_href": false,
+  "fixed_height_includes": false,
+  "old_archive_reference": false,
+  "clears_unused_options": true,
+  "label_shuffle_visible": true,
+  "label_shuffle_placement": "Main-visible reviewer-control Fig. 8"
+}

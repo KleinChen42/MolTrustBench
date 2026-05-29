@@ -1,0 +1,7 @@
+evidence_block,expected_limitation_path,expected_limitation_rows,critical_failure_path,critical_failure_rows,interpretation
+regression,results/tables/regression_sequence_expected_limitations.csv,4160,results/tables/regression_sequence_critical_failures.csv,0,"expected exposure-removed/class-limit boundary, not paper evidence failure"
+endpoint_temporal,results/tables/chembl_endpoint_temporal_expected_limitations.csv,180,results/tables/chembl_endpoint_temporal_critical_failures.csv,0,"expected exposure-removed/class-limit boundary, not paper evidence failure"
+endpoint_transformer,results/tables/chembl_endpoint_transformer_expected_limitations.csv,60,results/tables/chembl_endpoint_transformer_critical_failures.csv,0,"expected exposure-removed/class-limit boundary, not paper evidence failure"
+label_shuffle,results/tables/label_shuffle_expected_limitations.csv,180,results/tables/label_shuffle_critical_failures.csv,0,"expected exposure-removed/class-limit boundary, not paper evidence failure"
+cyp_sequence,results/tables/cyp_extension_sequence_expected_limitations.csv,1080,results/tables/cyp_extension_sequence_critical_failures.csv,0,"expected exposure-removed/class-limit boundary, not paper evidence failure"
+cyp_label_shuffle_rescue,results/tables/cyp_extension_label_shuffle_rescue_expected_limitations.csv,1080,results/tables/cyp_extension_label_shuffle_rescue_critical_failures.csv,0,"expected exposure-removed/class-limit boundary, not paper evidence failure"

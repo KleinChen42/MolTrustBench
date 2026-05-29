@@ -1,0 +1,13 @@
+model_id,family,used_in_milestone_1,claimed_pretraining_data,approximate_cutoff,auditability,registry_claim
+morgan_logreg,classical_fingerprint,True,,not_applicable,high,no learned molecular pretraining corpus
+morgan_xgb,classical_fingerprint,True,,not_applicable,high,no learned molecular pretraining corpus
+smiles_cnn,sequence_neural_baseline,True,,not_applicable,high,trained from scratch on benchmark splits
+smiles_gru,sequence_neural_baseline,True,,not_applicable,high,trained from scratch on benchmark splits
+smiles_transformer,sequence_neural_baseline,True,,not_applicable,high,trained from scratch on benchmark splits
+chemberta,smiles_foundation_model,False,PubChem;ZINC,unknown,low,registry entry only
+molformer,smiles_foundation_model,False,PubChem;ZINC,unknown,low,registry entry only
+chemprop,supervised_gnn,False,,not_applicable,medium,supervised wrapper not assumed pretrained
+grover,graph_foundation_model,False,ChEMBL;ZINC,unknown,medium,future checkpoint-specific audit required
+kpgt,graph_foundation_model,False,molecular_graph_corpus,unknown,low,future checkpoint-specific audit required
+unimol,three_dimensional_foundation_model,False,molecular_3d_corpus,unknown,low,future checkpoint-specific audit required
+mole,molecular_foundation_model,False,ZINC20;ExCAPE-DB;ChEMBL_supervised,paper_specific,high,future case study with documented TDC overlap mitigation

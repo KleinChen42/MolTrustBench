@@ -1,0 +1,24 @@
+{
+  "assay_provenance_available": false,
+  "cutoff_release": "CHEMBL30",
+  "dataset_id": "moleculenet:Tox21",
+  "exact_public_exposure_rate": 0.920777,
+  "exposure_removed_test_n": 0,
+  "interpretation": "Observable public-exposure lower bound; not evidence of model-specific training exposure.",
+  "label_conflict_summary": {},
+  "n_molecules": 7258,
+  "nn_exposure_rate_08": 0.958529,
+  "primary_limitations": [
+    "ChEMBL-indexed observable lower bound, not model-specific training evidence",
+    "Exposure-removed subset size and class balance must be checked before interpreting deltas"
+  ],
+  "scaffold_public_exposure_rate": 0.752962,
+  "source_artifacts": [
+    "results/tables/benchmark_coverage_exposure_summary.csv",
+    "results/tables/trust_card_examples.csv",
+    "paper/supplement/tables/Table_S24_slice_validity_master.csv",
+    "paper/supplement/tables/Table_S28_trust_card_schema.csv"
+  ],
+  "source_name": "moleculenet",
+  "task_name": "Tox21"
+}

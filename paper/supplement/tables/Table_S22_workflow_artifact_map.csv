@@ -1,0 +1,8 @@
+step_id,title,audit_module,proof_artifact
+inputs,Benchmark inputs,benchmark ingestion,data/processed/benchmarks
+standardize,Standardization audit,molecule standardization,data/processed/standardization_report.json
+release_index,Release-time index,public release index,results/release_index/compound_release_index.parquet
+exposure,Public-exposure audit,exposure annotation,results/tables/benchmark_coverage_exposure_summary.csv
+evaluation,Exposure-adjusted evaluation,score sensitivity,results/tables/exposure_delta_ci.csv
+provenance,Assay provenance,label-source audit,results/tables/assay_provenance_task_summary.csv
+trust_cards,Trust-card reporting,reporting standard,results/figures/trust_card_examples.pdf

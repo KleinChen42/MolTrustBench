@@ -1,0 +1,11 @@
+risk,required_control,status,caveat
+R1,State that public observability is not model-specific training inclusion.,supported,Interpretation-limits paragraph and conservative captions are in the manuscript.
+R2,"Report density-matched controls, NN-threshold sensitivity, CI checks, and train-label-shuffle null controls.",supported_with_caveats,"Controls are available, but they bound interpretation rather than proving causality."
+R3,"Distinguish MolTrustBench from ADMET reliability, OOD, scaffold, activity-cliff, FM, and agent benchmarks.",supported,Novelty-boundary table keeps the article framed as a protocol/reporting standard.
+R4,"Treat ChEMBL release dates as public-observability anchors, not model pretraining dates.",supported,"Release-date interpretation is explicit in the abstract, methods, and figure captions."
+R5,Separate ChEMBL observability from whether models used ChEMBL.,supported_with_caveats,Model registry and FM wrapper text keep model-specific ChEMBL use unknown unless documented.
+R6,Show that the work is more than data cleaning.,supported,"Exposure-adjusted evaluation, CIs, provenance, null controls, and trust cards are present."
+R7,Document FM wrapper scope without turning it into a broad FM leaderboard.,supported_with_caveats,MolFormer and ChemBERTa-100M are supplement-only wrapper-applicability checks.
+R8,"Report exposure-removed slice size, class balance, metric validity, and expected limitations.",supported_with_caveats,Table S24 records slice validity and expected sample-size/class-balance limitations.
+R9,Show that standardization choices are auditable.,supported,Table S25 reports raw-to-standardized accounting and policy notes.
+R10,Define assay-provenance heterogeneity and threshold-derived label discordance.,supported,Tables S26-S27 define flags and provide record-derived examples.

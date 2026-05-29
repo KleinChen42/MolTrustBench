@@ -1,0 +1,4 @@
+source_name,task_name,model_id,n_pairs,hidden_dims,seeds,mean_observed_temporal_delta,mean_shuffle_temporal_delta,mean_abs_observed_temporal_delta,mean_abs_shuffle_temporal_delta,mean_null_delta_gap,fraction_observed_above_shuffle,paper_interpretation
+chembl_bioactivity,CYP2C19_pchembl5_temporal,smiles_cnn,40,2,20,0.7060054083225815,0.1722574120009449,0.7060054083225815,0.4150203756201276,0.2909850327024538,0.975,observed temporal delta exceeds train-label-shuffle null on average
+chembl_bioactivity,CYP2C19_pchembl5_temporal,smiles_gru,40,2,20,0.3048071196929497,-0.0302952997888992,0.3257682928168178,0.2520251395854913,0.0737431532313265,0.575,observed temporal delta exceeds train-label-shuffle null on average
+chembl_bioactivity,CYP2C19_pchembl5_temporal,smiles_transformer,40,2,20,0.3465000935113001,0.0108912885705718,0.347634220895649,0.2261235316454354,0.1215106892502135,0.7,observed temporal delta exceeds train-label-shuffle null on average

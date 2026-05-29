@@ -1,0 +1,6 @@
+chembl_release,release_date,release_doi,input_kind,input_rows,standardized_rows,unique_standard_inchikey,rejected_rows,unique_scaffold
+CHEMBL24,2018-05,10.6019/CHEMBL.database.24,chemreps,1820035,1820035,1820035,0,525438
+CHEMBL27,2020-05,10.6019/CHEMBL.database.27,chemreps,1941410,1941410,1941410,0,38987
+CHEMBL30,2022-02,10.6019/CHEMBL.database.30,chemreps,2136187,2136187,2136187,0,60599
+CHEMBL33,2023-05,10.6019/CHEMBL.database.33,chemreps,2372674,2372674,2372674,0,120287
+CHEMBL36,2025-07,10.6019/CHEMBL.database.36,chemreps,2854815,2854815,2854815,0,163644

@@ -1,0 +1,7 @@
+source_name,task_name,split_name,train_n,test_n,test_label_counts,valid_for_classification_metrics
+chembl_bioactivity,DILI_hepatotoxicity_binary_temporal,standard,410,103,"{""0"": 29, ""1"": 74}",True
+chembl_bioactivity,DILI_hepatotoxicity_binary_temporal,exact_removed,410,2,"{""1"": 2}",False
+chembl_bioactivity,DILI_hepatotoxicity_binary_temporal,scaffold_removed,410,12,"{""0"": 2, ""1"": 10}",True
+chembl_bioactivity,DILI_hepatotoxicity_binary_temporal,nn08_removed,410,2,"{""1"": 2}",False
+chembl_bioactivity,DILI_hepatotoxicity_binary_temporal,temporal_future,511,2,"{""1"": 2}",False
+chembl_bioactivity,DILI_hepatotoxicity_binary_temporal,density_matched_clean,410,2,"{""1"": 2}",False

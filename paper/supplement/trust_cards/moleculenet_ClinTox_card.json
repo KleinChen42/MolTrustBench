@@ -1,0 +1,32 @@
+{
+  "assay_provenance_available": true,
+  "cutoff_release": "CHEMBL30",
+  "dataset_id": "moleculenet:ClinTox",
+  "exact_public_exposure_rate": 0.473649,
+  "exposure_removed_test_n": 0,
+  "interpretation": "Observable public-exposure lower bound; not evidence of model-specific training exposure.",
+  "label_conflict_summary": {
+    "activity_coverage_rate": 0.4494845360824742,
+    "conflicting_label_count": 502,
+    "duplicate_compound_count": 648,
+    "median_derived_label_discordance_score": 1.0,
+    "molecules_with_activity": 654,
+    "threshold_sensitive_count": 524,
+    "unit_inconsistency_count": 613
+  },
+  "n_molecules": 1480,
+  "nn_exposure_rate_08": 0.599324,
+  "primary_limitations": [
+    "ChEMBL-indexed observable lower bound, not model-specific training evidence",
+    "Exposure-removed subset size and class balance must be checked before interpreting deltas"
+  ],
+  "scaffold_public_exposure_rate": 0.737162,
+  "source_artifacts": [
+    "results/tables/benchmark_coverage_exposure_summary.csv",
+    "results/tables/trust_card_examples.csv",
+    "paper/supplement/tables/Table_S24_slice_validity_master.csv",
+    "paper/supplement/tables/Table_S28_trust_card_schema.csv"
+  ],
+  "source_name": "moleculenet",
+  "task_name": "ClinTox"
+}
