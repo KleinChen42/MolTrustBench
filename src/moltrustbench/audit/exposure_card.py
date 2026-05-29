@@ -37,9 +37,11 @@ def make_exposure_card(annotated: pd.DataFrame, *, cutoff_release: str) -> dict:
         "nn_exposure_rate_07": rate("nn_exposed_07"),
         "nn_exposure_rate_08": rate("nn_exposed_08"),
         "nn_exposure_rate_09": rate("nn_exposed_09"),
+        "exact_unobserved_n": clean,
+        "exposure_removed_test_n": clean,
         "exact_clean_molecules": clean,
         "risk_level": risk,
-        "interpretation": "Observable public-exposure lower bound; not evidence of confirmed model leakage.",
+        "interpretation": "Observable public-exposure lower bound; not evidence of model-specific training exposure.",
     }
 
 

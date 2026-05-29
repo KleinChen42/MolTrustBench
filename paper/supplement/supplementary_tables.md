@@ -31,12 +31,12 @@ Terminology: public exposure, observable exposure lower bound, temporal validity
 | Table_S21 | Trust-card example source data | C5 | R6 | 4 | `tables/Table_S21_trust_card_examples.csv` |
 | Table_S22 | Workflow artifact map | C5 | R6 | 7 | `tables/Table_S22_workflow_artifact_map.csv` |
 | Table_S23 | Expected limitation and critical-failure accounting | C3/C5 | R8 | 6 | `tables/Table_S23_expected_limitations_summary.csv` |
-| Table_S24 | Slice-validity master table | C3 | R8 | 12626 | `tables/Table_S24_slice_validity_master.csv` |
-| Table_S25 | Standardization audit summary | C1/C2 | R9 | 10 | `tables/Table_S25_standardization_audit.csv` |
+| Table_S24 | Slice-validity master table | C3 | R8 | 10172 | `tables/Table_S24_slice_validity_master.csv` |
+| Table_S25 | Standardization audit summary | C1/C2 | R9 | 9 | `tables/Table_S25_standardization_audit.csv` |
 | Table_S26 | Assay-provenance flag dictionary | C4 | R10 | 6 | `tables/Table_S26_assay_flag_dictionary.csv` |
 | Table_S27 | Assay-provenance example rows | C4 | R10 | 22 | `tables/Table_S27_assay_provenance_examples.csv` |
-| Table_S28 | Machine-readable trust-card schema | C5 | R6 | 11 | `tables/Table_S28_trust_card_schema.csv` |
-| Table_S29 | Figure source-data map | C5 | R6 | 9 | `tables/Table_S29_figure_source_data_map.csv` |
+| Table_S28 | Machine-readable trust-card schema | C5 | R6 | 12 | `tables/Table_S28_trust_card_schema.csv` |
+| Table_S29 | Figure source-data map | C5 | R6 | 8 | `tables/Table_S29_figure_source_data_map.csv` |
 
 ## Reviewer-Use Notes
 

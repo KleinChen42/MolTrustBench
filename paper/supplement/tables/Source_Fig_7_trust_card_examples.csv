@@ -1,5 +1,0 @@
-source_name,task_name,cutoff_release,n_molecules,exact_public_exposure_rate,scaffold_public_exposure_rate,nn_exposure_rate_08,exposure_removed_test_n,risk_level,interpretation
-moleculenet,BBBP,CHEMBL30,2039,0.837666,0.877881,0.889161,331,high,Observable public-exposure lower bound; not evidence of model-specific training exposure.
-moleculenet,ClinTox,CHEMBL30,1480,0.473649,0.737162,0.599324,779,medium,Observable public-exposure lower bound; not evidence of model-specific training exposure.
-moleculenet,BACE,CHEMBL30,1513,0.297422,0.426966,0.393919,1063,medium,Observable public-exposure lower bound; not evidence of model-specific training exposure.
-moleculenet,Tox21,CHEMBL30,7258,0.920777,0.752962,0.958529,575,high,Observable public-exposure lower bound; not evidence of model-specific training exposure.

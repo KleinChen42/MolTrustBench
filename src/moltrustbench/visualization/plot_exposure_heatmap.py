@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -11,8 +12,13 @@ import pandas as pd
 from moltrustbench.io import ensure_parent
 
 
+def _setup_style() -> None:
+    mpl.rcParams.update({"pdf.fonttype": 42, "ps.fonttype": 42, "svg.fonttype": "none"})
+
+
 def plot_exposure_heatmap(summary: pd.DataFrame, output_path: str | Path = "results/figures/exposure_heatmap.pdf") -> Path:
     out = ensure_parent(output_path)
+    _setup_style()
     columns = ["exact_exposure_rate", "scaffold_exposure_rate", "nn_exposure_rate_08"]
     labels = ["Exact", "Scaffold", "NN >= 0.8"]
     matrix = summary[columns].to_numpy(dtype=float) if not summary.empty else np.zeros((1, len(columns)))

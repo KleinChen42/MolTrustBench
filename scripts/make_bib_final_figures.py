@@ -153,7 +153,7 @@ def draw_delta_heatmap(
                 continue
             r = row.iloc[0]
             matrix[i, j] = float(r["mean_delta"])
-            stable[i, j] = bool(r["ci_excludes_zero"])
+            stable[i, j] = bool(r.get("ci_available", False)) and float(r.get("n_pairs", 0)) >= 2 and bool(r["ci_excludes_zero"])
             pairs[i, j] = float(r["n_pairs"])
 
     cmap = mpl.colormaps["RdBu_r"].copy()
@@ -197,6 +197,7 @@ def make_fig4() -> dict[str, object]:
     include = ci[
         ci["metric_family"].isin(["bbbp_clintox_model_family", "bace_tox21_feature_mlp"])
     ].copy()
+    include = include[include["n_pairs"].fillna(0).astype(float) >= 5].copy()
     include["model_order"] = include["model_id"].map(
         {
             "morgan_logreg": 0,
@@ -236,8 +237,8 @@ def make_fig4() -> dict[str, object]:
     cbar.set_label("AUROC delta: standard - comparison")
     legend = [
         Patch(facecolor="#f1f3f5", edgecolor="#c5cbd3", label="Not evaluable"),
-        Patch(facecolor="white", edgecolor="white", label="o: CI excludes 0"),
-        Patch(facecolor="white", edgecolor="white", label="x: CI overlaps 0"),
+        Patch(facecolor="white", edgecolor="white", label="o: repeated-run CI excludes 0"),
+        Patch(facecolor="white", edgecolor="white", label="x: repeated-run CI overlaps 0"),
     ]
     ax.legend(handles=legend, loc="lower center", bbox_to_anchor=(0.5, -0.18), ncol=3)
     fig.text(

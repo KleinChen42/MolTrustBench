@@ -139,7 +139,7 @@ TABLE_PLAN = [
         "results/tables/assay_provenance_task_summary_with_dili.csv",
         "C4",
         "R10",
-        "Compact source table for assay conflict map.",
+        "Compact source table for assay-provenance heterogeneity map.",
     ),
     SupplementTable(
         "Table_S16",
@@ -267,6 +267,10 @@ def read_csv_safe(rel_path: str) -> pd.DataFrame:
 
 
 REVIEWER_COLUMN_RENAMES = {
+    "conflicting_label_count": "discordant_threshold_label_count",
+    "binary_label_conflict": "binary_derived_label_discordance",
+    "binary_label_conflict_count": "binary_derived_label_discordance_count",
+    "label_conflict_score": "derived_label_discordance_score",
     "median_label_conflict_score": "median_derived_label_discordance_score",
 }
 
@@ -498,6 +502,11 @@ def ci_key_set() -> set[tuple[str, str, str, str]]:
     ]:
         df = read_csv_safe(rel_path)
         for _, record in df.iterrows():
+            n_pairs = _to_int(record.get("n_pairs", ""))
+            if "ci_available" in df.columns and str(record.get("ci_available", "")).lower() not in {"true", "1"}:
+                continue
+            if n_pairs is not None and n_pairs < 2:
+                continue
             keys.add(
                 (
                     str(record.get("source_name", "")),
@@ -508,6 +517,11 @@ def ci_key_set() -> set[tuple[str, str, str, str]]:
             )
     df = read_csv_safe("results/tables/regression_delta_ci.csv")
     for _, record in df.iterrows():
+        n_pairs = _to_int(record.get("n_pairs", ""))
+        if "ci_available" in df.columns and str(record.get("ci_available", "")).lower() not in {"true", "1"}:
+            continue
+        if n_pairs is not None and n_pairs < 2:
+            continue
         keys.add(
             (
                 str(record.get("source_name", "")),
@@ -625,11 +639,10 @@ def write_slice_validity_master() -> Path:
                 metric_valid = False
                 reason = "ONE_CLASS_AUROC_INVALID"
             elif has_metric and not has_counts:
-                positive_n = "not_recoverable_from_archived_source"
-                negative_n = "not_recoverable_from_archived_source"
-                one_class_flag = "unknown"
-                metric_valid = True
-                reason = "VALID_METRIC_CLASS_COUNTS_NOT_RECOVERABLE_FROM_ARCHIVE"
+                # Reviewer-facing S24 is an auditable slice-validity table.
+                # Historical metric rows whose compact archive does not expose
+                # class counts remain in the data-freeze archive, not here.
+                continue
             else:
                 metric_valid = bool(has_metric)
                 reason = "VALID_METRIC_WITH_CLASS_COUNTS" if has_metric else "NO_VALID_PRIMARY_METRIC"
@@ -680,6 +693,15 @@ def write_slice_validity_master() -> Path:
                 }
             )
 
+    for row in rows:
+        reason = str(row.get("reason_code", ""))
+        reason = reason.replace("clean_subset", "exposure_removed_subset")
+        reason = reason.replace("clean_or_temporal", "exposure_removed_or_temporal")
+        row["reason_code"] = reason
+        note = str(row.get("reviewer_note", ""))
+        note = note.replace("clean subset", "exposure-removed subset")
+        note = note.replace("clean", "exposure-removed")
+        row["reviewer_note"] = note
     out = TABLES / "Table_S24_slice_validity_master.csv"
     pd.DataFrame(rows).to_csv(out, index=False)
     return out
@@ -764,6 +786,10 @@ def write_standardization_audit() -> Path:
             }
         )
     for path in sorted((ROOT / "results" / "benchmark_annotations").glob("*_exposure.parquet")):
+        if path.stem == "tdc_admet_hERG_exposure":
+            # This miniature TDC-style smoke annotation is not the paper-facing
+            # hERG evidence. The ChEMBL hERG pilot is represented above.
+            continue
         row_count, status = read_parquet_rows(path)
         unique_inchikeys = ""
         scaffold_rows = ""
@@ -811,11 +837,11 @@ def write_assay_flag_dictionary() -> Path:
             "interpretation_limit": "duplicate records indicate provenance heterogeneity, not necessarily label error",
         },
         {
-            "flag_or_score": "conflicting_label_count",
+            "flag_or_score": "discordant_threshold_label_count",
             "definition": "number of molecules with threshold-derived positive and negative activity calls under the specified endpoint rule",
             "denominator": "molecules with activity records sufficient for threshold-derived calls",
             "source_columns": "standard_type, standard_relation, standard_value, standard_units, pchembl_value",
-            "interpretation_limit": "derived-label discordance is a label-source reliability risk, not proof that the original benchmark label is wrong",
+            "interpretation_limit": "derived-label discordance is a label-source audit flag, not proof that the original benchmark label is wrong",
         },
         {
             "flag_or_score": "unit_inconsistency_count",
@@ -832,7 +858,7 @@ def write_assay_flag_dictionary() -> Path:
             "interpretation_limit": "threshold sensitivity is reported as an audit flag, not a universal statement about biological activity",
         },
         {
-            "flag_or_score": "binary_label_conflict",
+            "flag_or_score": "binary_derived_label_discordance",
             "definition": "DILI/hepatotoxicity text-evidence records contain both positive and negative/no-evidence labels before final filtering",
             "denominator": "molecules in the DILI/hepatotoxicity text-evidence provenance pilot",
             "source_columns": "positive_record_count, negative_record_count, activity_comment_count",
@@ -843,7 +869,7 @@ def write_assay_flag_dictionary() -> Path:
             "definition": "molecule-level continuous score summarizing threshold-derived label discordance across public activity records",
             "denominator": "molecules with multiple or threshold-interpretable ChEMBL records",
             "source_columns": "pchembl_min, pchembl_max, pchembl_range, positive_record_count, total_record_count",
-            "interpretation_limit": "score is a provenance-risk descriptor and should not be used as ground-truth biological error",
+            "interpretation_limit": "score is a provenance heterogeneity descriptor and should not be used as ground-truth biological error",
         },
     ]
     out = TABLES / "Table_S26_assay_flag_dictionary.csv"
@@ -1027,9 +1053,10 @@ def trust_card_schema_rows() -> list[dict[str, object]]:
         ("exact_public_exposure_rate", "number", True, 0.8377, "fraction exactly observed by cutoff in indexed releases", "C1"),
         ("scaffold_public_exposure_rate", "number", True, 0.8779, "fraction with scaffold observed by cutoff", "C2"),
         ("nn_exposure_rate_08", "number", True, 0.8892, "fraction with nearest-neighbor similarity >=0.8 before cutoff", "C2"),
-        ("exposure_removed_test_n", "integer", True, 331, "test size after exposure removal, with class-balance validity reported separately", "C3/R8"),
+        ("exact_unobserved_n", "integer", True, 331, "benchmark molecules not exactly observed at the public-observability cutoff", "C1/C2"),
+        ("exposure_removed_test_n", "integer", False, 331, "optional performance-split size after exposure removal; use exact_unobserved_n for benchmark-level cards", "C3/R8"),
         ("assay_provenance_available", "boolean", True, True, "whether matched public assay provenance was extracted", "C4"),
-        ("label_conflict_summary", "object", False, "{\"conflicting_label_count\": 677}", "provenance heterogeneity summary", "C4/R10"),
+        ("label_conflict_summary", "object", False, "{\"discordant_threshold_label_count\": 677}", "provenance heterogeneity summary", "C4/R10"),
         ("primary_limitations", "array", True, "[\"ChEMBL-only lower bound\"]", "required caveats for interpretation", "R1/R4/R8"),
         ("source_artifacts", "array", True, "[\"results/tables/...\"]", "machine-readable artifacts behind the card", "C5"),
     ]
@@ -1063,11 +1090,11 @@ def write_trust_card_schema() -> tuple[Path, Path]:
         summary_fields = [
             ("molecules_with_activity", "molecules_with_activity"),
             ("duplicate_compound_count", "duplicate_compound_count"),
-            ("conflicting_label_count", "conflicting_label_count"),
+            ("conflicting_label_count", "discordant_threshold_label_count"),
             ("unit_inconsistency_count", "unit_inconsistency_count"),
             ("threshold_sensitive_count", "threshold_sensitive_count"),
             ("median_label_conflict_score", "median_derived_label_discordance_score"),
-            ("binary_label_conflict_count", "binary_label_conflict_count"),
+            ("binary_label_conflict_count", "binary_derived_label_discordance_count"),
             ("activity_coverage_rate", "activity_coverage_rate"),
         ]
         for _, r in assay.iterrows():
@@ -1087,21 +1114,18 @@ def write_trust_card_schema() -> tuple[Path, Path]:
     if trust_source.empty:
         trust_source = read_csv_safe("results/tables/benchmark_coverage_exposure_summary.csv")
     records = [record.to_dict() for _, record in trust_source.iterrows()]
-    seen = {(str(record.get("source_name", "")), str(record.get("task_name", ""))) for record in records}
-    for path in sorted((ROOT / "results" / "report_cards").glob("*.json")):
-        data = json.loads(path.read_text(encoding="utf-8"))
-        key = (str(data.get("source_name", "")), str(data.get("task_name", "")))
-        if key not in seen:
-            data["exact_clean_molecules"] = data.get("exact_clean_molecules", data.get("exposure_removed_test_n", 0))
-            records.append(data)
-            seen.add(key)
     for record in records:
         source_name = str(record.get("source_name", ""))
         task_name = str(record.get("task_name", ""))
         dataset_id = f"{source_name}:{task_name}"
         provenance_summary = assay_summaries.get((source_name, task_name), {})
-        if not provenance_summary and task_name == "hERG":
-            provenance_summary = assay_summaries.get(("chembl_bioactivity", "hERG_pchembl5_pilot"), {})
+        exact_unobserved = int(
+            record.get(
+                "exact_unobserved_n",
+                record.get("exact_clean_molecules", record.get("exact_unobserved_count", record.get("exposure_removed_test_n", 0))),
+            )
+        )
+        exposure_removed_test_n = record.get("exposure_removed_test_n", exact_unobserved)
         card = {
             "dataset_id": dataset_id,
             "source_name": source_name,
@@ -1111,8 +1135,9 @@ def write_trust_card_schema() -> tuple[Path, Path]:
             "exact_public_exposure_rate": float(record.get("exact_public_exposure_rate", record.get("exact_exposure_rate", 0.0))),
             "scaffold_public_exposure_rate": float(record.get("scaffold_public_exposure_rate", record.get("scaffold_exposure_rate", 0.0))),
             "nn_exposure_rate_08": float(record.get("nn_exposure_rate_08", record.get("nn_exposure_rate_08", 0.0))),
-            "exposure_removed_test_n": int(record.get("exact_clean_molecules", record.get("exact_unobserved_count", 0))),
-            "assay_provenance_available": bool(provenance_summary) or (source_name, task_name) in assay_keys or task_name in {"BBBP", "ClinTox", "hERG", "CYP1A2_pchembl5_temporal", "CYP2C19_pchembl5_temporal", "DILI_hepatotoxicity_binary_temporal"},
+            "exact_unobserved_n": exact_unobserved,
+            "exposure_removed_test_n": int(exposure_removed_test_n) if pd.notna(exposure_removed_test_n) else exact_unobserved,
+            "assay_provenance_available": bool(provenance_summary) or (source_name, task_name) in assay_keys,
             "label_conflict_summary": provenance_summary,
             "primary_limitations": [
                 "ChEMBL-indexed observable lower bound, not model-specific training evidence",
@@ -1149,13 +1174,12 @@ def write_trust_card_schema() -> tuple[Path, Path]:
 def write_figure_source_data_map() -> Path:
     rows = [
         ("Fig. 1", "workflow_schematic.pdf", "results/tables/workflow_artifact_map.csv", "C5", "workflow stage-to-artifact source data"),
-        ("Fig. 2", "release_histogram.pdf", "results/tables/chembl_release_counts.csv", "C1/R4", "ChEMBL release dates and molecule counts"),
-        ("Fig. 3", "exposure_heatmap_coverage.pdf", "results/tables/benchmark_coverage_exposure_summary.csv", "C1/C2", "four-task exposure rates at CHEMBL30"),
-        ("Fig. 4", "exposure_delta_ci.pdf", "results/tables/fig4_exposure_delta_ci_source.csv", "C3/R8", "standard-minus-comparison delta CI source"),
-        ("Fig. 5A", "bace_tox21_sequence_model_family.pdf", "results/tables/fig5_sequence_family_delta_source.csv", "C3", "sequence-family AUROC deltas"),
-        ("Fig. 5B", "bace_tox21_sequence_model_family.pdf", "results/tables/fig5_sequence_family_comparison_size_source.csv", "C3/R8", "comparison-slice test sizes"),
-        ("Fig. 6", "assay_conflict_map.pdf", "results/tables/assay_provenance_task_summary_with_dili.csv", "C4/R10", "assay-provenance heterogeneity rates"),
-        ("Fig. 7", "trust_card_examples.pdf", "results/tables/trust_card_examples.csv", "C5", "trust-card plotted examples"),
+        ("Fig. 2", "exposure_heatmap_coverage.pdf", "results/tables/benchmark_coverage_exposure_summary.csv", "C1/C2", "four-task exposure rates at CHEMBL30"),
+        ("Fig. 3", "exposure_delta_ci.pdf", "results/tables/fig4_exposure_delta_ci_source.csv", "C3/R8", "standard-minus-comparison delta CI source"),
+        ("Fig. 4A", "bace_tox21_sequence_model_family.pdf", "results/tables/fig5_sequence_family_delta_source.csv", "C3", "sequence-family AUROC deltas"),
+        ("Fig. 4B", "bace_tox21_sequence_model_family.pdf", "results/tables/fig5_sequence_family_comparison_size_source.csv", "C3/R8", "comparison-slice test sizes"),
+        ("Fig. 5", "assay_conflict_map.pdf", "results/tables/assay_provenance_task_summary_with_dili.csv", "C4/R10", "assay-provenance heterogeneity rates"),
+        ("Fig. 6", "trust_card_examples.pdf", "results/tables/trust_card_examples.csv", "C5", "trust-card plotted examples"),
         ("Fig. S7", "label_shuffle_null_control.pdf", "results/tables/figS7_label_shuffle_source.csv", "R2/R6", "supplementary train-label-shuffle null-control source"),
     ]
     out_rows = []
@@ -1409,6 +1433,13 @@ def validate_package_tables() -> None:
         raise ValueError(f"Table S20 has stale missing/pending statuses: {stale['risk'].tolist()}")
 
     s24 = pd.read_csv(TABLES / "Table_S24_slice_validity_master.csv")
+    nonrecoverable = s24[
+        s24.get("reason_code", pd.Series(dtype=str))
+        .astype(str)
+        .str.contains("VALID_METRIC_CLASS_COUNTS_NOT_RECOVERABLE_FROM_ARCHIVE|not_recoverable_from_archived_source", case=False, na=False)
+    ]
+    if not nonrecoverable.empty:
+        raise ValueError("Table S24 still exposes valid rows with non-recoverable class counts")
     one_class_valid = s24[
         s24["one_class_flag"].astype(str).str.lower().eq("true")
         & s24["metric_validity_flag"].astype(str).str.lower().eq("true")
@@ -1423,6 +1454,8 @@ def validate_package_tables() -> None:
     ]
     if not fixture_rows.empty:
         raise ValueError("Table S25 still exposes smoke-fixture row accounting as reviewer-facing benchmark accounting")
+    if s25["dataset_id"].astype(str).eq("tdc_admet_hERG_exposure").any():
+        raise ValueError("Table S25 still includes the 12-row TDC hERG miniature card")
 
     s27 = pd.read_csv(TABLES / "Table_S27_assay_provenance_examples.csv")
     required_tasks = {"BBBP", "ClinTox", "hERG_pchembl5_pilot", "CYP1A2_pchembl5_temporal", "CYP2C19_pchembl5_temporal"}
@@ -1440,11 +1473,25 @@ def validate_package_tables() -> None:
 
     schema = pd.read_csv(TABLES / "Table_S28_trust_card_schema.csv")
     required_fields = set(schema[schema["required"].astype(str).str.lower().eq("true")]["field_name"].astype(str))
+    trust_source = pd.read_csv(TABLES / "Table_S21_trust_card_examples.csv")
+    expected_trust_counts = {
+        (str(row["source_name"]), str(row["task_name"])): int(row.get("exact_unobserved_n", row.get("exposure_removed_test_n", 0)))
+        for _, row in trust_source.iterrows()
+    }
     for path in (SUPP / "trust_cards").glob("*_card.json"):
+        if path.name == "tdc_admet_hERG_card.json":
+            raise ValueError("Reviewer-facing trust-card JSON still includes the 12-row TDC hERG miniature card")
         card = json.loads(path.read_text(encoding="utf-8"))
         missing_fields = sorted(required_fields.difference(card))
         if missing_fields:
             raise ValueError(f"{path.name} missing trust-card fields: {missing_fields}")
+        key = (str(card.get("source_name", "")), str(card.get("task_name", "")))
+        if key in expected_trust_counts:
+            expected_count = expected_trust_counts[key]
+            if int(card.get("exact_unobserved_n", -1)) != expected_count:
+                raise ValueError(f"{path.name} exact_unobserved_n does not match Table S21")
+            if card.get("exposure_removed_test_n") is not None and int(card.get("exposure_removed_test_n", -1)) != expected_count:
+                raise ValueError(f"{path.name} exposure_removed_test_n does not match Table S21")
         if card.get("assay_provenance_available") and card.get("task_name") in {"BBBP", "ClinTox"} and not card.get("label_conflict_summary"):
             raise ValueError(f"{path.name} has assay provenance but an empty label_conflict_summary")
 

@@ -1,0 +1,1566 @@
+Rc files read:
+  /etc/LatexMk
+Latexmk: This is Latexmk, John Collins, 20 November 2021, version: 4.76.
+Rule 'pdflatex': File changes, etc:
+   Changed files, or newly in use since previous run(s):
+      'moltrustbench_main.tex'
+------------
+Run number 1 of rule 'pdflatex'
+------------
+------------
+Running 'pdflatex  -interaction=nonstopmode -halt-on-error -recorder  "moltrustbench_main.tex"'
+------------
+Latexmk: applying rule 'pdflatex'...
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./moltrustbench_main.tex
+LaTeX2e <2021-11-15> patch level 1
+L3 programming layer <2022-01-21> (./oup-authoring-template.cls
+Document Class: oup-authoring-template 2025/11/17 1.2
+(/usr/share/texlive/texmf-dist/tex/latex/crop/crop.sty
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifluatex.sty
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def))
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)))
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg))
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/sttools/flushend.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/sttools/stfloats.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/rotating.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/changepage/chngpage.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/totcount/totcount.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/base/fix-cm.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.def))
+(/usr/share/texlive/texmf-dist/tex/latex/footmisc/footmisc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/arydshln/arydshln.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/wrapfig/wrapfig.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/subfloat/subfloat.sty
+Package `subfloat', Version 2.14 of 2003/08/21.)
+(/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/mdwtools/footnote.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/jknapltx/mathrsfs.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/algorithms/algorithm.sty
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
+Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
+) (/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
+Document Style - pseudocode environments for use with the `algorithmicx' style
+) (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg))
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+(/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty))
+(/usr/share/texlive/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/pdfescape/pdfescape.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hycolor/hycolor.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/letltxmacro/letltxmacro.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/auxhook/auxhook.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref-langpatches.def)
+(/usr/share/texlive/texmf-dist/tex/generic/intcalc/intcalc.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/etexcmds/etexcmds.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def)
+(/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty
+(/usr/share/texlive/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/base/atbegshi-ltx.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/usr/share/texlive/texmf-dist/tex/latex/base/atveryend-ltx.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+(/usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty)))
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common-lists.t
+ex)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/pgf.revision.tex)))
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.code.t
+ex)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.de
+f)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.
+tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.
+tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code
+.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonomet
+ric.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.cod
+e.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison
+.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.
+tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code
+.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.
+tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerari
+thmetics.code.tex)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfint.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.te
+x)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.
+code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code
+.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.te
+x)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.c
+ode.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformation
+s.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.t
+ex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathprocessing
+.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.te
+x)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.
+tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.te
+x)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.c
+ode.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.code.
+tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorerdf.code.tex))
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65
+.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18
+.sty)) (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgffor.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex))
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/math/pgfmath.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers
+.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibrarytopaths.code.tex)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibrarysvg.path.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibrarysvg.path.cod
+e.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleparser.code.tex
+)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibrarydecorations.markings.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibrarydecorations.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduledecorations.cod
+e.tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrary
+decorations.markings.code.tex))
+(/usr/share/texlive/texmf-dist/tex/latex/silence/silence.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty)
+(/usr/share/texmf/tex/latex/lm/lmodern.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty)
+(/usr/share/texmf/tex/latex/lm/t1lmr.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def)
+(./moltrustbench_main.aux)
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg))
+(/usr/share/texlive/texmf-dist/tex/latex/anyfontsize/anyfontsize.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty))
+(/usr/share/texmf/tex/latex/lm/t1lmss.fd)
+(/usr/share/texmf/tex/latex/lm/ot1lmr.fd)
+(/usr/share/texmf/tex/latex/lm/omllmm.fd)
+(/usr/share/texmf/tex/latex/lm/omslmsy.fd)
+(/usr/share/texmf/tex/latex/lm/omxlmex.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/jknapltx/ursfs.fd)
+(/usr/share/texmf/tex/latex/lm/ts1lmss.fd)
+
+Package natbib Warning: Citation `chembl2012' on page 1 undefined on input line
+ 89.
+
+
+Package natbib Warning: Citation `chembl2019' on page 1 undefined on input line
+ 89.
+
+
+Package natbib Warning: Citation `chembl2023' on page 1 undefined on input line
+ 89.
+
+
+Package natbib Warning: Citation `chemblDownloads2025' on page 1 undefined on i
+nput line 89.
+
+
+Package natbib Warning: Citation `pubchem2019' on page 1 undefined on input lin
+e 89.
+
+
+Package natbib Warning: Citation `zinc2020' on page 1 undefined on input line 8
+9.
+
+
+Package natbib Warning: Citation `moleculenet2018' on page 1 undefined on input
+ line 91.
+
+
+Package natbib Warning: Citation `tdc2021' on page 1 undefined on input line 91
+.
+
+
+Package natbib Warning: Citation `ogb2020' on page 1 undefined on input line 91
+.
+
+
+Package natbib Warning: Citation `wallach2018' on page 1 undefined on input lin
+e 91.
+
+
+Package natbib Warning: Citation `sheridan2013' on page 1 undefined on input li
+ne 91.
+
+
+Package natbib Warning: Citation `moleculeace2023' on page 1 undefined on input
+ line 91.
+
+
+Package natbib Warning: Citation `deeptox2016' on page 1 undefined on input lin
+e 91.
+
+
+Package natbib Warning: Citation `boom2025' on page 1 undefined on input line 9
+1.
+
+
+Package natbib Warning: Citation `yang2019representation' on page 1 undefined o
+n input line 91.
+
+
+Package natbib Warning: Citation `hu2020pretraining' on page 1 undefined on inp
+ut line 91.
+
+
+Package natbib Warning: Citation `mole2024' on page 1 undefined on input line 9
+1.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active
+
+Package hyperref Warning: Difference (3) between bookmark levels is greater
+(hyperref)                than one, level fixed on input line 93.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active
+Overfull \hbox (11.38107pt too wide) has occurred while \output is active
+[][][] []
+[1
+Non-PDF special ignored!
+<special> ps: [{ThisPage} << /CropBox [0 0 595.82918 782.7922] >> /PUT pdfm...
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+
+Package natbib Warning: Citation `chemblDownloads2025' on page 2 undefined on i
+nput line 127.
+
+
+Package natbib Warning: Citation `bemis1996' on page 2 undefined on input line
+127.
+
+
+Underfull \hbox (badness 2343) in paragraph at lines 127--128
+\T1/lmr/m/n/8.03 For each release, MolTrustBench records standard InChIKey,
+
+Underfull \vbox (badness 10000) has occurred while \output is active
+
+Package natbib Warning: Citation `rdkit' on page 2 undefined on input line 131.
+
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active [2
+Non-PDF special ignored!
+<special> ps: [{ThisPage} << /CropBox [0 0 595.82918 782.7922] >> /PUT pdfm...
+ <./figures/workflow_schematic.pdf>]
+
+Package natbib Warning: Citation `ecfp2010' on page 3 undefined on input line 1
+35.
+
+
+Package natbib Warning: Citation `xgboost2016' on page 3 undefined on input lin
+e 135.
+
+
+Package natbib Warning: Citation `scikitlearn2011' on page 3 undefined on input
+ line 135.
+
+
+Package natbib Warning: Citation `weininger1988' on page 3 undefined on input l
+ine 135.
+
+
+Package natbib Warning: Citation `honda2019smilestransformer' on page 3 undefin
+ed on input line 135.
+
+
+Underfull \hbox (badness 2809) in paragraph at lines 135--136
+\T1/lmr/m/n/8.03 standard splits against exact-removed, scaffold-removed, NN-
+
+Underfull \hbox (badness 5741) in paragraph at lines 135--136
+\T1/lmr/m/n/8.03 removed, density-matched exposure-removed, and observable
+
+Underfull \hbox (badness 2189) in paragraph at lines 139--140
+\T1/lmr/m/n/8.03 as an expected limitation rather than being promoted to a
+
+Underfull \hbox (badness 3375) in paragraph at lines 143--144
+\T1/lmr/m/n/8.03 values when present, confidence scores, and source release.
+
+LaTeX Warning: Reference `tab:chembl-releases' on page 3 undefined on input lin
+e 149.
+
+
+Underfull \hbox (badness 1117) in paragraph at lines 149--150
+\T1/lmr/m/n/8.03 public chemical database history into an auditable benchmark
+
+Underfull \hbox (badness 1603) in paragraph at lines 149--150
+\T1/lmr/m/n/8.03 release dates from May 2018 to July 2025 and standardized
+
+LaTeX Warning: Reference `tab:coverage' on page 3 undefined on input line 169.
+
+
+Underfull \hbox (badness 1748) in paragraph at lines 169--170
+\T1/lmr/m/n/8.03 trustworthiness should be audited before interpreting held-out
+
+
+LaTeX Warning: Reference `tab:coverage' on page 3 undefined on input line 174.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active [3
+Non-PDF special ignored!
+<special> ps: [{ThisPage} << /CropBox [0 0 595.82918 782.7922] >> /PUT pdfm...
+ <./figures/exposure_heatmap_coverage.pdf>]
+Underfull \hbox (badness 1867) in paragraph at lines 214--215
+\T1/lmr/m/n/8.03 Endpoint-native ChEMBL temporal tasks add a direct stress
+
+Underfull \hbox (badness 1789) in paragraph at lines 214--215
+\T1/lmr/m/n/8.03 test because the labels and release history are derived from
+
+Underfull \hbox (badness 2173) in paragraph at lines 214--215
+\T1/lmr/m/n/8.03 sequence baselines use the same standard, exposure-removed,
+
+Underfull \hbox (badness 2495) in paragraph at lines 214--215
+\T1/lmr/m/n/8.03 density-matched, and temporal-future slice logic where valid.
+
+Package natbib Warning: Citation `molformer2022' on page 4 undefined on input l
+ine 218.
+
+
+Package natbib Warning: Citation `chemberta2020' on page 4 undefined on input l
+ine 218.
+
+
+Underfull \hbox (badness 1960) in paragraph at lines 218--219
+\T1/lmr/m/n/8.03 the same exposure-aware contracts can be applied to staged
+[4
+Non-PDF special ignored!
+<special> ps: [{ThisPage} << /CropBox [0 0 595.82918 782.7922] >> /PUT pdfm...
+ <./figures/exposure_delta_ci.pdf>]
+Underfull \hbox (badness 2941) in paragraph at lines 226--227
+\T1/lmr/m/n/8.03 The model-family sweep extends exposure-adjusted evaluation
+
+Underfull \hbox (badness 1264) in paragraph at lines 226--227
+\T1/lmr/m/n/8.03 conservative. Across BBBP, ClinTox, BACE, and Tox21, the
+
+Underfull \hbox (badness 2856) in paragraph at lines 237--238
+\T1/lmr/m/n/8.03 MolTrustBench also audits whether the molecules underlying
+
+Underfull \hbox (badness 6978) in paragraph at lines 237--238
+\T1/lmr/m/n/8.03 benchmark labels have heterogeneous public assay records.
+
+Underfull \vbox (badness 10000) has occurred while \output is active
+Underfull \hbox (badness 2591) in paragraph at lines 264--265
+[]|\T1/lmss/m/n/7.52812 Release or date used as the public-
+
+Underfull \hbox (badness 3108) in paragraph at lines 265--266
+[]|\T1/lmss/m/n/7.52812 Exact, scaffold, and nearest-neighbor
+
+Underfull \hbox (badness 3343) in paragraph at lines 266--267
+[]|\T1/lmss/m/n/7.52812 Exact-removed, scaffold-removed, and
+
+Underfull \hbox (badness 2726) in paragraph at lines 269--270
+[]|\T1/lmss/m/n/7.52812 Standard, exposure-removed, exposed,
+
+Underfull \hbox (badness 7704) in paragraph at lines 269--270
+\T1/lmss/m/n/7.52812 temporal-future, and density-matched
+
+Underfull \hbox (badness 10000) in paragraph at lines 270--271
+[]|\T1/lmss/m/n/7.52812 Whether evidence is audit-only,
+
+Underfull \hbox (badness 1571) in paragraph at lines 277--278
+\T1/lmr/m/n/8.03 MolTrustBench reframes molecular benchmark evaluation as a
+
+Underfull \vbox (badness 10000) has occurred while \output is active [5
+Non-PDF special ignored!
+<special> ps: [{ThisPage} << /CropBox [0 0 595.82918 782.7922] >> /PUT pdfm...
+ <./figures/bace_tox21_sequence_model_family.pdf> <./figures/assay_conflict_map
+.pdf>]
+Underfull \hbox (badness 1142) in paragraph at lines 279--280
+\T1/lmr/m/n/8.03 in the supplement. Assay-provenance claims are supported by
+
+Underfull \hbox (badness 1152) in paragraph at lines 279--280
+\T1/lmr/m/n/8.03 generated trust cards, sanity checks, data-freeze records, and
+
+
+Underfull \hbox (badness 6332) in paragraph at lines 281--282
+[]\T1/lmr/m/n/8.03 The main limitations are also explicit: SIDER remains
+
+Underfull \hbox (badness 4156) in paragraph at lines 281--282
+\T1/lmr/m/n/8.03 aware regression slices are too small or absent under the
+
+Underfull \hbox (badness 2671) in paragraph at lines 281--282
+\T1/lmr/m/n/8.03 become one-class subsets in the endpoint-native wave; DILI
+
+Underfull \hbox (badness 5893) in paragraph at lines 283--284
+\T1/lmr/m/n/8.03 usability under exposure-adjusted evaluation. MolTrustBench
+(/usr/share/texmf/tex/latex/lm/t1lmtt.fd)
+
+Package natbib Warning: Citation `chemblDownloads2025' on page 6 undefined on i
+nput line 287.
+
+
+Underfull \hbox (badness 5985) in paragraph at lines 287--288
+\T1/lmr/m/n/8.03 Processed evidence tables, exposure annotations, generated
+
+Underfull \hbox (badness 3179) in paragraph at lines 287--288
+\T1/lmr/bx/n/8.03 DOI/accession to be inserted]\T1/lmr/m/n/8.03 . The correspon
+ding local
+
+Underfull \hbox (badness 1484) in paragraph at lines 287--288
+\T1/lmr/m/n/8.03 The supplement package includes compact source data, slice-
+
+Underfull \hbox (badness 2150) in paragraph at lines 291--292
+\T1/lmr/m/n/8.03 current version uses the release-index, exposure-audit, assay-
+
+
+Underfull \hbox (badness 1694) in paragraph at lines 291--292
+\T1/lmr/m/n/8.03 supplement-packaging, and final-figure scripts under $\T1/lmtt
+/m/n/8.03 scripts/$\T1/lmr/m/n/8.03 ,
+
+Underfull \vbox (badness 10000) has occurred while \output is active [6
+Non-PDF special ignored!
+<special> ps: [{ThisPage} << /CropBox [0 0 595.82918 782.7922] >> /PUT pdfm...
+ <./figures/trust_card_examples.pdf>] (./moltrustbench_main.bbl
+Underfull \hbox (badness 10000) in paragraph at lines 9--15
+[]\T1/lmr/m/n/7.77905 BOOM benchmark authors.  BOOM: Benchmarking
+
+Underfull \hbox (badness 10000) in paragraph at lines 9--15
+\T1/lmr/m/n/7.77905 molecular out-of-distribution prediction.  []$https :
+
+Underfull \hbox (badness 10000) in paragraph at lines 9--15
+\T1/lmr/m/n/7.77905 / / papers . nips . cc / paper _ ^^\les / paper / 2025 / ha
+sh /
+
+Underfull \hbox (badness 10000) in paragraph at lines 9--15
+\T1/lmr/m/n/7.77905 b94263f7f98c9766ea9a09761ddd88ee-[]Abstract-[]Datasets _ an
+d _
+
+Underfull \hbox (badness 3029) in paragraph at lines 9--15
+\T1/lmr/m/n/7.77905 Benchmarks _ Track . html$[], 2025.  NeurIPS Datasets and
+
+Underfull \hbox (badness 1983) in paragraph at lines 89--96
+\T1/lmr/m/n/7.77905 Mara耋n, Fiona Hunter, Lara Junco, Grace Mugumbate,
+
+Underfull \hbox (badness 1490) in paragraph at lines 89--96
+\T1/lmr/m/n/7.77905 Milagros Rodriguez-Lopez, Francis Atkinson, Nicolas Bosc,
+
+Underfull \hbox (badness 3128) in paragraph at lines 103--109
+\T1/lmr/m/n/7.77905 Alexandre Passos, David Cournapeau, Matthieu Brucher,
+
+Underfull \hbox (badness 2057) in paragraph at lines 116--120
+[]\T1/lmr/m/n/7.77905 David Rogers and Mathew Hahn.  Extended-connectivity
+
+Underfull \hbox (badness 2042) in paragraph at lines 142--147
+[]\T1/lmr/m/n/7.77905 Izhar Wallach and Abraham Heifets.  Most ligand-based
+
+Underfull \hbox (badness 2253) in paragraph at lines 142--147
+\T1/lmr/m/n/7.77905 classification benchmarks reward memorization rather than
+
+Underfull \hbox (badness 2635) in paragraph at lines 149--154
+\T1/lmr/m/it/7.77905 Journal of Chemical Information and Computer Sciences\T1/l
+mr/m/n/7.77905 ,
+
+Underfull \hbox (badness 1845) in paragraph at lines 170--179
+\T1/lmr/m/n/7.77905 Stephen H. Bryant, Kwaku Buolamwini, Jane Hodkinson,
+
+Underfull \hbox (badness 2894) in paragraph at lines 170--179
+\T1/lmr/m/n/7.77905 data types and time periods.  \T1/lmr/m/it/7.77905 Nucleic
+Acids Research\T1/lmr/m/n/7.77905 ,
+
+Underfull \vbox (badness 10000) has occurred while \output is active [7
+Non-PDF special ignored!
+<special> ps: [{ThisPage} << /CropBox [0 0 595.82918 782.7922] >> /PUT pdfm...
+]) [8
+Non-PDF special ignored!
+<special> ps: [{ThisPage} << /CropBox [0 0 595.82918 782.7922] >> /PUT pdfm...
+]
+
+Package natbib Warning: There were undefined citations.
+
+(./moltrustbench_main.aux
+
+Package natbib Warning: Citation(s) may have changed.
+(natbib)                Rerun to get citations correct.
+
+)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `moltrustbench_main.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+ )
+(see the transcript file for additional information){/usr/share/texmf/fonts/enc
+/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/
+texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-
+ts1.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/share/texmf/fo
+nts/type1/public/lm/lmbx8.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx9.pfb
+></usr/share/texmf/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf/fonts/type
+1/public/lm/lmr6.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/sha
+re/texmf/fonts/type1/public/lm/lmri8.pfb></usr/share/texmf/fonts/type1/public/l
+m/lmss10.pfb></usr/share/texmf/fonts/type1/public/lm/lmss12.pfb></usr/share/tex
+mf/fonts/type1/public/lm/lmss8.pfb></usr/share/texmf/fonts/type1/public/lm/lmss
+9.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbo10.pfb></usr/share/texmf/fo
+nts/type1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsso8
+.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy5.pfb></usr/share/texmf/fonts/
+type1/public/lm/lmsy8.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt8.pfb>
+Output written on moltrustbench_main.pdf (8 pages, 625907 bytes).
+Transcript written on moltrustbench_main.log.
+Latexmk: Found input bbl file 'moltrustbench_main.bbl'
+Latexmk: References changed.
+Latexmk: References changed.
+Latexmk: References changed.
+Latexmk: Log file says output to 'moltrustbench_main.pdf'
+Latexmk: List of undefined refs and citations:
+  Citation `bemis1996' on page 2 undefined on input line 127
+  Citation `boom2025' on page 1 undefined on input line 91
+  Citation `chemberta2020' on page 4 undefined on input line 218
+  Citation `chembl2012' on page 1 undefined on input line 89
+  Citation `chembl2019' on page 1 undefined on input line 89
+  Citation `chembl2023' on page 1 undefined on input line 89
+  Citation `chemblDownloads2025' on page 1 undefined on input line 89
+  Citation `chemblDownloads2025' on page 2 undefined on input line 127
+  Citation `chemblDownloads2025' on page 6 undefined on input line 287
+  Citation `deeptox2016' on page 1 undefined on input line 91
+  Citation `ecfp2010' on page 3 undefined on input line 135
+  Citation `honda2019smilestransformer' on page 3 undefined on input line 135
+  Citation `hu2020pretraining' on page 1 undefined on input line 91
+  Citation `mole2024' on page 1 undefined on input line 91
+  Citation `moleculeace2023' on page 1 undefined on input line 91
+  Citation `moleculenet2018' on page 1 undefined on input line 91
+  Citation `molformer2022' on page 4 undefined on input line 218
+  Citation `ogb2020' on page 1 undefined on input line 91
+  Citation `pubchem2019' on page 1 undefined on input line 89
+  Citation `rdkit' on page 2 undefined on input line 131
+  Citation `scikitlearn2011' on page 3 undefined on input line 135
+  Citation `sheridan2013' on page 1 undefined on input line 91
+  Citation `tdc2021' on page 1 undefined on input line 91
+  Citation `wallach2018' on page 1 undefined on input line 91
+  Citation `weininger1988' on page 3 undefined on input line 135
+  Citation `xgboost2016' on page 3 undefined on input line 135
+  Citation `yang2019representation' on page 1 undefined on input line 91
+  Citation `zinc2020' on page 1 undefined on input line 89
+  Reference `tab:chembl-releases' on page 3 undefined on input line 149
+  Reference `tab:coverage' on page 3 undefined on input line 169
+  Reference `tab:coverage' on page 3 undefined on input line 174
+Latexmk: Examining 'moltrustbench_main.log'
+=== TeX engine is 'pdfTeX'
+Latexmk: Found bibliography file(s) [references.bib]
+Rule 'bibtex moltrustbench_main': File changes, etc:
+   Changed files, or newly in use since previous run(s):
+      'moltrustbench_main.aux'
+------------
+Run number 1 of rule 'bibtex moltrustbench_main'
+------------
+------------
+Running 'bibtex  "moltrustbench_main.aux"'
+------------
+Latexmk: applying rule 'bibtex moltrustbench_main'...
+This is BibTeX, Version 0.99d (TeX Live 2022/dev/Debian)
+The top-level auxiliary file: moltrustbench_main.aux
+The style file: oup-plain.bst
+Database file #1: references.bib
+Rule 'pdflatex': File changes, etc:
+   Changed files, or newly in use since previous run(s):
+      'moltrustbench_main.aux'
+      'moltrustbench_main.out'
+------------
+Run number 2 of rule 'pdflatex'
+------------
+------------
+Running 'pdflatex  -interaction=nonstopmode -halt-on-error -recorder  "moltrustbench_main.tex"'
+------------
+Latexmk: applying rule 'pdflatex'...
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./moltrustbench_main.tex
+LaTeX2e <2021-11-15> patch level 1
+L3 programming layer <2022-01-21> (./oup-authoring-template.cls
+Document Class: oup-authoring-template 2025/11/17 1.2
+(/usr/share/texlive/texmf-dist/tex/latex/crop/crop.sty
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifluatex.sty
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def))
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)))
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg))
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/sttools/flushend.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/sttools/stfloats.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/rotating.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/changepage/chngpage.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/totcount/totcount.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/base/fix-cm.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.def))
+(/usr/share/texlive/texmf-dist/tex/latex/footmisc/footmisc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/arydshln/arydshln.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/wrapfig/wrapfig.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/subfloat/subfloat.sty
+Package `subfloat', Version 2.14 of 2003/08/21.)
+(/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/mdwtools/footnote.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/jknapltx/mathrsfs.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/algorithms/algorithm.sty
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
+Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
+) (/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
+Document Style - pseudocode environments for use with the `algorithmicx' style
+) (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg))
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+(/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty))
+(/usr/share/texlive/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/pdfescape/pdfescape.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hycolor/hycolor.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/letltxmacro/letltxmacro.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/auxhook/auxhook.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref-langpatches.def)
+(/usr/share/texlive/texmf-dist/tex/generic/intcalc/intcalc.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/etexcmds/etexcmds.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def)
+(/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty
+(/usr/share/texlive/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/base/atbegshi-ltx.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/usr/share/texlive/texmf-dist/tex/latex/base/atveryend-ltx.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+(/usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty)))
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common-lists.t
+ex)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/pgf.revision.tex)))
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.code.t
+ex)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.de
+f)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.
+tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.
+tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code
+.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonomet
+ric.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.cod
+e.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison
+.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.
+tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code
+.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.
+tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerari
+thmetics.code.tex)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfint.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.te
+x)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.
+code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code
+.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.te
+x)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.c
+ode.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformation
+s.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.t
+ex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathprocessing
+.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.te
+x)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.
+tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.te
+x)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.c
+ode.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.code.
+tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorerdf.code.tex))
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65
+.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18
+.sty)) (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgffor.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex))
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/math/pgfmath.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers
+.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibrarytopaths.code.tex)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibrarysvg.path.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibrarysvg.path.cod
+e.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleparser.code.tex
+)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibrarydecorations.markings.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibrarydecorations.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduledecorations.cod
+e.tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrary
+decorations.markings.code.tex))
+(/usr/share/texlive/texmf-dist/tex/latex/silence/silence.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty)
+(/usr/share/texmf/tex/latex/lm/lmodern.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty)
+(/usr/share/texmf/tex/latex/lm/t1lmr.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def)
+(./moltrustbench_main.aux)
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg))
+(/usr/share/texlive/texmf-dist/tex/latex/anyfontsize/anyfontsize.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty))
+(./moltrustbench_main.out) (./moltrustbench_main.out)
+(/usr/share/texmf/tex/latex/lm/t1lmss.fd)
+(/usr/share/texmf/tex/latex/lm/ot1lmr.fd)
+(/usr/share/texmf/tex/latex/lm/omllmm.fd)
+(/usr/share/texmf/tex/latex/lm/omslmsy.fd)
+(/usr/share/texmf/tex/latex/lm/omxlmex.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/jknapltx/ursfs.fd)
+(/usr/share/texmf/tex/latex/lm/ts1lmss.fd)
+Underfull \hbox (badness 2027) in paragraph at lines 91--92
+\T1/lmr/m/n/8.03 model work has also treated benchmark overlap with public
+
+Underfull \vbox (badness 10000) has occurred while \output is active
+
+Package hyperref Warning: Difference (3) between bookmark levels is greater
+(hyperref)                than one, level fixed on input line 93.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active
+Overfull \hbox (11.38107pt too wide) has occurred while \output is active
+[][][] []
+[1
+Non-PDF special ignored!
+<special> ps: [{ThisPage} << /CropBox [0 0 595.82918 782.7922] >> /PUT pdfm...
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+Underfull \vbox (badness 10000) has occurred while \output is active
+Underfull \hbox (badness 2343) in paragraph at lines 127--128
+\T1/lmr/m/n/8.03 For each release, MolTrustBench records standard InChIKey,
+[2
+Non-PDF special ignored!
+<special> ps: [{ThisPage} << /CropBox [0 0 595.82918 782.7922] >> /PUT pdfm...
+ <./figures/workflow_schematic.pdf>]
+Underfull \hbox (badness 2809) in paragraph at lines 135--136
+\T1/lmr/m/n/8.03 standard splits against exact-removed, scaffold-removed, NN-
+
+Underfull \hbox (badness 5741) in paragraph at lines 135--136
+\T1/lmr/m/n/8.03 removed, density-matched exposure-removed, and observable
+
+Underfull \hbox (badness 2189) in paragraph at lines 139--140
+\T1/lmr/m/n/8.03 as an expected limitation rather than being promoted to a
+
+Underfull \hbox (badness 3375) in paragraph at lines 143--144
+\T1/lmr/m/n/8.03 values when present, confidence scores, and source release.
+
+Underfull \hbox (badness 1117) in paragraph at lines 149--150
+\T1/lmr/m/n/8.03 public chemical database history into an auditable benchmark
+
+Underfull \vbox (badness 10000) has occurred while \output is active
+Underfull \hbox (badness 1748) in paragraph at lines 169--170
+\T1/lmr/m/n/8.03 trustworthiness should be audited before interpreting held-out
+
+[3
+Non-PDF special ignored!
+<special> ps: [{ThisPage} << /CropBox [0 0 595.82918 782.7922] >> /PUT pdfm...
+]
+Underfull \hbox (badness 1867) in paragraph at lines 214--215
+\T1/lmr/m/n/8.03 Endpoint-native ChEMBL temporal tasks add a direct stress
+
+Underfull \hbox (badness 1789) in paragraph at lines 214--215
+\T1/lmr/m/n/8.03 test because the labels and release history are derived from
+
+Underfull \hbox (badness 2173) in paragraph at lines 214--215
+\T1/lmr/m/n/8.03 sequence baselines use the same standard, exposure-removed,
+
+Underfull \hbox (badness 2495) in paragraph at lines 214--215
+\T1/lmr/m/n/8.03 density-matched, and temporal-future slice logic where valid.
+
+Underfull \hbox (badness 1960) in paragraph at lines 218--219
+\T1/lmr/m/n/8.03 the same exposure-aware contracts can be applied to staged
+[4
+Non-PDF special ignored!
+<special> ps: [{ThisPage} << /CropBox [0 0 595.82918 782.7922] >> /PUT pdfm...
+ <./figures/exposure_heatmap_coverage.pdf> <./figures/exposure_delta_ci.pdf>]
+Underfull \hbox (badness 2941) in paragraph at lines 226--227
+\T1/lmr/m/n/8.03 The model-family sweep extends exposure-adjusted evaluation
+
+Underfull \hbox (badness 1264) in paragraph at lines 226--227
+\T1/lmr/m/n/8.03 conservative. Across BBBP, ClinTox, BACE, and Tox21, the
+
+Underfull \hbox (badness 2856) in paragraph at lines 237--238
+\T1/lmr/m/n/8.03 MolTrustBench also audits whether the molecules underlying
+
+Underfull \hbox (badness 6978) in paragraph at lines 237--238
+\T1/lmr/m/n/8.03 benchmark labels have heterogeneous public assay records.
+
+Underfull \vbox (badness 10000) has occurred while \output is active
+Underfull \vbox (badness 10000) has occurred while \output is active [5
+Non-PDF special ignored!
+<special> ps: [{ThisPage} << /CropBox [0 0 595.82918 782.7922] >> /PUT pdfm...
+ <./figures/bace_tox21_sequence_model_family.pdf> <./figures/assay_conflict_map
+.pdf>]
+Underfull \hbox (badness 2591) in paragraph at lines 264--265
+[]|\T1/lmss/m/n/7.52812 Release or date used as the public-
+
+Underfull \hbox (badness 3108) in paragraph at lines 265--266
+[]|\T1/lmss/m/n/7.52812 Exact, scaffold, and nearest-neighbor
+
+Underfull \hbox (badness 3343) in paragraph at lines 266--267
+[]|\T1/lmss/m/n/7.52812 Exact-removed, scaffold-removed, and
+
+Underfull \hbox (badness 2726) in paragraph at lines 269--270
+[]|\T1/lmss/m/n/7.52812 Standard, exposure-removed, exposed,
+
+Underfull \hbox (badness 7704) in paragraph at lines 269--270
+\T1/lmss/m/n/7.52812 temporal-future, and density-matched
+
+Underfull \hbox (badness 10000) in paragraph at lines 270--271
+[]|\T1/lmss/m/n/7.52812 Whether evidence is audit-only,
+
+Underfull \hbox (badness 1571) in paragraph at lines 277--278
+\T1/lmr/m/n/8.03 MolTrustBench reframes molecular benchmark evaluation as a
+
+Underfull \hbox (badness 1142) in paragraph at lines 279--280
+\T1/lmr/m/n/8.03 in the supplement. Assay-provenance claims are supported by
+
+Underfull \hbox (badness 1152) in paragraph at lines 279--280
+\T1/lmr/m/n/8.03 generated trust cards, sanity checks, data-freeze records, and
+
+
+Underfull \hbox (badness 6332) in paragraph at lines 281--282
+[]\T1/lmr/m/n/8.03 The main limitations are also explicit: SIDER remains
+
+Underfull \hbox (badness 4156) in paragraph at lines 281--282
+\T1/lmr/m/n/8.03 aware regression slices are too small or absent under the
+
+Underfull \hbox (badness 2671) in paragraph at lines 281--282
+\T1/lmr/m/n/8.03 become one-class subsets in the endpoint-native wave; DILI
+
+Underfull \hbox (badness 5893) in paragraph at lines 283--284
+\T1/lmr/m/n/8.03 usability under exposure-adjusted evaluation. MolTrustBench
+(/usr/share/texmf/tex/latex/lm/t1lmtt.fd)
+Underfull \hbox (badness 5985) in paragraph at lines 287--288
+\T1/lmr/m/n/8.03 Processed evidence tables, exposure annotations, generated
+
+Underfull \hbox (badness 3179) in paragraph at lines 287--288
+\T1/lmr/bx/n/8.03 DOI/accession to be inserted]\T1/lmr/m/n/8.03 . The correspon
+ding local
+
+Underfull \hbox (badness 1484) in paragraph at lines 287--288
+\T1/lmr/m/n/8.03 The supplement package includes compact source data, slice-
+
+Underfull \hbox (badness 2150) in paragraph at lines 291--292
+\T1/lmr/m/n/8.03 current version uses the release-index, exposure-audit, assay-
+
+
+Underfull \hbox (badness 1694) in paragraph at lines 291--292
+\T1/lmr/m/n/8.03 supplement-packaging, and final-figure scripts under $\T1/lmtt
+/m/n/8.03 scripts/$\T1/lmr/m/n/8.03 ,
+[6
+Non-PDF special ignored!
+<special> ps: [{ThisPage} << /CropBox [0 0 595.82918 782.7922] >> /PUT pdfm...
+ <./figures/trust_card_examples.pdf>] (./moltrustbench_main.bbl
+Underfull \hbox (badness 10000) in paragraph at lines 9--15
+[]\T1/lmr/m/n/7.77905 BOOM benchmark authors.  BOOM: Benchmarking
+
+Underfull \hbox (badness 10000) in paragraph at lines 9--15
+\T1/lmr/m/n/7.77905 molecular out-of-distribution prediction.  []$https :
+
+Underfull \hbox (badness 10000) in paragraph at lines 9--15
+\T1/lmr/m/n/7.77905 / / papers . nips . cc / paper _ ^^\les / paper / 2025 / ha
+sh /
+
+Underfull \hbox (badness 10000) in paragraph at lines 9--15
+\T1/lmr/m/n/7.77905 b94263f7f98c9766ea9a09761ddd88ee-[]Abstract-[]Datasets _ an
+d _
+
+Underfull \hbox (badness 3029) in paragraph at lines 9--15
+\T1/lmr/m/n/7.77905 Benchmarks _ Track . html$[], 2025.  NeurIPS Datasets and
+
+Underfull \hbox (badness 1983) in paragraph at lines 89--96
+\T1/lmr/m/n/7.77905 Mara耋n, Fiona Hunter, Lara Junco, Grace Mugumbate,
+
+Underfull \hbox (badness 1490) in paragraph at lines 89--96
+\T1/lmr/m/n/7.77905 Milagros Rodriguez-Lopez, Francis Atkinson, Nicolas Bosc,
+
+Underfull \hbox (badness 3128) in paragraph at lines 103--109
+\T1/lmr/m/n/7.77905 Alexandre Passos, David Cournapeau, Matthieu Brucher,
+
+Underfull \hbox (badness 2057) in paragraph at lines 116--120
+[]\T1/lmr/m/n/7.77905 David Rogers and Mathew Hahn.  Extended-connectivity
+
+Underfull \hbox (badness 2042) in paragraph at lines 142--147
+[]\T1/lmr/m/n/7.77905 Izhar Wallach and Abraham Heifets.  Most ligand-based
+
+Underfull \hbox (badness 2253) in paragraph at lines 142--147
+\T1/lmr/m/n/7.77905 classification benchmarks reward memorization rather than
+
+Underfull \hbox (badness 2635) in paragraph at lines 149--154
+\T1/lmr/m/it/7.77905 Journal of Chemical Information and Computer Sciences\T1/l
+mr/m/n/7.77905 ,
+
+Underfull \vbox (badness 10000) has occurred while \output is active [7
+Non-PDF special ignored!
+<special> ps: [{ThisPage} << /CropBox [0 0 595.82918 782.7922] >> /PUT pdfm...
+]
+Underfull \hbox (badness 1845) in paragraph at lines 170--179
+\T1/lmr/m/n/7.77905 Stephen H. Bryant, Kwaku Buolamwini, Jane Hodkinson,
+
+Underfull \hbox (badness 2894) in paragraph at lines 170--179
+\T1/lmr/m/n/7.77905 data types and time periods.  \T1/lmr/m/it/7.77905 Nucleic
+Acids Research\T1/lmr/m/n/7.77905 ,
+) [8
+Non-PDF special ignored!
+<special> ps: [{ThisPage} << /CropBox [0 0 595.82918 782.7922] >> /PUT pdfm...
+] (./moltrustbench_main.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ )
+(see the transcript file for additional information){/usr/share/texmf/fonts/enc
+/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/
+texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-
+ts1.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/share/texmf/fo
+nts/type1/public/lm/lmbx8.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx9.pfb
+></usr/share/texmf/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf/fonts/type
+1/public/lm/lmr6.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/sha
+re/texmf/fonts/type1/public/lm/lmri8.pfb></usr/share/texmf/fonts/type1/public/l
+m/lmss10.pfb></usr/share/texmf/fonts/type1/public/lm/lmss12.pfb></usr/share/tex
+mf/fonts/type1/public/lm/lmss8.pfb></usr/share/texmf/fonts/type1/public/lm/lmss
+9.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbo10.pfb></usr/share/texmf/fo
+nts/type1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsso8
+.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy5.pfb></usr/share/texmf/fonts/
+type1/public/lm/lmsy8.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt8.pfb>
+Output written on moltrustbench_main.pdf (8 pages, 629226 bytes).
+Transcript written on moltrustbench_main.log.
+Latexmk: Found input bbl file 'moltrustbench_main.bbl'
+Latexmk: References changed.
+Latexmk: Log file says output to 'moltrustbench_main.pdf'
+Latexmk: Examining 'moltrustbench_main.log'
+=== TeX engine is 'pdfTeX'
+Latexmk: Found bibliography file(s) [references.bib]
+Rule 'bibtex moltrustbench_main': File changes, etc:
+   Changed files, or newly in use since previous run(s):
+      'moltrustbench_main.aux'
+------------
+Run number 2 of rule 'bibtex moltrustbench_main'
+------------
+------------
+Running 'bibtex  "moltrustbench_main.aux"'
+------------
+Latexmk: applying rule 'bibtex moltrustbench_main'...
+This is BibTeX, Version 0.99d (TeX Live 2022/dev/Debian)
+The top-level auxiliary file: moltrustbench_main.aux
+The style file: oup-plain.bst
+Database file #1: references.bib
+Rule 'pdflatex': File changes, etc:
+   Changed files, or newly in use since previous run(s):
+      'moltrustbench_main.aux'
+------------
+Run number 3 of rule 'pdflatex'
+------------
+------------
+Running 'pdflatex  -interaction=nonstopmode -halt-on-error -recorder  "moltrustbench_main.tex"'
+------------
+Latexmk: applying rule 'pdflatex'...
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./moltrustbench_main.tex
+LaTeX2e <2021-11-15> patch level 1
+L3 programming layer <2022-01-21> (./oup-authoring-template.cls
+Document Class: oup-authoring-template 2025/11/17 1.2
+(/usr/share/texlive/texmf-dist/tex/latex/crop/crop.sty
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifluatex.sty
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def))
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)))
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg))
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/sttools/flushend.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/sttools/stfloats.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/rotating.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/changepage/chngpage.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/totcount/totcount.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/base/fix-cm.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.def))
+(/usr/share/texlive/texmf-dist/tex/latex/footmisc/footmisc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/arydshln/arydshln.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/wrapfig/wrapfig.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/subfloat/subfloat.sty
+Package `subfloat', Version 2.14 of 2003/08/21.)
+(/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/mdwtools/footnote.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/jknapltx/mathrsfs.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/algorithms/algorithm.sty
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
+Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
+) (/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
+Document Style - pseudocode environments for use with the `algorithmicx' style
+) (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg))
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+(/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty))
+(/usr/share/texlive/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/pdfescape/pdfescape.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hycolor/hycolor.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/letltxmacro/letltxmacro.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/auxhook/auxhook.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref-langpatches.def)
+(/usr/share/texlive/texmf-dist/tex/generic/intcalc/intcalc.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/etexcmds/etexcmds.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def)
+(/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty
+(/usr/share/texlive/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/base/atbegshi-ltx.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/usr/share/texlive/texmf-dist/tex/latex/base/atveryend-ltx.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+(/usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty)))
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common-lists.t
+ex)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/pgf.revision.tex)))
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.code.t
+ex)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.de
+f)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.
+tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.
+tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code
+.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonomet
+ric.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.cod
+e.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison
+.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.
+tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code
+.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.
+tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerari
+thmetics.code.tex)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfint.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.te
+x)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.
+code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code
+.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.te
+x)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.c
+ode.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformation
+s.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.t
+ex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathprocessing
+.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.te
+x)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.
+tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.te
+x)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.c
+ode.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.code.
+tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorerdf.code.tex))
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65
+.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18
+.sty)) (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgffor.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex))
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/math/pgfmath.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers
+.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibrarytopaths.code.tex)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibrarysvg.path.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibrarysvg.path.cod
+e.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleparser.code.tex
+)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibrarydecorations.markings.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibrarydecorations.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduledecorations.cod
+e.tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrary
+decorations.markings.code.tex))
+(/usr/share/texlive/texmf-dist/tex/latex/silence/silence.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty)
+(/usr/share/texmf/tex/latex/lm/lmodern.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty)
+(/usr/share/texmf/tex/latex/lm/t1lmr.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def)
+(./moltrustbench_main.aux)
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg))
+(/usr/share/texlive/texmf-dist/tex/latex/anyfontsize/anyfontsize.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty))
+(./moltrustbench_main.out) (./moltrustbench_main.out)
+(/usr/share/texmf/tex/latex/lm/t1lmss.fd)
+(/usr/share/texmf/tex/latex/lm/ot1lmr.fd)
+(/usr/share/texmf/tex/latex/lm/omllmm.fd)
+(/usr/share/texmf/tex/latex/lm/omslmsy.fd)
+(/usr/share/texmf/tex/latex/lm/omxlmex.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/jknapltx/ursfs.fd)
+(/usr/share/texmf/tex/latex/lm/ts1lmss.fd)
+Underfull \hbox (badness 2027) in paragraph at lines 91--92
+\T1/lmr/m/n/8.03 model work has also treated benchmark overlap with public
+
+Underfull \vbox (badness 10000) has occurred while \output is active
+
+Package hyperref Warning: Difference (3) between bookmark levels is greater
+(hyperref)                than one, level fixed on input line 93.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active
+Overfull \hbox (11.38107pt too wide) has occurred while \output is active
+[][][] []
+[1
+Non-PDF special ignored!
+<special> ps: [{ThisPage} << /CropBox [0 0 595.82918 782.7922] >> /PUT pdfm...
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+Underfull \vbox (badness 10000) has occurred while \output is active
+Underfull \hbox (badness 2343) in paragraph at lines 127--128
+\T1/lmr/m/n/8.03 For each release, MolTrustBench records standard InChIKey,
+[2
+Non-PDF special ignored!
+<special> ps: [{ThisPage} << /CropBox [0 0 595.82918 782.7922] >> /PUT pdfm...
+ <./figures/workflow_schematic.pdf>]
+Underfull \hbox (badness 2809) in paragraph at lines 135--136
+\T1/lmr/m/n/8.03 standard splits against exact-removed, scaffold-removed, NN-
+
+Underfull \hbox (badness 5741) in paragraph at lines 135--136
+\T1/lmr/m/n/8.03 removed, density-matched exposure-removed, and observable
+
+Underfull \hbox (badness 2189) in paragraph at lines 139--140
+\T1/lmr/m/n/8.03 as an expected limitation rather than being promoted to a
+
+Underfull \hbox (badness 3375) in paragraph at lines 143--144
+\T1/lmr/m/n/8.03 values when present, confidence scores, and source release.
+
+Underfull \hbox (badness 1117) in paragraph at lines 149--150
+\T1/lmr/m/n/8.03 public chemical database history into an auditable benchmark
+
+Underfull \vbox (badness 10000) has occurred while \output is active
+Underfull \hbox (badness 1748) in paragraph at lines 169--170
+\T1/lmr/m/n/8.03 trustworthiness should be audited before interpreting held-out
+
+[3
+Non-PDF special ignored!
+<special> ps: [{ThisPage} << /CropBox [0 0 595.82918 782.7922] >> /PUT pdfm...
+]
+Underfull \hbox (badness 1867) in paragraph at lines 214--215
+\T1/lmr/m/n/8.03 Endpoint-native ChEMBL temporal tasks add a direct stress
+
+Underfull \hbox (badness 1789) in paragraph at lines 214--215
+\T1/lmr/m/n/8.03 test because the labels and release history are derived from
+
+Underfull \hbox (badness 2173) in paragraph at lines 214--215
+\T1/lmr/m/n/8.03 sequence baselines use the same standard, exposure-removed,
+
+Underfull \hbox (badness 2495) in paragraph at lines 214--215
+\T1/lmr/m/n/8.03 density-matched, and temporal-future slice logic where valid.
+
+Underfull \hbox (badness 1960) in paragraph at lines 218--219
+\T1/lmr/m/n/8.03 the same exposure-aware contracts can be applied to staged
+[4
+Non-PDF special ignored!
+<special> ps: [{ThisPage} << /CropBox [0 0 595.82918 782.7922] >> /PUT pdfm...
+ <./figures/exposure_heatmap_coverage.pdf> <./figures/exposure_delta_ci.pdf>]
+Underfull \hbox (badness 2941) in paragraph at lines 226--227
+\T1/lmr/m/n/8.03 The model-family sweep extends exposure-adjusted evaluation
+
+Underfull \hbox (badness 1264) in paragraph at lines 226--227
+\T1/lmr/m/n/8.03 conservative. Across BBBP, ClinTox, BACE, and Tox21, the
+
+Underfull \hbox (badness 2856) in paragraph at lines 237--238
+\T1/lmr/m/n/8.03 MolTrustBench also audits whether the molecules underlying
+
+Underfull \hbox (badness 6978) in paragraph at lines 237--238
+\T1/lmr/m/n/8.03 benchmark labels have heterogeneous public assay records.
+
+Underfull \vbox (badness 10000) has occurred while \output is active
+Underfull \vbox (badness 10000) has occurred while \output is active [5
+Non-PDF special ignored!
+<special> ps: [{ThisPage} << /CropBox [0 0 595.82918 782.7922] >> /PUT pdfm...
+ <./figures/bace_tox21_sequence_model_family.pdf> <./figures/assay_conflict_map
+.pdf>]
+Underfull \hbox (badness 2591) in paragraph at lines 264--265
+[]|\T1/lmss/m/n/7.52812 Release or date used as the public-
+
+Underfull \hbox (badness 3108) in paragraph at lines 265--266
+[]|\T1/lmss/m/n/7.52812 Exact, scaffold, and nearest-neighbor
+
+Underfull \hbox (badness 3343) in paragraph at lines 266--267
+[]|\T1/lmss/m/n/7.52812 Exact-removed, scaffold-removed, and
+
+Underfull \hbox (badness 2726) in paragraph at lines 269--270
+[]|\T1/lmss/m/n/7.52812 Standard, exposure-removed, exposed,
+
+Underfull \hbox (badness 7704) in paragraph at lines 269--270
+\T1/lmss/m/n/7.52812 temporal-future, and density-matched
+
+Underfull \hbox (badness 10000) in paragraph at lines 270--271
+[]|\T1/lmss/m/n/7.52812 Whether evidence is audit-only,
+
+Underfull \hbox (badness 1571) in paragraph at lines 277--278
+\T1/lmr/m/n/8.03 MolTrustBench reframes molecular benchmark evaluation as a
+
+Underfull \hbox (badness 1142) in paragraph at lines 279--280
+\T1/lmr/m/n/8.03 in the supplement. Assay-provenance claims are supported by
+
+Underfull \hbox (badness 1152) in paragraph at lines 279--280
+\T1/lmr/m/n/8.03 generated trust cards, sanity checks, data-freeze records, and
+
+
+Underfull \hbox (badness 6332) in paragraph at lines 281--282
+[]\T1/lmr/m/n/8.03 The main limitations are also explicit: SIDER remains
+
+Underfull \hbox (badness 4156) in paragraph at lines 281--282
+\T1/lmr/m/n/8.03 aware regression slices are too small or absent under the
+
+Underfull \hbox (badness 2671) in paragraph at lines 281--282
+\T1/lmr/m/n/8.03 become one-class subsets in the endpoint-native wave; DILI
+
+Underfull \hbox (badness 5893) in paragraph at lines 283--284
+\T1/lmr/m/n/8.03 usability under exposure-adjusted evaluation. MolTrustBench
+(/usr/share/texmf/tex/latex/lm/t1lmtt.fd)
+Underfull \hbox (badness 5985) in paragraph at lines 287--288
+\T1/lmr/m/n/8.03 Processed evidence tables, exposure annotations, generated
+
+Underfull \hbox (badness 3179) in paragraph at lines 287--288
+\T1/lmr/bx/n/8.03 DOI/accession to be inserted]\T1/lmr/m/n/8.03 . The correspon
+ding local
+
+Underfull \hbox (badness 1484) in paragraph at lines 287--288
+\T1/lmr/m/n/8.03 The supplement package includes compact source data, slice-
+
+Underfull \hbox (badness 2150) in paragraph at lines 291--292
+\T1/lmr/m/n/8.03 current version uses the release-index, exposure-audit, assay-
+
+
+Underfull \hbox (badness 1694) in paragraph at lines 291--292
+\T1/lmr/m/n/8.03 supplement-packaging, and final-figure scripts under $\T1/lmtt
+/m/n/8.03 scripts/$\T1/lmr/m/n/8.03 ,
+[6
+Non-PDF special ignored!
+<special> ps: [{ThisPage} << /CropBox [0 0 595.82918 782.7922] >> /PUT pdfm...
+ <./figures/trust_card_examples.pdf>] (./moltrustbench_main.bbl
+Underfull \hbox (badness 10000) in paragraph at lines 9--15
+[]\T1/lmr/m/n/7.77905 BOOM benchmark authors.  BOOM: Benchmarking
+
+Underfull \hbox (badness 10000) in paragraph at lines 9--15
+\T1/lmr/m/n/7.77905 molecular out-of-distribution prediction.  []$https :
+
+Underfull \hbox (badness 10000) in paragraph at lines 9--15
+\T1/lmr/m/n/7.77905 / / papers . nips . cc / paper _ ^^\les / paper / 2025 / ha
+sh /
+
+Underfull \hbox (badness 10000) in paragraph at lines 9--15
+\T1/lmr/m/n/7.77905 b94263f7f98c9766ea9a09761ddd88ee-[]Abstract-[]Datasets _ an
+d _
+
+Underfull \hbox (badness 3029) in paragraph at lines 9--15
+\T1/lmr/m/n/7.77905 Benchmarks _ Track . html$[], 2025.  NeurIPS Datasets and
+
+Underfull \hbox (badness 1983) in paragraph at lines 89--96
+\T1/lmr/m/n/7.77905 Mara耋n, Fiona Hunter, Lara Junco, Grace Mugumbate,
+
+Underfull \hbox (badness 1490) in paragraph at lines 89--96
+\T1/lmr/m/n/7.77905 Milagros Rodriguez-Lopez, Francis Atkinson, Nicolas Bosc,
+
+Underfull \hbox (badness 3128) in paragraph at lines 103--109
+\T1/lmr/m/n/7.77905 Alexandre Passos, David Cournapeau, Matthieu Brucher,
+
+Underfull \hbox (badness 2057) in paragraph at lines 116--120
+[]\T1/lmr/m/n/7.77905 David Rogers and Mathew Hahn.  Extended-connectivity
+
+Underfull \hbox (badness 2042) in paragraph at lines 142--147
+[]\T1/lmr/m/n/7.77905 Izhar Wallach and Abraham Heifets.  Most ligand-based
+
+Underfull \hbox (badness 2253) in paragraph at lines 142--147
+\T1/lmr/m/n/7.77905 classification benchmarks reward memorization rather than
+
+Underfull \hbox (badness 2635) in paragraph at lines 149--154
+\T1/lmr/m/it/7.77905 Journal of Chemical Information and Computer Sciences\T1/l
+mr/m/n/7.77905 ,
+
+Underfull \vbox (badness 10000) has occurred while \output is active [7
+Non-PDF special ignored!
+<special> ps: [{ThisPage} << /CropBox [0 0 595.82918 782.7922] >> /PUT pdfm...
+]
+Underfull \hbox (badness 1845) in paragraph at lines 170--179
+\T1/lmr/m/n/7.77905 Stephen H. Bryant, Kwaku Buolamwini, Jane Hodkinson,
+
+Underfull \hbox (badness 2894) in paragraph at lines 170--179
+\T1/lmr/m/n/7.77905 data types and time periods.  \T1/lmr/m/it/7.77905 Nucleic
+Acids Research\T1/lmr/m/n/7.77905 ,
+) [8
+Non-PDF special ignored!
+<special> ps: [{ThisPage} << /CropBox [0 0 595.82918 782.7922] >> /PUT pdfm...
+] (./moltrustbench_main.aux) )
+(see the transcript file for additional information){/usr/share/texmf/fonts/enc
+/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/
+texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-
+ts1.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/share/texmf/fo
+nts/type1/public/lm/lmbx8.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx9.pfb
+></usr/share/texmf/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf/fonts/type
+1/public/lm/lmr6.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/sha
+re/texmf/fonts/type1/public/lm/lmri8.pfb></usr/share/texmf/fonts/type1/public/l
+m/lmss10.pfb></usr/share/texmf/fonts/type1/public/lm/lmss12.pfb></usr/share/tex
+mf/fonts/type1/public/lm/lmss8.pfb></usr/share/texmf/fonts/type1/public/lm/lmss
+9.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbo10.pfb></usr/share/texmf/fo
+nts/type1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsso8
+.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy5.pfb></usr/share/texmf/fonts/
+type1/public/lm/lmsy8.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt8.pfb>
+Output written on moltrustbench_main.pdf (8 pages, 629226 bytes).
+Transcript written on moltrustbench_main.log.
+Latexmk: Found input bbl file 'moltrustbench_main.bbl'
+Latexmk: Log file says output to 'moltrustbench_main.pdf'
+Latexmk: Examining 'moltrustbench_main.log'
+=== TeX engine is 'pdfTeX'
+Latexmk: Found bibliography file(s) [references.bib]
+Latexmk: All targets (moltrustbench_main.pdf) are up-to-date

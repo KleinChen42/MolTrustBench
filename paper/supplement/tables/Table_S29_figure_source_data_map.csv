@@ -1,10 +1,9 @@
 figure,figure_file,source_data_path,supplement_source_path,claim_or_risk,note,source_status
 Fig. 1,workflow_schematic.pdf,results/tables/workflow_artifact_map.csv,tables/Source_Fig_1_workflow_artifact_map.csv,C5,workflow stage-to-artifact source data,available
-Fig. 2,release_histogram.pdf,results/tables/chembl_release_counts.csv,tables/Source_Fig_2_chembl_release_counts.csv,C1/R4,ChEMBL release dates and molecule counts,available
-Fig. 3,exposure_heatmap_coverage.pdf,results/tables/benchmark_coverage_exposure_summary.csv,tables/Source_Fig_3_benchmark_coverage_exposure_summary.csv,C1/C2,four-task exposure rates at CHEMBL30,available
-Fig. 4,exposure_delta_ci.pdf,results/tables/fig4_exposure_delta_ci_source.csv,tables/Source_Fig_4_fig4_exposure_delta_ci_source.csv,C3/R8,standard-minus-comparison delta CI source,available
-Fig. 5A,bace_tox21_sequence_model_family.pdf,results/tables/fig5_sequence_family_delta_source.csv,tables/Source_Fig_5A_fig5_sequence_family_delta_source.csv,C3,sequence-family AUROC deltas,available
-Fig. 5B,bace_tox21_sequence_model_family.pdf,results/tables/fig5_sequence_family_comparison_size_source.csv,tables/Source_Fig_5B_fig5_sequence_family_comparison_size_source.csv,C3/R8,comparison-slice test sizes,available
-Fig. 6,assay_conflict_map.pdf,results/tables/assay_provenance_task_summary_with_dili.csv,tables/Source_Fig_6_assay_provenance_task_summary_with_dili.csv,C4/R10,assay-provenance heterogeneity rates,available
-Fig. 7,trust_card_examples.pdf,results/tables/trust_card_examples.csv,tables/Source_Fig_7_trust_card_examples.csv,C5,trust-card plotted examples,available
+Fig. 2,exposure_heatmap_coverage.pdf,results/tables/benchmark_coverage_exposure_summary.csv,tables/Source_Fig_2_benchmark_coverage_exposure_summary.csv,C1/C2,four-task exposure rates at CHEMBL30,available
+Fig. 3,exposure_delta_ci.pdf,results/tables/fig4_exposure_delta_ci_source.csv,tables/Source_Fig_3_fig4_exposure_delta_ci_source.csv,C3/R8,standard-minus-comparison delta CI source,available
+Fig. 4A,bace_tox21_sequence_model_family.pdf,results/tables/fig5_sequence_family_delta_source.csv,tables/Source_Fig_4A_fig5_sequence_family_delta_source.csv,C3,sequence-family AUROC deltas,available
+Fig. 4B,bace_tox21_sequence_model_family.pdf,results/tables/fig5_sequence_family_comparison_size_source.csv,tables/Source_Fig_4B_fig5_sequence_family_comparison_size_source.csv,C3/R8,comparison-slice test sizes,available
+Fig. 5,assay_conflict_map.pdf,results/tables/assay_provenance_task_summary_with_dili.csv,tables/Source_Fig_5_assay_provenance_task_summary_with_dili.csv,C4/R10,assay-provenance heterogeneity rates,available
+Fig. 6,trust_card_examples.pdf,results/tables/trust_card_examples.csv,tables/Source_Fig_6_trust_card_examples.csv,C5,trust-card plotted examples,available
 Fig. S7,label_shuffle_null_control.pdf,results/tables/figS7_label_shuffle_source.csv,tables/Source_Fig_S7_figS7_label_shuffle_source.csv,R2/R6,supplementary train-label-shuffle null-control source,available

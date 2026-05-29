@@ -1,0 +1,15 @@
+{
+  "input_rows": 3156,
+  "n_boot": 10000,
+  "outputs": {
+    "exposure_delta_ci": "results/tables/exposure_delta_ci.csv",
+    "exposure_delta_ci_figure": "results/figures/exposure_delta_ci.pdf",
+    "sequence_delta_ci": "results/tables/sequence_delta_ci.csv",
+    "sequence_delta_ci_figure": "results/figures/sequence_delta_ci.pdf"
+  },
+  "paired_delta_rows": 2328,
+  "random_seed": 20260525,
+  "sequence_summary_rows": 24,
+  "status": "completed",
+  "summary_rows": 80
+}

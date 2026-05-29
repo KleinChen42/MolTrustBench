@@ -52,11 +52,19 @@
       "claim_role": "C2"
     },
     {
-      "field_name": "exposure_removed_test_n",
+      "field_name": "exact_unobserved_n",
       "type": "integer",
       "required": true,
       "example": 331,
-      "description": "test size after exposure removal, with class-balance validity reported separately",
+      "description": "benchmark molecules not exactly observed at the public-observability cutoff",
+      "claim_role": "C1/C2"
+    },
+    {
+      "field_name": "exposure_removed_test_n",
+      "type": "integer",
+      "required": false,
+      "example": 331,
+      "description": "optional performance-split size after exposure removal; use exact_unobserved_n for benchmark-level cards",
       "claim_role": "C3/R8"
     },
     {
@@ -71,7 +79,7 @@
       "field_name": "label_conflict_summary",
       "type": "object",
       "required": false,
-      "example": "{\"conflicting_label_count\": 677}",
+      "example": "{\"discordant_threshold_label_count\": 677}",
       "description": "provenance heterogeneity summary",
       "claim_role": "C4/R10"
     },

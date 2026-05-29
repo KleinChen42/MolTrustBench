@@ -20,6 +20,6 @@
   "fixed_height_includes": false,
   "old_archive_reference": false,
   "clears_unused_options": true,
-  "label_shuffle_visible": true,
-  "label_shuffle_placement": "Main-visible reviewer-control Fig. 8"
+  "label_shuffle_visible": false,
+  "label_shuffle_placement": "Supplement-first Fig. S7 null-control source"
 }

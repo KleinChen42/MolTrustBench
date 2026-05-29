@@ -23,6 +23,7 @@ def _setup_style() -> None:
             "font.family": "sans-serif",
             "font.sans-serif": ["Arial", "Helvetica", "DejaVu Sans", "sans-serif"],
             "pdf.fonttype": 42,
+            "ps.fonttype": 42,
             "svg.fonttype": "none",
             "font.size": 7,
             "axes.spines.right": False,
@@ -52,6 +53,7 @@ def _load_display_cards(card_dir: str | Path) -> list[dict]:
 def write_trust_card_table(cards: list[dict], output: str | Path) -> pd.DataFrame:
     rows = []
     for card in cards:
+        exact_unobserved = card.get("exact_unobserved_n", card.get("exposure_removed_test_n", card.get("exact_clean_molecules")))
         rows.append(
             {
                 "source_name": card.get("source_name"),
@@ -61,7 +63,8 @@ def write_trust_card_table(cards: list[dict], output: str | Path) -> pd.DataFram
                 "exact_public_exposure_rate": card.get("exact_public_exposure_rate"),
                 "scaffold_public_exposure_rate": card.get("scaffold_public_exposure_rate"),
                 "nn_exposure_rate_08": card.get("nn_exposure_rate_08"),
-                "exposure_removed_test_n": card.get("exposure_removed_test_n", card.get("exact_clean_molecules")),
+                "exact_unobserved_n": exact_unobserved,
+                "exposure_removed_test_n": card.get("exposure_removed_test_n", exact_unobserved),
                 "risk_level": card.get("risk_level"),
                 "interpretation": card.get("interpretation"),
             }
@@ -121,7 +124,7 @@ def plot_trust_cards(
         ax.text(0.92, 0.875, risk, fontsize=6.4, weight="bold", ha="right", va="center", color=edge)
 
         ax.text(0.07, 0.72, f"n = {int(card.get('n_molecules', 0)):,}", fontsize=7.0, ha="left")
-        exposure_removed_n = int(card.get("exposure_removed_test_n", card.get("exact_clean_molecules", 0)))
+        exposure_removed_n = int(card.get("exact_unobserved_n", card.get("exposure_removed_test_n", card.get("exact_clean_molecules", 0))))
         ax.text(0.36, 0.72, f"exact-unobserved n = {exposure_removed_n:,}", fontsize=7.0, ha="left")
         _draw_meter(ax, 0.07, 0.60, 0.52, "Exact public exposure", card.get("exact_public_exposure_rate", 0.0), edge)
         _draw_meter(ax, 0.07, 0.49, 0.52, "Scaffold public exposure", card.get("scaffold_public_exposure_rate", 0.0), edge)

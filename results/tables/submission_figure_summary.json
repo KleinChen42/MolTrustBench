@@ -1,0 +1,14 @@
+{
+  "workflow_rows": 7,
+  "trust_card_rows": 4,
+  "figures": [
+    "results/figures/workflow_schematic.pdf",
+    "results/figures/workflow_schematic.svg",
+    "results/figures/trust_card_examples.pdf",
+    "results/figures/trust_card_examples.svg"
+  ],
+  "tables": [
+    "results/tables/workflow_artifact_map.csv",
+    "results/tables/trust_card_examples.csv"
+  ]
+}

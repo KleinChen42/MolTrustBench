@@ -5,8 +5,9 @@ n_molecules,integer,True,2039,number of audited benchmark molecules,C1
 exact_public_exposure_rate,number,True,0.8377,fraction exactly observed by cutoff in indexed releases,C1
 scaffold_public_exposure_rate,number,True,0.8779,fraction with scaffold observed by cutoff,C2
 nn_exposure_rate_08,number,True,0.8892,fraction with nearest-neighbor similarity >=0.8 before cutoff,C2
-exposure_removed_test_n,integer,True,331,"test size after exposure removal, with class-balance validity reported separately",C3/R8
+exact_unobserved_n,integer,True,331,benchmark molecules not exactly observed at the public-observability cutoff,C1/C2
+exposure_removed_test_n,integer,False,331,optional performance-split size after exposure removal; use exact_unobserved_n for benchmark-level cards,C3/R8
 assay_provenance_available,boolean,True,True,whether matched public assay provenance was extracted,C4
-label_conflict_summary,object,False,"{""conflicting_label_count"": 677}",provenance heterogeneity summary,C4/R10
+label_conflict_summary,object,False,"{""discordant_threshold_label_count"": 677}",provenance heterogeneity summary,C4/R10
 primary_limitations,array,True,"[""ChEMBL-only lower bound""]",required caveats for interpretation,R1/R4/R8
 source_artifacts,array,True,"[""results/tables/...""]",machine-readable artifacts behind the card,C5
