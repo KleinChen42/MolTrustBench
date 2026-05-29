@@ -148,18 +148,18 @@ def plot_workflow(
     table = write_workflow_table(root_path, Path(output_table))
     _setup_style()
 
-    fig, ax = plt.subplots(figsize=(7.4, 4.8))
+    fig, ax = plt.subplots(figsize=(7.4, 4.4))
     ax.set_axis_off()
     fig.patch.set_facecolor("white")
 
     layout = {
-        "inputs": (0.04, 0.68, 0.28, 0.16),
-        "standardize": (0.36, 0.68, 0.28, 0.16),
-        "release_index": (0.68, 0.68, 0.28, 0.16),
-        "exposure": (0.25, 0.455, 0.50, 0.15),
-        "evaluation": (0.04, 0.22, 0.28, 0.16),
-        "provenance": (0.36, 0.22, 0.28, 0.16),
-        "trust_cards": (0.68, 0.22, 0.28, 0.16),
+        "inputs": (0.05, 0.69, 0.24, 0.14),
+        "standardize": (0.38, 0.69, 0.24, 0.14),
+        "release_index": (0.71, 0.69, 0.24, 0.14),
+        "exposure": (0.25, 0.47, 0.50, 0.14),
+        "evaluation": (0.07, 0.25, 0.38, 0.14),
+        "provenance": (0.55, 0.25, 0.38, 0.14),
+        "trust_cards": (0.25, 0.055, 0.50, 0.14),
     }
     colors = {
         "available": ("#eef5f2", "#3c7c66"),
@@ -181,8 +181,8 @@ def plot_workflow(
             facecolor=face,
         )
         ax.add_patch(patch)
-        title_width = 28 if box_w < 0.4 else 44
-        subtitle_width = 34 if box_w < 0.4 else 62
+        title_width = 22 if box_w < 0.30 else (31 if box_w < 0.4 else 44)
+        subtitle_width = 28 if box_w < 0.30 else (46 if box_w < 0.4 else 62)
         title = ax.text(
             x + 0.018,
             y + box_h - 0.026,
@@ -195,9 +195,9 @@ def plot_workflow(
         )
         subtitle = ax.text(
             x + 0.018,
-            y + box_h - 0.073,
+            y + box_h - 0.068,
             fill(step["subtitle"], width=subtitle_width),
-            fontsize=5.55,
+            fontsize=5.35,
             va="top",
             ha="left",
             color="#333333",
@@ -205,9 +205,9 @@ def plot_workflow(
         )
         module = ax.text(
             x + 0.018,
-            y + 0.024,
-            step["module"],
-            fontsize=5.45,
+            y + 0.016,
+            fill(step["module"], width=title_width),
+            fontsize=5.35,
             va="bottom",
             ha="left",
             color=edge,
@@ -235,9 +235,10 @@ def plot_workflow(
         (mid_right("inputs"), mid_left("standardize"), 0.0),
         (mid_right("standardize"), mid_left("release_index"), 0.0),
         (bottom_center("release_index"), top_center("exposure"), 0.0),
-        (bottom_center("exposure"), top_center("evaluation"), 0.16),
-        (bottom_center("exposure"), top_center("provenance"), 0.0),
-        (bottom_center("exposure"), top_center("trust_cards"), -0.16),
+        (bottom_center("exposure"), top_center("evaluation"), 0.12),
+        (bottom_center("exposure"), top_center("provenance"), -0.12),
+        (bottom_center("evaluation"), top_center("trust_cards"), -0.08),
+        (bottom_center("provenance"), top_center("trust_cards"), 0.08),
     ]
     for start_xy, end_xy, rad in arrows:
         arrow = FancyArrowPatch(
