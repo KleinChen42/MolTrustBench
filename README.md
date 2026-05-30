@@ -1,5 +1,7 @@
 # MolTrustBench
 
+[![DOI](https://zenodo.org/badge/1244518152.svg)](https://doi.org/10.5281/zenodo.20446371)
+
 **MolTrustBench** is a benchmark trustworthiness audit framework for molecular AI. The tool name is **MolLeakTrace**. The paper target is:
 
 > Benchmarking without Time Travel: Public-Exposure Auditing and Temporal Generalization in Molecular AI

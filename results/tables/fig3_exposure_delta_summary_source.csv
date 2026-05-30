@@ -1,0 +1,17 @@
+task_name,comparison_split,median_delta_across_model_families,iqr_low,iqr_high,retained_model_rows,retained_model_families,comparison_test_n_median,n_pairs_min,uncertainty_status
+BBBP,exact_removed,-0.061321871091307,-0.06331052855300175,-0.04749694633364595,3,smiles_cnn;smiles_gru;smiles_transformer,66.0,40,seed_replicate_ci_available
+BBBP,scaffold_removed,-0.0188468215811966,-0.0220936832264957,0.0168770032051282,3,smiles_cnn;smiles_gru;smiles_transformer,49.0,40,seed_replicate_ci_available
+BBBP,nn08_removed,-0.0619190705128204,-0.06266025641025635,-0.04697627314814805,3,smiles_cnn;smiles_gru;smiles_transformer,47.0,40,seed_replicate_ci_available
+BBBP,density_matched_clean,-0.0548066682602528,-0.0584810346414206,-0.04033929777840615,3,smiles_cnn;smiles_gru;smiles_transformer,38.0,40,seed_replicate_ci_available
+ClinTox,exact_removed,-0.0144990388672698,-0.033690437120039954,0.3064502685441315,3,smiles_cnn;smiles_gru;smiles_transformer,155.0,40,seed_replicate_ci_available
+ClinTox,scaffold_removed,0.0225906510833071,0.0046678645412634515,0.14462206506986675,3,smiles_cnn;smiles_gru;smiles_transformer,75.0,40,seed_replicate_ci_available
+ClinTox,nn08_removed,-0.0216624247006661,-0.03989444781671855,0.2915646109992937,3,smiles_cnn;smiles_gru;smiles_transformer,114.0,40,seed_replicate_ci_available
+ClinTox,density_matched_clean,-0.0358817639029569,-0.050221916329752,0.29611545420703156,3,smiles_cnn;smiles_gru;smiles_transformer,140.0,40,seed_replicate_ci_available
+BACE,exact_removed,0.0430669315037065,0.0399563387649589,0.0461775242424541,2,morgan_mlp_gpu;morgan_xgb,882.0,5,seed_replicate_ci_available
+BACE,scaffold_removed,0.0295082255488586,0.028434825125134698,0.030581625972582502,2,morgan_mlp_gpu;morgan_xgb,719.0,5,seed_replicate_ci_available
+BACE,nn08_removed,0.02552712798637715,0.021625037352352723,0.029429218620401574,2,morgan_mlp_gpu;morgan_xgb,755.0,5,seed_replicate_ci_available
+BACE,density_matched_clean,0.19780410827003314,0.18866050307288137,0.20694771346718493,2,morgan_mlp_gpu;morgan_xgb,123.0,5,seed_replicate_ci_available
+Tox21,exact_removed,0.24303277519877636,0.13652816669564463,0.3495373837019081,2,morgan_mlp_gpu;morgan_xgb,100.0,5,seed_replicate_ci_available
+Tox21,scaffold_removed,0.12926615306640218,0.06906550088992094,0.18946680524288345,2,morgan_mlp_gpu;morgan_xgb,379.0,5,seed_replicate_ci_available
+Tox21,nn08_removed,0.2790378596025452,0.17036870129170364,0.38770701791338674,2,morgan_mlp_gpu;morgan_xgb,56.0,5,seed_replicate_ci_available
+Tox21,density_matched_clean,0.24303277519877636,0.13652816669564463,0.3495373837019081,2,morgan_mlp_gpu;morgan_xgb,100.0,5,seed_replicate_ci_available

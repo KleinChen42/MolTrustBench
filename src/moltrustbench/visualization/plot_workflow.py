@@ -16,7 +16,7 @@ WORKFLOW_STEPS = [
     {
         "step_id": "inputs",
         "title": "Benchmark inputs",
-        "subtitle": "MoleculeNet, TDC, ChEMBL tasks",
+        "subtitle": "datasets",
         "module": "benchmark ingestion",
         "artifact": "data/processed/benchmarks",
         "x": 0.05,
@@ -24,8 +24,8 @@ WORKFLOW_STEPS = [
     },
     {
         "step_id": "standardize",
-        "title": "Standardization audit",
-        "subtitle": "SMILES, InChIKey, scaffolds",
+        "title": "Standardization",
+        "subtitle": "SMILES -> InChIKey",
         "module": "standardization",
         "artifact": "data/processed/standardization_report.json",
         "x": 0.25,
@@ -33,8 +33,8 @@ WORKFLOW_STEPS = [
     },
     {
         "step_id": "release_index",
-        "title": "Release-time index",
-        "subtitle": "ChEMBL releases, first-seen dates",
+        "title": "Release index",
+        "subtitle": "first-seen dates",
         "module": "release index",
         "artifact": "results/release_index/compound_release_index.parquet",
         "x": 0.45,
@@ -42,8 +42,8 @@ WORKFLOW_STEPS = [
     },
     {
         "step_id": "exposure",
-        "title": "Public-exposure audit",
-        "subtitle": "Exact, scaffold, NN lower bounds",
+        "title": "Exposure audit",
+        "subtitle": "exact / scaffold / NN",
         "module": "exposure annotation",
         "artifact": "results/tables/benchmark_coverage_exposure_summary.csv",
         "x": 0.65,
@@ -51,8 +51,8 @@ WORKFLOW_STEPS = [
     },
     {
         "step_id": "evaluation",
-        "title": "Exposure-adjusted evaluation",
-        "subtitle": "Slices, intervals, limitations",
+        "title": "Exposure-aware evaluation",
+        "subtitle": "score deltas",
         "module": "score sensitivity",
         "artifact": "results/tables/exposure_delta_ci.csv",
         "x": 0.25,
@@ -61,7 +61,7 @@ WORKFLOW_STEPS = [
     {
         "step_id": "provenance",
         "title": "Assay provenance",
-        "subtitle": "Assays, units, thresholds",
+        "subtitle": "units / thresholds",
         "module": "label-source audit",
         "artifact": "results/tables/assay_provenance_task_summary.csv",
         "x": 0.45,
@@ -69,8 +69,8 @@ WORKFLOW_STEPS = [
     },
     {
         "step_id": "trust_cards",
-        "title": "Trust-card reporting",
-        "subtitle": "Cards, schema, caveats",
+        "title": "Trust cards",
+        "subtitle": "reporting schema",
         "module": "reporting standard",
         "artifact": "results/figures/trust_card_examples.pdf",
         "x": 0.65,
@@ -142,6 +142,7 @@ def plot_workflow(
     root: str | Path = ".",
     output_pdf: str | Path = "results/figures/workflow_schematic.pdf",
     output_svg: str | Path | None = "results/figures/workflow_schematic.svg",
+    output_png: str | Path | None = "results/figures/workflow_schematic.png",
     output_table: str | Path = "results/tables/workflow_artifact_map.csv",
 ) -> pd.DataFrame:
     root_path = Path(root)
@@ -195,25 +196,15 @@ def plot_workflow(
         )
         subtitle = ax.text(
             x + 0.018,
-            y + box_h - 0.068,
+            y + 0.030,
             fill(step["subtitle"], width=subtitle_width),
-            fontsize=5.35,
-            va="top",
+            fontsize=6.05,
+            va="bottom",
             ha="left",
             color="#333333",
             linespacing=1.08,
         )
-        module = ax.text(
-            x + 0.018,
-            y + 0.016,
-            fill(step["module"], width=title_width),
-            fontsize=5.35,
-            va="bottom",
-            ha="left",
-            color=edge,
-            weight="bold",
-        )
-        text_groups[step["step_id"]] = [title, subtitle, module]
+        text_groups[step["step_id"]] = [title, subtitle]
 
     def mid_right(step_id: str) -> tuple[float, float]:
         x, y, w, h = layout[step_id]
@@ -286,6 +277,8 @@ def plot_workflow(
     fig.savefig(output_pdf, bbox_inches="tight")
     if output_svg:
         fig.savefig(output_svg, bbox_inches="tight")
+    if output_png:
+        fig.savefig(output_png, dpi=300, bbox_inches="tight")
     plt.close(fig)
     return table
 
@@ -295,12 +288,14 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("--root", default=".")
     parser.add_argument("--output-pdf", default="results/figures/workflow_schematic.pdf")
     parser.add_argument("--output-svg", default="results/figures/workflow_schematic.svg")
+    parser.add_argument("--output-png", default="results/figures/workflow_schematic.png")
     parser.add_argument("--output-table", default="results/tables/workflow_artifact_map.csv")
     args = parser.parse_args(argv)
     table = plot_workflow(
         root=args.root,
         output_pdf=args.output_pdf,
         output_svg=args.output_svg,
+        output_png=args.output_png,
         output_table=args.output_table,
     )
     print(table.to_string(index=False))

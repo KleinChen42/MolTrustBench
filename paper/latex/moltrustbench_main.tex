@@ -1,6 +1,6 @@
 %%
 %% MolTrustBench manuscript using the Oxford University Press authoring
-%% template. Author metadata remains placeholder text until submission.
+%% template.
 %%
 
 \documentclass[unnumsec,webpdf,contemporary,large,numbered]{oup-authoring-template}
@@ -9,6 +9,7 @@
 \usepackage{lmodern}
 \usepackage{booktabs}
 \usepackage{float}
+\usepackage{placeins}
 \usepackage{graphicx}
 \usepackage{url}
 \urlstyle{same}
@@ -57,13 +58,11 @@
 
 \title[MolTrustBench]{Benchmarking without Time Travel: Public-Exposure Auditing and Temporal Generalization in Molecular AI}
 
-\author[1,$\ast$]{Author One}
-\author[1]{Author Two}
-\author[1]{MolTrustBench Consortium}
+\author[1,$\ast$]{Zhuo Chen}
 
-\address[1]{\orgdiv{Department}, \orgname{Institution}, \orgaddress{\street{Street}, \postcode{Postcode}, \state{State}, \country{Country}}}
+\address[1]{\orgname{Chalmers University of Technology}}
 
-\corresp[$\ast$]{Corresponding author. \url{mailto:author@example.com}}
+\corresp[$\ast$]{Corresponding author. \href{mailto:zhuoc@chalmers.se}{zhuoc@chalmers.se}}
 
 \received{Date}{0}{2026}
 \revised{Date}{0}{2026}
@@ -116,31 +115,53 @@ Drug-discovery agent benchmarks & Does not evaluate autonomous discovery agents;
 \begin{figure*}[!t]
 \centering
 \maybefigure[width=0.92\textwidth,keepaspectratio]{workflow_schematic.pdf}
-\caption{\textbf{MolTrustBench workflow.} MolTrustBench converts benchmark molecules and labels into auditable public-observability, exposure-adjusted evaluation, assay-provenance, and trust-card artifacts. Benchmark molecules are standardized, linked to ChEMBL release-time compound and scaffold indexes, annotated for exact, scaffold, and nearest-neighbor public exposure, evaluated under exposure-aware splits, and summarized in benchmark trust cards. ChEMBL release dates are treated as public observability dates, not as evidence that a specific model used ChEMBL during pretraining.}
+\caption{\textbf{MolTrustBench workflow.} The schematic shows the audit modules and the primary artifact produced by each module. Benchmark inputs include MoleculeNet, TDC, and ChEMBL-derived tasks. Standardization records SMILES, InChIKey, and Bemis--Murcko scaffolds. Release indexes are collapsed to first-seen molecule and scaffold dates. Exposure annotations include exact, scaffold, and nearest-neighbor public exposure. Evaluation outputs include exposure-removed slices, uncertainty intervals, and expected limitations, and the final layer emits benchmark trust cards. ChEMBL release dates are treated as public observability dates, not as evidence that a specific model used ChEMBL during pretraining.}
 \label{fig:workflow}
 \end{figure*}
 
 \section{Methods}
 
+\begin{figure*}[!t]
+\centering
+\small
+\begin{minipage}{0.96\textwidth}
+\textbf{Algorithm 1. MolTrustBench public-exposure audit.}\\[0.25em]
+\textbf{Input:} benchmark molecules and labels, public cutoff release, ChEMBL release indexes, and optional assay-provenance records.
+\begin{enumerate}
+\item Standardize benchmark molecules to canonical SMILES and standard InChIKey.
+\item Compute Bemis--Murcko scaffolds and record standardization failures.
+\item Match exact InChIKeys to the ChEMBL first-seen release index.
+\item Match scaffolds to the scaffold first-seen release index.
+\item Compute nearest-neighbor similarity to molecules observable before the cutoff.
+\item Assign exact, scaffold, and NN public-exposure flags.
+\item Construct standard, exposure-removed, density-matched, and temporal-future slices.
+\item Evaluate models only on metric-valid slices and suppress intervals for deterministic repeats.
+\item Extract assay provenance and derived-label discordance flags where available.
+\item Emit source tables, slice-validity records, protocol parameters, and benchmark trust cards.
+\end{enumerate}
+\textbf{Output:} exposure annotations, slice-validity table, adjusted metrics, assay-provenance table, protocol-parameter map, and trust-card JSON.
+\end{minipage}
+\end{figure*}
+
 \subsection{Release-time public-exposure index}
 
-We use historical ChEMBL releases as public-observability anchors. For each release, MolTrustBench records standard InChIKey, standardized SMILES, release metadata, and Bemis--Murcko scaffold information \cite{chemblDownloads2025,bemis1996}. Compound-level and scaffold-level indexes are collapsed to first-seen release and first-seen date. The initial index covers CHEMBL24, CHEMBL27, CHEMBL30, CHEMBL33, and CHEMBL36.
+We use historical ChEMBL releases as public-observability anchors. For each release, MolTrustBench records standard InChIKey, standardized SMILES, release metadata, and Bemis--Murcko scaffold information \cite{chemblDownloads2025,bemis1996}. Compound-level and scaffold-level indexes are collapsed to first-seen release and first-seen date. The initial index covers CHEMBL24, CHEMBL27, CHEMBL30, CHEMBL33, and CHEMBL36. Protocol parameters, required inputs, output artifacts, and supplement links are summarized in Table S30.
 
 \subsection{Benchmark standardization and exposure annotation}
 
-Benchmark molecules are standardized with RDKit when available \cite{rdkit}. Each molecule is annotated with exact public exposure, scaffold public exposure, nearest-neighbor exposure at Tanimoto thresholds 0.6, 0.7, 0.8, and 0.9, maximum nearest-neighbor similarity before the cutoff, earliest exact release, earliest scaffold release, exposure category, and an exposure audit score. The main cutoff in this audit is CHEMBL30, corresponding to February 2022 in the ChEMBL release table.
+Benchmark molecules are standardized with RDKit when available \cite{rdkit}. Invalid SMILES are rejected with explicit records; salts and mixtures are reduced by the submitted standardization policy; stereochemistry is retained when present; tautomer and charge choices are not claimed to remove all chemical ambiguity; and duplicate molecules are accounted for in the standardization audit rather than silently discarded (Table S25). Each molecule is annotated with exact public exposure, scaffold public exposure, nearest-neighbor exposure at Tanimoto thresholds 0.6, 0.7, 0.8, and 0.9, maximum nearest-neighbor similarity before the cutoff, earliest exact release, earliest scaffold release, exposure category, and exposure audit flags. Nearest-neighbor exposure uses Morgan/ECFP fingerprints, Tanimoto similarity, and pre-cutoff ChEMBL molecules as the indexed search scope. The main cutoff in this audit is CHEMBL30, corresponding to February 2022 in the ChEMBL release table.
 
 \subsection{Exposure-adjusted evaluation}
 
-For the current performance evidence, MolTrustBench compares standard splits against exact-removed, scaffold-removed, NN-removed, density-matched exposure-removed, and observable temporal-future subsets. Classical Morgan-fingerprint baselines use logistic regression and an XGBoost-style gradient-boosted classifier fallback \cite{ecfp2010,xgboost2016,scikitlearn2011}, while sequence-neural baselines include SMILES-CNN, SMILES-GRU, and SMILES-Transformer families \cite{weininger1988,honda2019smilestransformer}. Regression runs report RMSE, MAE, and $R^2$ under the same exposure-aware slice logic. These models are used to test score sensitivity under exposure-aware evaluation; they are not treated as evidence of foundation-model training exposure.
+For the current performance evidence, MolTrustBench compares standard splits against exact-removed, scaffold-removed, NN@0.8-removed, density-matched exposure-removed, and observable temporal-future subsets. Exact-removed slices remove test molecules observed before the cutoff, scaffold-removed slices remove pre-cutoff scaffolds, and NN@0.8-removed slices remove test molecules with a pre-cutoff neighbor at Tanimoto $\geq 0.8$. Density matching uses retained-n and class-balance reporting to separate exposure signals from chemical-density caveats (Tables S6 and S24). Classical Morgan-fingerprint baselines use logistic regression and an XGBoost-style gradient-boosted classifier fallback \cite{ecfp2010,xgboost2016,scikitlearn2011}, while sequence-neural baselines include SMILES-CNN, SMILES-GRU, and SMILES-Transformer families \cite{weininger1988,honda2019smilestransformer}. Regression runs report RMSE, MAE, and $R^2$ under the same exposure-aware slice logic. These models are used to test score sensitivity under exposure-aware evaluation; they are not treated as evidence of foundation-model training exposure.
 
-Train-label-shuffle controls permute training labels before fitting sequence baselines, then compare null-control exposure-adjusted deltas with observed-label deltas. This analysis is used as a negative control for score sensitivity, not as evidence that public exposure caused a specific model behavior.
+Train-label-shuffle controls permute training labels before fitting sequence baselines, then compare null-control exposure-adjusted deltas with observed-label deltas. Seed-level intervals are reported only where repeated, non-degenerate uncertainty is available; deterministic repeats and one-class AUROC slices are recorded without inferential markers. This analysis is used as a negative control for score sensitivity, not as evidence that public exposure caused a specific model behavior.
 
 For endpoint-native temporal evaluation, MolTrustBench also constructs ChEMBL-derived hERG, CYP, and DILI/hepatotoxicity tasks from release-indexed bioactivity or text-evidence records. These tasks use the same exposure-aware split logic but are interpreted as endpoint-specific temporal-validity and provenance checks. Strict exposure-removed slices that become too small or one-class are retained as expected limitations rather than promoted to performance results. Frozen foundation-model embeddings are treated as checkpoint-light wrapper case studies, not evidence that a specific checkpoint used ChEMBL during pretraining.
 
 \subsection{Assay provenance}
 
-Assay-provenance auditing uses ChEMBL36 SQLite activity tables to recover assay identifiers, document identifiers, targets, assay types, standard measurement fields, units, relations, pChEMBL values when present, confidence scores, and source release. MolTrustBench summarizes duplicate compound counts, discordant threshold-derived label calls, unit inconsistency, threshold sensitivity, document-level heterogeneity, and a derived-label discordance score. The current evidence includes MoleculeNet-overlapping BBBP and ClinTox molecules plus endpoint-native ChEMBL-derived hERG, CYP1A2, CYP2C19, and DILI/hepatotoxicity endpoints.
+Assay-provenance auditing uses ChEMBL36 SQLite activity tables to recover assay identifiers, document identifiers, targets, assay types, standard measurement fields, units, relations, pChEMBL values when present, confidence scores, and source release. Relations such as ``$<$'', ``$>$'', and ``='' are retained when deriving threshold labels, units are audited before aggregation, and discordant threshold-derived label calls are reported as provenance heterogeneity rather than proof that original labels are wrong. MolTrustBench summarizes duplicate compound counts, unit inconsistency, threshold sensitivity, document-level heterogeneity, and a derived-label discordance score. The current evidence includes MoleculeNet-overlapping BBBP and ClinTox molecules plus endpoint-native ChEMBL-derived hERG, CYP1A2, CYP2C19, and DILI/hepatotoxicity endpoints (Tables S26--S27).
 
 \section{Results}
 
@@ -178,14 +199,14 @@ The real-data audit finds measurable public exposure across all four completed M
 \begin{table}[!t]
 \caption{\textbf{Audit-only exposure coverage at the CHEMBL30 cutoff.}}
 \label{tab:coverage}
-\begin{tabular*}{\columnwidth}{@{\extracolsep\fill}lrrrr}
+\begin{tabular*}{\columnwidth}{@{\extracolsep\fill}lrrrrr}
 \toprule
-Task & Molecules & Exact & Scaffold & NN@0.8 \\
+Task & Molecules & Exact & Exact-unobs. n & Scaffold & NN@0.8 \\
 \midrule
-BBBP & 2,039 & 0.838 & 0.878 & 0.889 \\
-ClinTox & 1,480 & 0.474 & 0.737 & 0.599 \\
-BACE & 1,513 & 0.297 & 0.427 & 0.394 \\
-Tox21 & 7,258 & 0.921 & 0.753 & 0.959 \\
+BBBP & 2,039 & 0.838 & 331 & 0.878 & 0.889 \\
+ClinTox & 1,480 & 0.474 & 779 & 0.737 & 0.599 \\
+BACE & 1,513 & 0.297 & 1,063 & 0.427 & 0.394 \\
+Tox21 & 7,258 & 0.921 & 575 & 0.753 & 0.959 \\
 \bottomrule
 \end{tabular*}
 \end{table}
@@ -198,12 +219,12 @@ Exact molecule matching is only the most conservative exposure test, and the sca
 
 Exposure-adjusted evaluation shows that standard split scores and exposure-removed subset scores can diverge enough to change how benchmark performance is interpreted. On BBBP, Morgan-logistic regression achieved AUROC 0.879 on the standard split and 0.946 on the exact-removed split; Morgan-XGB similarly changed from 0.885 to 0.976. ClinTox moved in the opposite direction: Morgan-logistic regression changed from AUROC 0.836 on the standard split to 0.565 on the exact-removed split, and Morgan-XGB changed from 0.784 to 0.370. These results are not interpreted as a universal performance drop. Instead, exposure-aware subsets can produce different estimates of model performance, with direction and magnitude depending on task composition, label structure, model class, and exposure-removed subset size.
 
-\begin{figure}[!t]
+\begin{figure*}[!t]
 \centering
-\maybefigure[width=0.94\columnwidth,keepaspectratio]{exposure_delta_ci.pdf}
-\caption{\textbf{Exposure-adjusted score deltas.} The main heatmap shows rows with at least five matched runs and non-degenerate seed-replicate uncertainty. Deltas are computed as standard-score minus comparison-score for matched standard and exposure-aware slices; open markers indicate intervals excluding zero only when repeated-run uncertainty is available. Single-run or deterministic-repeat rows are retained in the source tables as descriptive estimates without interval markers. The figure is evidence of benchmark score sensitivity under public-exposure auditing; it does not prove model-specific training exposure or label recall.}
+\maybefigure[width=0.88\textwidth,keepaspectratio]{exposure_delta_ci.pdf}
+\caption{\textbf{Exposure-adjusted score sensitivity.} Panel A summarizes repeated-evidence AUROC deltas between standard and exposure-aware evaluation slices. Deltas are computed as standard-score minus comparison-score; positive values indicate higher standard-split performance and negative values indicate higher exposure-aware slice performance. Points show the median across retained model-family rows for each task and split, with horizontal bars showing the interquartile range. Panel B reports comparison-slice sample-size and validity boundaries using the same one-class, low-minority-class, and interval-availability logic as Table S24. Single-run, deterministic-repeat, or invalid-slice rows are retained in the source tables and Supplementary Fig. S3 without inferential markers. The figure illustrates score sensitivity under public-observability auditing and does not imply model-specific training exposure or label recall.}
 \label{fig:performance-drop}
-\end{figure}
+\end{figure*}
 
 \subsection{Density-matched and temporal-future controls define the current evidence boundary}
 
@@ -276,31 +297,33 @@ Limitations & Whether evidence is audit-only, performance-tested, or endpoint-na
 
 MolTrustBench reframes molecular benchmark evaluation as a trustworthiness audit. The central finding is not that any model used a specific molecule or label, but that commonly used benchmark tasks contain measurable public-observability and assay-provenance limitations that should be reported before leaderboard scores are interpreted as prospective generalization. This framing separates three questions that are often conflated: whether chemistry was publicly observable, whether model performance changes under exposure-aware evaluation, and whether assay-derived labels are stable enough to support benchmark claims.
 
-The evidence package is intentionally scoped. The four-task audit supports the molecule, scaffold, and nearest-neighbor public-observability claims. Exposure-adjusted evaluation is supported by the core tasks plus endpoint-native, sequence-family, regression, frozen-embedding, and train-label-shuffle extensions summarized in the supplement. Assay-provenance claims are supported by ChEMBL36 SQLite extraction plus endpoint-native toxicology evidence. The reporting-standard contribution is supported by the workflow schematic, trust cards, sanity checks, data-freeze records, and machine-readable supplement tables S24--S29.
+The evidence package is intentionally scoped. The four-task audit supports the molecule, scaffold, and nearest-neighbor public-observability claims. Exposure-adjusted evaluation is supported by the core tasks plus endpoint-native, sequence-family, regression, frozen-embedding, and train-label-shuffle extensions summarized in the supplement. Assay-provenance claims are supported by ChEMBL36 SQLite extraction plus endpoint-native toxicology evidence. The reporting-standard contribution is supported by the workflow schematic, trust cards, sanity checks, data-freeze records, and machine-readable supplement tables S24--S30.
 
 The main limitations are also explicit: SIDER remains deferred; Lipophilicity, CYP2C9, DILI, and some label-shuffle slices become too small or class-degenerate under strict exposure-aware filtering; four observed-vs-null comparisons remain null-sensitive; temporal-future subsets are small for some tasks; frozen FM rows are wrapper applicability evidence; and model-specific pretraining cutoffs remain unknown for many public checkpoints.
 
 These limitations are audit outputs rather than failures to be hidden. Exposure-removed subsets that become too small or class-degenerate under strict filtering are evidence about benchmark usability under exposure-adjusted evaluation. MolTrustBench provides a reproducible scaffold for replacing implicit benchmark assumptions with explicit public-exposure lower bounds, assay-provenance diagnostics, and exposure-adjusted reporting.
 
+\FloatBarrier
+
 \section{Data availability}
 
-Processed evidence tables, exposure annotations, generated benchmark splits, figure source data, supplement tables, trust-card JSON examples, and analysis manifests underlying this article will be available from a DOI-issuing repository at \textbf{[repository DOI/accession to be inserted]}. The corresponding local evidence archive pending repository deposit is \artifact{moltrustbench_data_freeze_20260529_161700.tgz}; its SHA256 checksum is recorded in the deposit manifest \artifact{moltrustbench_data_freeze_20260529_161700_manifest.csv} and in the supplement data-availability file. The supplement package includes compact source data, slice-validity tables, standardization audit tables, assay-provenance flag definitions, machine-readable trust-card schemas, and a figure source-data map. The archive excludes raw ChEMBL database dumps, local secrets, transient caches, and third-party model checkpoints. ChEMBL source releases are available from the official ChEMBL downloads page \cite{chemblDownloads2025}; benchmark datasets and public checkpoints should be cited through their original sources.
+Processed evidence tables, exposure annotations, generated benchmark splits, figure source data, supplement tables, trust-card JSON examples, and analysis manifests underlying this article are available in the MolTrustBench evidence archive at Zenodo, DOI \href{https://doi.org/10.5281/zenodo.20446372}{10.5281/zenodo.20446372} \cite{moltrustbenchZenodo2026}. The corresponding local evidence archive used to prepare this submission package is \artifact{moltrustbench_data_freeze_20260529_161700.tgz}; its SHA256 checksum is recorded in the deposit manifest \artifact{moltrustbench_data_freeze_20260529_161700_manifest.csv} and in the supplement data-availability file. The supplement package includes compact source data, slice-validity tables, standardization audit tables, assay-provenance flag definitions, machine-readable trust-card schemas, and a figure source-data map. The archive excludes raw ChEMBL database dumps, local secrets, transient caches, and third-party model checkpoints. ChEMBL source releases are available from the official ChEMBL downloads page \cite{chemblDownloads2025}; benchmark datasets and public checkpoints should be cited through their original sources.
 
 \section{Code availability}
 
-MolTrustBench code is maintained in the project repository. The current version uses the release-index, exposure-audit, assay-provenance, model-family integration, label-shuffle negative-control, supplement-packaging, and final-figure scripts under \artifact{scripts/}, with reusable package modules under \artifact{src/moltrustbench/}. Before submission, the GitHub commit SHA or tagged release corresponding to the deposited evidence archive should be added here.
+MolTrustBench code is maintained at \url{https://github.com/KleinChen42/MolTrustBench}. The submission package was prepared from repository commit \artifact{0992de94ef28a5c2552cf44e88fe5fee21b095b2}, using the release-index, exposure-audit, assay-provenance, model-family integration, label-shuffle negative-control, supplement-packaging, and final-figure scripts under \artifact{scripts/}, with reusable package modules under \artifact{src/moltrustbench/}.
 
 \section{Acknowledgments}
 
-Acknowledgments will be completed after author and compute-resource details are finalized.
+The author acknowledges the public ChEMBL, MoleculeNet, Therapeutics Data Commons, PubChem, ZINC, RDKit, scikit-learn, XGBoost, MolFormer, and ChemBERTa resources used to construct and audit the MolTrustBench evidence package.
 
 \section{Funding}
 
-Funding information will be completed before submission.
+No specific funding was received for this work.
 
 \section{Conflict of interest}
 
-The authors declare no competing interests. This statement should be verified before submission.
+The author declares no competing interests.
 
 \bibliographystyle{oup-plain}
 \bibliography{references}

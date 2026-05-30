@@ -15,9 +15,18 @@
         "results\\figures\\exposure_delta_ci.pdf",
         "results\\figures\\exposure_delta_ci.svg",
         "results\\figures\\exposure_delta_ci.png",
-        "results\\figures\\exposure_delta_ci.tiff"
+        "results\\figures\\exposure_delta_ci.tiff",
+        "results\\figures\\figS3_exposure_delta_full_heatmap_bib.pdf",
+        "results\\figures\\figS3_exposure_delta_full_heatmap_bib.svg",
+        "results\\figures\\figS3_exposure_delta_full_heatmap_bib.png",
+        "results\\figures\\figS3_exposure_delta_full_heatmap_bib.tiff",
+        "results\\figures\\figS3_exposure_delta_full_heatmap.pdf",
+        "results\\figures\\figS3_exposure_delta_full_heatmap.svg",
+        "results\\figures\\figS3_exposure_delta_full_heatmap.png",
+        "results\\figures\\figS3_exposure_delta_full_heatmap.tiff"
       ],
-      "rows": 40
+      "retained_rows": 40,
+      "rows": 16
     },
     {
       "figure": "Fig5",

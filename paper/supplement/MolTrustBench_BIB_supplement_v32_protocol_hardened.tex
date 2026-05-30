@@ -1,0 +1,96 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+
+\begin{document}
+
+\begin{center}
+{\Large Supplementary Information for MolTrustBench}\\[0.4em]
+Zhuo Chen\\
+Chalmers University of Technology\\
+\href{mailto:zhuoc@chalmers.se}{zhuoc@chalmers.se}
+\end{center}
+
+\section*{Overview}
+
+This supplementary information summarizes the machine-readable source tables,
+quality-control summaries, and trust-card schema files used by MolTrustBench.
+The companion evidence archive is deposited at Zenodo:
+\href{https://doi.org/10.5281/zenodo.20446372}{10.5281/zenodo.20446372}. Raw ChEMBL database
+dumps, local secrets, transient caches, and third-party model checkpoints are
+not redistributed; ChEMBL releases, public benchmark datasets, and public model
+checkpoints should be accessed through their original sources.
+
+\section*{Source Tables and Artifacts}
+
+\scriptsize
+\begin{longtable}{p{0.12\linewidth}p{0.38\linewidth}p{0.10\linewidth}r p{0.30\linewidth}}
+\toprule
+Table & Description & Claim & Rows & Supplement file \\
+\midrule
+\endfirsthead
+\toprule
+Table & Description & Claim & Rows & Supplement file \\
+\midrule
+\endhead
+Table\_S1 & ChEMBL release-index summary & C1/C2 & 5 & \path{tables/Table_S1_chembl_release_counts.csv} \\
+Table\_S2 & Benchmark exposure summary across audited tasks & C1/C2 & 4 & \path{tables/Table_S2_benchmark_coverage_exposure_summary.csv} \\
+Table\_S3 & Core BBBP/ClinTox exposure-adjusted baseline metrics & C3 & 16 & \path{tables/Table_S3_slice_metrics.csv} \\
+Table\_S4 & BACE/Tox21 C3 expansion metrics & C3 & 30 & \path{tables/Table_S4_bace_tox21_c3_summary.csv} \\
+Table\_S5 & BACE/Tox21 sequence-family metrics & C3/C5 & 60 & \path{tables/Table_S5_bace_tox21_sequence_summary.csv} \\
+Table\_S6 & Exposure-adjusted CI summary & C3 & 80 & \path{tables/Table_S6_exposure_delta_ci.csv} \\
+Table\_S7 & Sequence-family CI summary & C3 & 24 & \path{tables/Table_S7_sequence_delta_ci.csv} \\
+Table\_S8 & ESOL/Lipophilicity regression CI summary & C3 & 24 & \path{tables/Table_S8_regression_delta_ci.csv} \\
+Table\_S9 & Endpoint-native ChEMBL temporal metrics & C3/C4 & 108 & \path{tables/Table_S9_chembl_endpoint_temporal_summary.csv} \\
+Table\_S10 & Endpoint SMILES-Transformer add-on metrics & C3 & 42 & \path{tables/Table_S10_chembl_endpoint_transformer_summary.csv} \\
+Table\_S11 & Train-label-shuffle null-control comparisons & C3 & 22 & \path{tables/Table_S11_label_shuffle_null_control_comparison.csv} \\
+Table\_S12 & CYP label-shuffle rescue null summary & C3 & 3 & \path{tables/Table_S12_cyp_extension_label_shuffle_null_summary.csv} \\
+Table\_S13 & Frozen MolFormer embedding summary & C3 & 57 & \path{tables/Table_S13_fm_embedding_summary.csv} \\
+Table\_S14 & Frozen ChemBERTa-100M embedding summary & C3 & 30 & \path{tables/Table_S14_chemberta_100m_fm_summary.csv} \\
+Table\_S15 & Assay-provenance task summary with DILI/hepatotoxicity & C4 & 6 & \path{tables/Table_S15_assay_provenance_task_summary_with_dili.csv} \\
+Table\_S16 & CYP1A2/CYP2C19 assay-provenance summary & C4 & 2 & \path{tables/Table_S16_cyp_endpoint_extension_assay_provenance_summary.csv} \\
+Table\_S17 & DILI/hepatotoxicity split and provenance boundary & C4 & 6 & \path{tables/Table_S17_dili_hepatotoxicity_split_summary.csv} \\
+Table\_S18 & DILI/hepatotoxicity sequence summary & C3/C4 & 12 & \path{tables/Table_S18_dili_hepatotoxicity_sequence_summary.csv} \\
+Table\_S19 & Model pretraining registry & C5 & 12 & \path{tables/Table_S19_model_pretraining_registry.csv} \\
+Table\_S20 & Current control and reporting checklist & C5 & 10 & \path{tables/Table_S20_required_controls.csv} \\
+Table\_S21 & Trust-card example source data & C5 & 4 & \path{tables/Table_S21_trust_card_examples.csv} \\
+Table\_S22 & Workflow artifact map & C5 & 7 & \path{tables/Table_S22_workflow_artifact_map.csv} \\
+Table\_S23 & Expected limitation and critical-failure accounting & C3/C5 & 6 & \path{tables/Table_S23_expected_limitations_summary.csv} \\
+Table\_S24 & Slice-validity master table & C3 & 12626 & \path{tables/Table_S24_slice_validity_master.csv} \\
+Table\_S25 & Standardization audit summary & C1/C2 & 13 & \path{tables/Table_S25_standardization_audit.csv} \\
+Table\_S26 & Assay-provenance flag dictionary & C4 & 6 & \path{tables/Table_S26_assay_flag_dictionary.csv} \\
+Table\_S27 & Assay-provenance example rows & C4 & 22 & \path{tables/Table_S27_assay_provenance_examples.csv} \\
+Table\_S28 & Machine-readable trust-card schema & C5 & 12 & \path{tables/Table_S28_trust_card_schema.csv} \\
+Table\_S29 & Figure source-data map & C5 & 10 & \path{tables/Table_S29_figure_source_data_map.csv} \\
+Table\_S30 & Protocol parameters and reproducibility artifacts & C5 & 10 & \path{tables/Table_S30_protocol_parameters.csv} \\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\section*{Interpretation Notes}
+
+Tables S1--S2 report observable public-exposure lower bounds, not
+model-specific training inclusion. Tables S3--S12 summarize exposure-adjusted
+evaluation, repeated-run intervals, density controls, and train-label-shuffle
+negative controls. Tables S13--S14 are frozen-embedding applicability checks and
+do not support broad foundation-model conclusions. Tables S15--S18 summarize
+assay-provenance and endpoint-native toxicology evidence. Tables S23--S25 record
+expected slice limitations, metric validity, class-balance flags, and
+standardization accounting. Tables S26--S29 define provenance flags, give compact
+record-derived examples, provide the trust-card schema, and map figures to
+source data. Table S30 lists protocol parameters and reproducibility artifacts
+for rerunning the audit modules.
+
+Rows marked as expected limitations, not auditable in the compact package, or
+missing class counts are excluded from inferential claims. Exposure-removed
+slices that become too small or one-class are reported as benchmark-usability
+limitations rather than performance evidence.
+
+\end{document}

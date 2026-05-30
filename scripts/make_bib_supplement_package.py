@@ -24,6 +24,10 @@ from pandas.errors import EmptyDataError
 ROOT = Path(__file__).resolve().parents[1]
 SUPP = ROOT / "paper" / "supplement"
 TABLES = SUPP / "tables"
+ZENODO_VERSION_DOI = "10.5281/zenodo.20446372"
+ZENODO_VERSION_URL = f"https://doi.org/{ZENODO_VERSION_DOI}"
+GITHUB_URL = "https://github.com/KleinChen42/MolTrustBench"
+GITHUB_BUILD_SHA = "0992de94ef28a5c2552cf44e88fe5fee21b095b2"
 
 
 @dataclass(frozen=True)
@@ -1356,7 +1360,9 @@ def write_figure_source_data_map() -> Path:
     rows = [
         ("Fig. 1", "workflow_schematic.pdf", "results/tables/workflow_artifact_map.csv", "C5", "workflow stage-to-artifact source data"),
         ("Fig. 2", "exposure_heatmap_coverage.pdf", "results/tables/benchmark_coverage_exposure_summary.csv", "C1/C2", "four-task exposure rates at CHEMBL30"),
-        ("Fig. 3", "exposure_delta_ci.pdf", "results/tables/fig3_exposure_delta_ci_source.csv", "C3/R8", "standard-minus-comparison delta interval source"),
+        ("Fig. 3A", "exposure_delta_ci.pdf", "results/tables/fig3_exposure_delta_summary_source.csv", "C3/R8", "task-by-split median and IQR repeated-evidence delta summary"),
+        ("Fig. 3B", "exposure_delta_ci.pdf", "results/tables/fig3_slice_validity_source.csv", "C3/R8", "comparison-slice validity tile source"),
+        ("Fig. S3", "figS3_exposure_delta_full_heatmap.pdf", "results/tables/figS3_exposure_delta_full_source.csv", "C3/R8", "supplementary full task/model/split delta matrix"),
         ("Fig. 4A", "bace_tox21_sequence_model_family.pdf", "results/tables/fig5_sequence_family_delta_source.csv", "C3", "sequence-family AUROC deltas"),
         ("Fig. 4B", "bace_tox21_sequence_model_family.pdf", "results/tables/fig5_sequence_family_comparison_size_source.csv", "C3/R8", "comparison-slice test sizes"),
         ("Fig. 5", "assay_conflict_map.pdf", "results/tables/assay_provenance_task_summary_with_dili.csv", "C4/R10", "assay-provenance heterogeneity rates"),
@@ -1390,17 +1396,96 @@ def write_figure_source_data_map() -> Path:
     return out
 
 
+def write_protocol_parameters() -> Path:
+    rows = [
+        {
+            "Module": "Release index",
+            "Key operation": "Build first-seen molecule and scaffold index",
+            "Required parameters": "ChEMBL release, chemreps input, standard InChIKey field, Bemis-Murcko scaffold method",
+            "Output artifact": "release-index CSV/parquet and release-count summary",
+            "Supplement table": "S1",
+        },
+        {
+            "Module": "Standardization",
+            "Key operation": "Parse and standardize benchmark SMILES",
+            "Required parameters": "RDKit version, invalid-SMILES policy, salt/mixture handling, stereochemistry policy, duplicate policy",
+            "Output artifact": "standardization manifest and rejected-molecule report",
+            "Supplement table": "S25",
+        },
+        {
+            "Module": "Scaffold extraction",
+            "Key operation": "Compute Bemis-Murcko scaffolds",
+            "Required parameters": "RDKit scaffold function, empty-scaffold handling, scaffold-generation success/failure counts",
+            "Output artifact": "scaffold index and scaffold-count QA fields",
+            "Supplement table": "S1/S25",
+        },
+        {
+            "Module": "Exact exposure",
+            "Key operation": "Match benchmark InChIKeys to release index",
+            "Required parameters": "cutoff release, duplicate-collapse policy, exact-unobserved count definition",
+            "Output artifact": "exact exposure annotations and trust-card source rows",
+            "Supplement table": "S2/S21",
+        },
+        {
+            "Module": "Nearest-neighbor exposure",
+            "Key operation": "Compute pre-cutoff nearest-neighbor similarity",
+            "Required parameters": "Morgan/ECFP radius, bit length, Tanimoto similarity, thresholds 0.6/0.7/0.8/0.9, pre-cutoff ChEMBL search scope",
+            "Output artifact": "NN exposure table and max-similarity annotations",
+            "Supplement table": "S2",
+        },
+        {
+            "Module": "Exposure-aware splits",
+            "Key operation": "Construct exact/scaffold/NN-removed, exposed, density-matched, and temporal-future slices",
+            "Required parameters": "split definition, cutoff release, one-class invalidity rule, minority-class warning thresholds",
+            "Output artifact": "split manifest and slice-validity records",
+            "Supplement table": "S24",
+        },
+        {
+            "Module": "Density matching",
+            "Key operation": "Match exposure-removed controls",
+            "Required parameters": "matching variables, nearest-neighbor/caliper rule, retained-n reporting, class-balance reporting",
+            "Output artifact": "density-matched split metrics and retained-n diagnostics",
+            "Supplement table": "S6/S24",
+        },
+        {
+            "Module": "Model evaluation",
+            "Key operation": "Train and evaluate baseline model families",
+            "Required parameters": "seeds, hyperparameters, metrics, seed-level interval method, deterministic-repeat suppression rule",
+            "Output artifact": "metric tables and score-delta summaries",
+            "Supplement table": "S3-S14/S24",
+        },
+        {
+            "Module": "Assay provenance",
+            "Key operation": "Extract ChEMBL activity records and derive provenance flags",
+            "Required parameters": "activity tables, unit handling, relation handling, threshold-derived labels, discordance definition",
+            "Output artifact": "provenance summaries, flag dictionary, and record-level examples",
+            "Supplement table": "S15-S18/S26/S27",
+        },
+        {
+            "Module": "Trust cards",
+            "Key operation": "Generate benchmark reporting cards",
+            "Required parameters": "schema fields, exact-unobserved counts, provenance summaries, caveat rules, source-artifact links",
+            "Output artifact": "trust-card source table, JSON examples, and schema",
+            "Supplement table": "S21/S28/S29",
+        },
+    ]
+    out = TABLES / "Table_S30_protocol_parameters.csv"
+    pd.DataFrame(rows).to_csv(out, index=False)
+    return out
+
+
 def write_generated_reviewer_tables() -> list[dict[str, str]]:
     generated_specs = [
         ("Table_S13", "Frozen MolFormer embedding summary", lambda: write_fm_supplement_summary("Table_S13", "results/tables/fm_embedding_summary.csv", "Table_S13_fm_embedding_summary.csv"), "C3", "R5/R7", "Sanitized supplement-only MolFormer wrapper summary; local run paths removed."),
         ("Table_S14", "Frozen ChemBERTa-100M embedding summary", lambda: write_fm_supplement_summary("Table_S14", "results/tables/chemberta_100m_fm_summary.csv", "Table_S14_chemberta_100m_fm_summary.csv"), "C3", "R5/R7", "Sanitized supplement-only ChemBERTa-100M wrapper summary; local run paths removed."),
-        ("Table_S20", "Current reviewer controls and reporting checklist", write_required_controls_table, "C5", "R1-R10", "Current reviewer-risk controls regenerated from the BIB hardening status."),
+        ("Table_S20", "Current control and reporting checklist", write_required_controls_table, "C5", "R1-R10", "Current interpretation controls regenerated from the BIB hardening status."),
         ("Table_S24", "Slice-validity master table", write_slice_validity_master, "C3", "R8", "Sample sizes, class balance, metric validity, CI availability, and reason codes."),
         ("Table_S25", "Standardization audit summary", write_standardization_audit, "C1/C2", "R9", "Raw-to-standardized accounting and molecule-standardization policy notes."),
         ("Table_S26", "Assay-provenance flag dictionary", write_assay_flag_dictionary, "C4", "R10", "Definitions and denominators for assay-provenance heterogeneity flags."),
         ("Table_S27", "Assay-provenance example rows", write_assay_examples, "C4", "R10", "Compact examples showing how provenance flags are derived from records."),
         ("Table_S28", "Machine-readable trust-card schema", write_trust_card_schema, "C5", "R6", "Trust-card fields, required status, types, and JSON schema/examples."),
         ("Table_S29", "Figure source-data map", write_figure_source_data_map, "C5", "R6", "Source-data table for each main figure and key supplement figure."),
+        ("Table_S30", "Protocol parameters and reproducibility artifacts", write_protocol_parameters, "C5", "R6/R9", "Module-level operations, parameters, output artifacts, and supplement links for protocol reproduction."),
     ]
     rows = []
     for table_id, title, writer, claim, reviewer_role, note in generated_specs:
@@ -1494,7 +1579,7 @@ def write_markdown(manifest_rows: list[dict[str, str]]) -> None:
     lines = [
         "# MolTrustBench Supplementary Tables",
         "",
-        "This supplement is organized as an audit-ready evidence package for Briefings in Bioinformatics. It maps compact source-data tables to claims C1-C5 and risk controls R1-R10. Large generated tables and raw-size artifacts are referenced through the data-freeze archive rather than duplicated here.",
+        "This supplement is organized as an audit-ready evidence package for Briefings in Bioinformatics. It maps compact source-data tables to claims C1-C5 and control categories R1-R10. Large generated tables and raw-size artifacts are referenced through the data-freeze archive rather than duplicated here.",
         "",
         "Terminology: public exposure, observable exposure lower bound, temporal validity, exposure-adjusted evaluation, assay provenance, train-label-shuffle null control, and expected exposure-removed slice limitations.",
         "",
@@ -1510,7 +1595,7 @@ def write_markdown(manifest_rows: list[dict[str, str]]) -> None:
     lines.extend(
         [
             "",
-            "## Reviewer-Use Notes",
+            "## Interpretation Notes",
             "",
             "- Tables S1-S2 support public-exposure claims and should be read as observability lower bounds, not direct model-training evidence.",
             "- Tables S3-S12 support exposure-adjusted evaluation, CI stability checks, and train-label-shuffle null controls. They do not prove causality.",
@@ -1522,6 +1607,7 @@ def write_markdown(manifest_rows: list[dict[str, str]]) -> None:
             "- Tables S26-S27 define assay-provenance flags and give compact record-derived examples for R10.",
             "- Table S28 and `trust_cards/` provide the machine-readable trust-card schema and examples behind the plotted cards.",
             "- Table S29 maps each main figure to its compact source-data table.",
+            "- Table S30 lists the protocol parameters and reproducibility artifacts needed to rerun the audit modules.",
             "",
             "## Data-Freeze Pointer",
             "",
@@ -1535,13 +1621,123 @@ def write_markdown(manifest_rows: list[dict[str, str]]) -> None:
                 f"- SHA256: `{freeze['sha256']}`",
                 f"- File count: `{freeze['file_count']}`",
                 "",
-                "If a newer freeze archive is created after this supplement, regenerate the package with `python scripts/make_bib_supplement_package.py`.",
+            "This archive is mirrored by the deposited Zenodo evidence package cited in the manuscript.",
             ]
         )
     else:
         lines.append("- No freeze archive found yet; create one before submission.")
 
     (SUPP / "supplementary_tables.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def tex_escape(value: object) -> str:
+    text = str(value)
+    replacements = {
+        "\\": r"\textbackslash{}",
+        "&": r"\&",
+        "%": r"\%",
+        "$": r"\$",
+        "#": r"\#",
+        "_": r"\_",
+        "{": r"\{",
+        "}": r"\}",
+        "~": r"\textasciitilde{}",
+        "^": r"\textasciicircum{}",
+    }
+    return "".join(replacements.get(ch, ch) for ch in text)
+
+
+def write_supplement_tex(manifest_rows: list[dict[str, str]]) -> None:
+    rows = []
+    for row in manifest_rows:
+        rows.append(
+            " & ".join(
+                [
+                    tex_escape(row["table_id"]),
+                    tex_escape(row["title"]),
+                    tex_escape(row["claim"]),
+                    tex_escape(row["rows"] or "NA"),
+                    r"\path{" + str(row["supplement_path"]).replace("\\", "/") + "}",
+                ]
+            )
+            + r" \\"
+        )
+    table_rows = "\n".join(rows)
+    text = rf"""\documentclass[10pt]{{article}}
+\usepackage[margin=0.8in]{{geometry}}
+\usepackage{{booktabs}}
+\usepackage{{longtable}}
+\usepackage{{array}}
+\usepackage{{hyperref}}
+\usepackage[T1]{{fontenc}}
+\usepackage{{lmodern}}
+\setlength{{\parindent}}{{0pt}}
+\setlength{{\parskip}}{{0.6em}}
+
+\begin{{document}}
+
+\begin{{center}}
+{{\Large Supplementary Information for MolTrustBench}}\\[0.4em]
+Zhuo Chen\\
+Chalmers University of Technology\\
+\href{{mailto:zhuoc@chalmers.se}}{{zhuoc@chalmers.se}}
+\end{{center}}
+
+\section*{{Overview}}
+
+This supplementary information summarizes the machine-readable source tables,
+quality-control summaries, and trust-card schema files used by MolTrustBench.
+The companion evidence archive is deposited at Zenodo:
+\href{{{ZENODO_VERSION_URL}}}{{{ZENODO_VERSION_DOI}}}. Raw ChEMBL database
+dumps, local secrets, transient caches, and third-party model checkpoints are
+not redistributed; ChEMBL releases, public benchmark datasets, and public model
+checkpoints should be accessed through their original sources.
+
+\section*{{Source Tables and Artifacts}}
+
+\scriptsize
+\begin{{longtable}}{{p{{0.12\linewidth}}p{{0.38\linewidth}}p{{0.10\linewidth}}r p{{0.30\linewidth}}}}
+\toprule
+Table & Description & Claim & Rows & Supplement file \\
+\midrule
+\endfirsthead
+\toprule
+Table & Description & Claim & Rows & Supplement file \\
+\midrule
+\endhead
+{table_rows}
+\bottomrule
+\end{{longtable}}
+\normalsize
+
+\section*{{Interpretation Notes}}
+
+Tables S1--S2 report observable public-exposure lower bounds, not
+model-specific training inclusion. Tables S3--S12 summarize exposure-adjusted
+evaluation, repeated-run intervals, density controls, and train-label-shuffle
+negative controls. Tables S13--S14 are frozen-embedding applicability checks and
+do not support broad foundation-model conclusions. Tables S15--S18 summarize
+assay-provenance and endpoint-native toxicology evidence. Tables S23--S25 record
+expected slice limitations, metric validity, class-balance flags, and
+standardization accounting. Tables S26--S29 define provenance flags, give compact
+record-derived examples, provide the trust-card schema, and map figures to
+source data. Table S30 lists protocol parameters and reproducibility artifacts
+for rerunning the audit modules.
+
+Rows marked as expected limitations, not auditable in the compact package, or
+missing class counts are excluded from inferential claims. Exposure-removed
+slices that become too small or one-class are reported as benchmark-usability
+limitations rather than performance evidence.
+
+\end{{document}}
+"""
+    stale_tex = SUPP / "MolTrustBench_BIB_supplement_v31_metadata_final.tex"
+    if stale_tex.exists():
+        try:
+            stale_tex.unlink()
+        except PermissionError:
+            pass
+    (SUPP / "MolTrustBench_BIB_supplement_v32_protocol_hardened.tex").write_text(text, encoding="utf-8")
 
 
 def write_data_availability() -> None:
@@ -1551,34 +1747,13 @@ def write_data_availability() -> None:
         if freeze
         else "`results/archive/<archive-to-be-deposited>.tgz`"
     )
-    text = f"""# Data Availability Statement For BIB Submission
+    text = f"""# Data Availability Statement
 
-The data availability statement below is ready to paste after replacing the repository placeholder with a DOI or accession.
+All processed data, exposure annotations, generated benchmark splits, summary tables, figure source data, supplementary tables, trust-card JSON examples, and analysis manifests needed to reproduce the results in this article are provided in the MolTrustBench evidence archive and supplement package at Zenodo: **{ZENODO_VERSION_URL}**. The local archive corresponding to this package is {archive_text}. The supplement package under `paper/supplement/` includes Tables S1-S30, including slice validity, standardization audit, assay-flag definitions, provenance examples, trust-card schema, figure source-data mapping, and protocol-parameter mapping. The archive excludes raw ChEMBL database dumps, local secrets, transient caches, and third-party model checkpoints. ChEMBL source releases are publicly available from the official ChEMBL downloads page, and benchmark datasets are available from their original public sources. Frozen foundation-model checkpoint artifacts are not redistributed in the archive; scripts record the staged checkpoint identifiers and reproduce embeddings when the corresponding public checkpoint is available under its own license. Code is available at `{GITHUB_URL}` at commit `{GITHUB_BUILD_SHA}`.
 
-## Ready-To-Paste Draft
-
-All processed data, exposure annotations, generated benchmark splits, summary tables, figure source data, supplementary tables, trust-card JSON examples, and analysis manifests needed to reproduce the results in this article are provided in the MolTrustBench evidence archive and supplement package: **[repository DOI/accession to be inserted]**. The local archive corresponding to this draft is {archive_text}. The supplement package under `paper/supplement/` includes Tables S1-S29, including slice validity, standardization audit, assay-flag definitions, provenance examples, trust-card schema, and figure source-data mapping. The archive excludes raw ChEMBL database dumps, local secrets, transient caches, and third-party model checkpoints. ChEMBL source releases are publicly available from the official ChEMBL downloads page, and benchmark datasets are available from their original public sources. Frozen foundation-model checkpoint artifacts are not redistributed in the archive; scripts record the staged checkpoint identifiers and reproduce embeddings when the corresponding public checkpoint is available under its own license. Code is available at the project repository **[GitHub URL and commit SHA to be inserted]**.
-
-## Repository Actions Before Submission
-
-- Deposit the current data-freeze archive, manifest, and BIB supplement package in a DOI-issuing repository such as Zenodo, Figshare, OSF, or Harvard Dataverse.
-- Add the DOI/accession to the statement above and to `paper/latex/moltrustbench_main.tex`.
-- Add the GitHub commit SHA or tagged release corresponding to the submitted manuscript.
-- Include dataset citations in the reference list for ChEMBL and any third-party benchmark datasets used in the article.
-
-## Placeholder Search Before Submission
-
-- `[repository DOI/accession to be inserted]`
-- `[GitHub URL and commit SHA to be inserted]`
-- `DOI added during production`
-- `Date added during production`
-- `submission-metadata-required@example.invalid`
-- author, affiliation, funding, acknowledgment, and conflict-of-interest placeholders
-
-## Risk Flags
+## Access and Reuse Notes
 
 - Do not state that raw ChEMBL SQLite or raw ChEMBL release tarballs are redistributed unless their licensing and size are explicitly handled by the repository deposit.
-- Do not use "available on request" for generated result tables; BIB requires a Data Availability statement and strongly encourages public availability where ethically feasible.
 - Model checkpoints should be cited or linked through their original hosts, not republished inside the evidence archive unless license terms allow it.
 """
     (SUPP / "data_availability_statement.md").write_text(text, encoding="utf-8")
@@ -1586,19 +1761,23 @@ All processed data, exposure annotations, generated benchmark splits, summary ta
 
 
 def write_readme() -> None:
-    deposit = ROOT / "paper" / "deposit_readme.md"
-    if deposit.exists():
-        shutil.copy2(deposit, SUPP / "deposit_readme.md")
-    text = """# MolTrustBench BIB Supplement Package
+    stale_deposit = SUPP / "deposit_readme.md"
+    if stale_deposit.exists():
+        try:
+            stale_deposit.unlink()
+        except PermissionError:
+            pass
+    text = f"""# MolTrustBench BIB Supplement Package
 
 Contents:
 
-- `supplementary_tables.md`: audit map from supplement tables to claims and risk controls.
+- `supplementary_tables.md`: audit map from supplement tables to claims and control categories.
 - `supplement_manifest.csv`: source paths, row counts, checksums, and claim mapping.
-- `data_availability_statement.md`: ready-to-paste BIB data availability draft with DOI placeholders.
-- `deposit_readme.md`: repository-deposit checklist for DOI archive preparation.
+- `data_availability_statement.md`: BIB data availability statement for the deposited evidence package.
 - `tables/`: compact source-data CSVs for main and supplementary claims.
 - `trust_cards/`: machine-readable trust-card schema and example JSON cards.
+
+Archive DOI: {ZENODO_VERSION_URL}
 
 Large generated tables and raw-size artifacts are traceable through the data-freeze archive listed in `supplementary_tables.md`.
 """
@@ -1610,6 +1789,11 @@ def validate_package_tables() -> None:
     missing = manifest[manifest["status"].astype(str) != "available"]
     if not missing.empty:
         raise ValueError(f"Supplement manifest has unavailable tables: {missing['table_id'].tolist()}")
+    expected_ids = {f"Table_S{i}" for i in range(1, 31)}
+    observed_ids = set(manifest["table_id"].astype(str))
+    missing_ids = sorted(expected_ids.difference(observed_ids), key=lambda value: int(value.split("_S", 1)[1]))
+    if missing_ids:
+        raise ValueError(f"Supplement manifest is missing expected tables: {missing_ids}")
 
     s20 = pd.read_csv(TABLES / "Table_S20_required_controls.csv")
     stale = s20[s20["status"].astype(str).str.contains("missing|pending", case=False, na=False)]
@@ -1680,6 +1864,10 @@ def validate_package_tables() -> None:
         raise ValueError("Table S29 still maps a main label-shuffle figure even though that control is supplement-first")
     if s29["source_data_path"].astype(str).str.contains("fig4_exposure_delta", case=False, na=False).any():
         raise ValueError("Table S29 still references stale Fig. 4 exposure-delta source data")
+    required_figures = {"Fig. 3A", "Fig. 3B", "Fig. S3", "Fig. S7"}
+    missing_figures = sorted(required_figures.difference(set(s29["figure"].astype(str))))
+    if missing_figures:
+        raise ValueError(f"Table S29 is missing updated figure-source mappings: {missing_figures}")
     unavailable_sources = s29[s29["source_status"].astype(str) != "available"]
     if not unavailable_sources.empty:
         raise ValueError(f"Table S29 has missing source-data rows: {unavailable_sources['figure'].tolist()}")
@@ -1691,9 +1879,13 @@ def validate_package_tables() -> None:
         (str(row["source_name"]), str(row["task_name"])): int(row.get("exact_unobserved_n", row.get("exposure_removed_test_n", 0)))
         for _, row in trust_source.iterrows()
     }
-    for path in (SUPP / "trust_cards").glob("*_card.json"):
-        if path.name == "tdc_admet_hERG_card.json":
-            raise ValueError("Audit-facing trust-card JSON still includes the 12-row TDC hERG miniature card")
+    expected_card_paths = [
+        SUPP / "trust_cards" / f"{source}_{task}_card.json".replace("/", "_")
+        for source, task in expected_trust_counts
+    ]
+    for path in expected_card_paths:
+        if not path.exists():
+            raise ValueError(f"Expected trust-card JSON was not generated: {path.name}")
         card = json.loads(path.read_text(encoding="utf-8"))
         missing_fields = sorted(required_fields.difference(card))
         if missing_fields:
@@ -1712,20 +1904,46 @@ def validate_package_tables() -> None:
 def zip_package() -> Path:
     stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     out = SUPP / f"MolTrustBench_BIB_supplement_package_{stamp}.zip"
+    manifest = pd.read_csv(SUPP / "supplement_manifest.csv")
+    include_paths = {
+        SUPP / "supplementary_tables.md",
+        SUPP / "supplement_manifest.csv",
+        SUPP / "data_availability_statement.md",
+        SUPP / "README.md",
+        SUPP / "MolTrustBench_BIB_supplement_v32_protocol_hardened.tex",
+    }
+    for rel in manifest["supplement_path"].dropna().astype(str):
+        if rel:
+            include_paths.add(SUPP / rel)
+    s29_path = TABLES / "Table_S29_figure_source_data_map.csv"
+    if s29_path.exists():
+        s29 = pd.read_csv(s29_path)
+        for rel in s29.get("supplement_source_path", pd.Series(dtype=str)).dropna().astype(str):
+            if rel:
+                include_paths.add(SUPP / rel)
+    trust_source = TABLES / "Table_S21_trust_card_examples.csv"
+    if trust_source.exists():
+        trust = pd.read_csv(trust_source)
+        for _, row in trust.iterrows():
+            name = f"{row.get('source_name', '')}_{row.get('task_name', '')}_card.json".replace("/", "_")
+            include_paths.add(SUPP / "trust_cards" / name)
+    include_paths.add(SUPP / "trust_cards" / "trust_card_schema.json")
+
     with zipfile.ZipFile(out, "w", compression=zipfile.ZIP_DEFLATED) as zf:
-        for path in sorted(SUPP.rglob("*")):
-            if path == out or path.suffix == ".zip":
-                continue
-            if path.is_file():
+        for path in sorted(include_paths):
+            if path.exists() and path.is_file():
                 zf.write(path, path.relative_to(SUPP).as_posix())
     return out
 
 
 def reset_generated_outputs() -> None:
     for path in (TABLES, SUPP / "trust_cards"):
-        if path.exists():
-            shutil.rmtree(path)
         path.mkdir(parents=True, exist_ok=True)
+    for stale in (SUPP / "trust_cards").glob("*_card.json"):
+        try:
+            stale.unlink()
+        except PermissionError:
+            pass
 
 
 def main() -> None:
@@ -1733,6 +1951,7 @@ def main() -> None:
     reset_generated_outputs()
     manifest_rows = copy_tables()
     write_markdown(manifest_rows)
+    write_supplement_tex(manifest_rows)
     write_data_availability()
     write_readme()
     validate_package_tables()

@@ -1,7 +1,9 @@
 figure,figure_file,source_data_path,supplement_source_path,claim_or_risk,note,source_status
 Fig. 1,workflow_schematic.pdf,results/tables/workflow_artifact_map.csv,tables/Source_Fig_1_workflow_artifact_map.csv,C5,workflow stage-to-artifact source data,available
 Fig. 2,exposure_heatmap_coverage.pdf,results/tables/benchmark_coverage_exposure_summary.csv,tables/Source_Fig_2_benchmark_coverage_exposure_summary.csv,C1/C2,four-task exposure rates at CHEMBL30,available
-Fig. 3,exposure_delta_ci.pdf,results/tables/fig3_exposure_delta_ci_source.csv,tables/Source_Fig_3_fig3_exposure_delta_ci_source.csv,C3/R8,standard-minus-comparison delta interval source,available
+Fig. 3A,exposure_delta_ci.pdf,results/tables/fig3_exposure_delta_summary_source.csv,tables/Source_Fig_3A_fig3_exposure_delta_summary_source.csv,C3/R8,task-by-split median and IQR repeated-evidence delta summary,available
+Fig. 3B,exposure_delta_ci.pdf,results/tables/fig3_slice_validity_source.csv,tables/Source_Fig_3B_fig3_slice_validity_source.csv,C3/R8,comparison-slice validity tile source,available
+Fig. S3,figS3_exposure_delta_full_heatmap.pdf,results/tables/figS3_exposure_delta_full_source.csv,tables/Source_Fig_S3_figS3_exposure_delta_full_source.csv,C3/R8,supplementary full task/model/split delta matrix,available
 Fig. 4A,bace_tox21_sequence_model_family.pdf,results/tables/fig5_sequence_family_delta_source.csv,tables/Source_Fig_4A_fig5_sequence_family_delta_source.csv,C3,sequence-family AUROC deltas,available
 Fig. 4B,bace_tox21_sequence_model_family.pdf,results/tables/fig5_sequence_family_comparison_size_source.csv,tables/Source_Fig_4B_fig5_sequence_family_comparison_size_source.csv,C3/R8,comparison-slice test sizes,available
 Fig. 5,assay_conflict_map.pdf,results/tables/assay_provenance_task_summary_with_dili.csv,tables/Source_Fig_5_assay_provenance_task_summary_with_dili.csv,C4/R10,assay-provenance heterogeneity rates,available

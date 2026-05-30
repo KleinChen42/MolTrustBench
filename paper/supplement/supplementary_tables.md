@@ -1,6 +1,6 @@
 # MolTrustBench Supplementary Tables
 
-This supplement is organized as an audit-ready evidence package for Briefings in Bioinformatics. It maps compact source-data tables to claims C1-C5 and risk controls R1-R10. Large generated tables and raw-size artifacts are referenced through the data-freeze archive rather than duplicated here.
+This supplement is organized as an audit-ready evidence package for Briefings in Bioinformatics. It maps compact source-data tables to claims C1-C5 and control categories R1-R10. Large generated tables and raw-size artifacts are referenced through the data-freeze archive rather than duplicated here.
 
 Terminology: public exposure, observable exposure lower bound, temporal validity, exposure-adjusted evaluation, assay provenance, train-label-shuffle null control, and expected exposure-removed slice limitations.
 
@@ -27,7 +27,7 @@ Terminology: public exposure, observable exposure lower bound, temporal validity
 | Table_S17 | DILI/hepatotoxicity split and provenance boundary | C4 | R8/R10 | 6 | `tables/Table_S17_dili_hepatotoxicity_split_summary.csv` |
 | Table_S18 | DILI/hepatotoxicity sequence summary | C3/C4 | R8/R10 | 12 | `tables/Table_S18_dili_hepatotoxicity_sequence_summary.csv` |
 | Table_S19 | Model pretraining registry | C5 | R5 | 12 | `tables/Table_S19_model_pretraining_registry.csv` |
-| Table_S20 | Current reviewer controls and reporting checklist | C5 | R1-R10 | 10 | `tables/Table_S20_required_controls.csv` |
+| Table_S20 | Current control and reporting checklist | C5 | R1-R10 | 10 | `tables/Table_S20_required_controls.csv` |
 | Table_S21 | Trust-card example source data | C5 | R6 | 4 | `tables/Table_S21_trust_card_examples.csv` |
 | Table_S22 | Workflow artifact map | C5 | R6 | 7 | `tables/Table_S22_workflow_artifact_map.csv` |
 | Table_S23 | Expected limitation and critical-failure accounting | C3/C5 | R8 | 6 | `tables/Table_S23_expected_limitations_summary.csv` |
@@ -36,9 +36,10 @@ Terminology: public exposure, observable exposure lower bound, temporal validity
 | Table_S26 | Assay-provenance flag dictionary | C4 | R10 | 6 | `tables/Table_S26_assay_flag_dictionary.csv` |
 | Table_S27 | Assay-provenance example rows | C4 | R10 | 22 | `tables/Table_S27_assay_provenance_examples.csv` |
 | Table_S28 | Machine-readable trust-card schema | C5 | R6 | 12 | `tables/Table_S28_trust_card_schema.csv` |
-| Table_S29 | Figure source-data map | C5 | R6 | 8 | `tables/Table_S29_figure_source_data_map.csv` |
+| Table_S29 | Figure source-data map | C5 | R6 | 10 | `tables/Table_S29_figure_source_data_map.csv` |
+| Table_S30 | Protocol parameters and reproducibility artifacts | C5 | R6/R9 | 10 | `tables/Table_S30_protocol_parameters.csv` |
 
-## Reviewer-Use Notes
+## Interpretation Notes
 
 - Tables S1-S2 support public-exposure claims and should be read as observability lower bounds, not direct model-training evidence.
 - Tables S3-S12 support exposure-adjusted evaluation, CI stability checks, and train-label-shuffle null controls. They do not prove causality.
@@ -50,6 +51,7 @@ Terminology: public exposure, observable exposure lower bound, temporal validity
 - Tables S26-S27 define assay-provenance flags and give compact record-derived examples for R10.
 - Table S28 and `trust_cards/` provide the machine-readable trust-card schema and examples behind the plotted cards.
 - Table S29 maps each main figure to its compact source-data table.
+- Table S30 lists the protocol parameters and reproducibility artifacts needed to rerun the audit modules.
 
 ## Data-Freeze Pointer
 
@@ -58,4 +60,4 @@ Terminology: public exposure, observable exposure lower bound, temporal validity
 - SHA256: `beb779864151105b3c8cd13507df8f0779bfc53e2d6a4f6a792d82f91e34b2df`
 - File count: `3389`
 
-If a newer freeze archive is created after this supplement, regenerate the package with `python scripts/make_bib_supplement_package.py`.
+This archive is mirrored by the deposited Zenodo evidence package cited in the manuscript.

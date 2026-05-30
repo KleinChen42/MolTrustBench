@@ -1,0 +1,17 @@
+task_name,comparison_split,comparison_test_n_median,one_class_flag,low_minority_class_flag,small_minority_class_caution,min_class_n,ci_available,interpretation_status,tile_color
+BBBP,exact_removed,66,False,False,False,,True,interval,#cfe8d8
+BBBP,scaffold_removed,49,False,False,False,,True,interval,#cfe8d8
+BBBP,nn08_removed,47,False,False,False,,True,interval,#cfe8d8
+BBBP,density_matched_clean,38,False,False,False,17,True,interval,#cfe8d8
+ClinTox,exact_removed,155,False,True,False,1,True,low minority,#f4d6a5
+ClinTox,scaffold_removed,75,False,False,False,,True,interval,#cfe8d8
+ClinTox,nn08_removed,114,False,False,False,,True,interval,#cfe8d8
+ClinTox,density_matched_clean,140,False,True,False,1,True,low minority,#f4d6a5
+BACE,exact_removed,882,False,False,False,,True,interval,#cfe8d8
+BACE,scaffold_removed,719,False,False,False,,True,interval,#cfe8d8
+BACE,nn08_removed,755,False,False,False,,True,interval,#cfe8d8
+BACE,density_matched_clean,123,False,False,False,,True,interval,#cfe8d8
+Tox21,exact_removed,100,False,True,False,3,True,low minority,#f4d6a5
+Tox21,scaffold_removed,379,False,False,True,5,True,minority caution,#f6e7b5
+Tox21,nn08_removed,56,False,True,False,1,True,low minority,#f4d6a5
+Tox21,density_matched_clean,100,False,True,False,3,True,low minority,#f4d6a5

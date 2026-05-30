@@ -1,0 +1,11 @@
+Module,Key operation,Required parameters,Output artifact,Supplement table
+Release index,Build first-seen molecule and scaffold index,"ChEMBL release, chemreps input, standard InChIKey field, Bemis-Murcko scaffold method",release-index CSV/parquet and release-count summary,S1
+Standardization,Parse and standardize benchmark SMILES,"RDKit version, invalid-SMILES policy, salt/mixture handling, stereochemistry policy, duplicate policy",standardization manifest and rejected-molecule report,S25
+Scaffold extraction,Compute Bemis-Murcko scaffolds,"RDKit scaffold function, empty-scaffold handling, scaffold-generation success/failure counts",scaffold index and scaffold-count QA fields,S1/S25
+Exact exposure,Match benchmark InChIKeys to release index,"cutoff release, duplicate-collapse policy, exact-unobserved count definition",exact exposure annotations and trust-card source rows,S2/S21
+Nearest-neighbor exposure,Compute pre-cutoff nearest-neighbor similarity,"Morgan/ECFP radius, bit length, Tanimoto similarity, thresholds 0.6/0.7/0.8/0.9, pre-cutoff ChEMBL search scope",NN exposure table and max-similarity annotations,S2
+Exposure-aware splits,"Construct exact/scaffold/NN-removed, exposed, density-matched, and temporal-future slices","split definition, cutoff release, one-class invalidity rule, minority-class warning thresholds",split manifest and slice-validity records,S24
+Density matching,Match exposure-removed controls,"matching variables, nearest-neighbor/caliper rule, retained-n reporting, class-balance reporting",density-matched split metrics and retained-n diagnostics,S6/S24
+Model evaluation,Train and evaluate baseline model families,"seeds, hyperparameters, metrics, seed-level interval method, deterministic-repeat suppression rule",metric tables and score-delta summaries,S3-S14/S24
+Assay provenance,Extract ChEMBL activity records and derive provenance flags,"activity tables, unit handling, relation handling, threshold-derived labels, discordance definition","provenance summaries, flag dictionary, and record-level examples",S15-S18/S26/S27
+Trust cards,Generate benchmark reporting cards,"schema fields, exact-unobserved counts, provenance summaries, caveat rules, source-artifact links","trust-card source table, JSON examples, and schema",S21/S28/S29
